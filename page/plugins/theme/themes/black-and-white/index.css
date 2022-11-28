@@ -1,0 +1,8 @@
+@import "../base/index.css";
+
+dsa-hero {
+  --color-1: black;
+  --color-2: white;
+
+  border: solid 1px;
+}

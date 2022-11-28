@@ -1,0 +1,67 @@
+dsa-attributes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 3px;
+}
+
+dsa-attribute {
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+  margin: 3px;
+  border: 1.25px solid rgb(190 190 190);
+  background-color:
+    rgba(
+      var(--dsa-attribute-red)
+      var(--dsa-attribute-green)
+      var(--dsa-attribute-blue)
+      / 50%
+    );
+  cursor: default;
+
+  /* Test for border images:
+  border-image: url("./image.png") 25% round;
+  image-rendering: crisp-edges;
+   */
+  padding: 3px;
+  min-width: 2em;
+  max-width: calc(100% - 0.5em);
+  height: 2em;
+  word-break: break-word;
+}
+
+dsa-attribute-name {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  font-size: 50%;
+}
+
+dsa-attribute:hover > dsa-attribute-name {
+  display: flex;
+}
+
+dsa-attribute-abbreviation {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+dsa-attribute:hover > dsa-attribute-abbreviation {
+  display: none;
+}
+
+dsa-attribute-value {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+dsa-attribute-value[contenteditable] {
+  outline: 0 solid transparent;
+  cursor: text;
+}

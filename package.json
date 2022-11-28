@@ -1,0 +1,14 @@
+{
+  "name": "dsa-hero-sheet",
+  "version": "1.0.0",
+  "description": "A sheet to view and edit your dsa hero.",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "npx http-server ./page -c-1 -d false -i false --cors --no-dotfiles"
+  },
+  "author": "Sertonix",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
