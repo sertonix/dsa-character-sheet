@@ -8,13 +8,13 @@ body {
   font-family: monospace;
 }
 
-dsa-heros {
+dsa-characters {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-dsa-hero-casing {
+dsa-character-casing {
   display: contents;
 }
 

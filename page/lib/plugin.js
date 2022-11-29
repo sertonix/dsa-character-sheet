@@ -1,27 +1,16 @@
-import {EventEmitter,deltaArrays,Disposables,uniqueArray} from "./utils.js";
+import {EventEmitter,deltaArrays,Disposables,Disposable} from "./utils.js";
 
 export class PluginManager {
   plugins = new Map();
   events = new EventEmitter();
-  disposables = new Disposables();
   baseURL = new URL("../plugins/",import.meta.url);
   defaultPlugins = [
-    "theme",
     "garbage-tester",
+    "heading",
+    "close-button",
   ];
 
   initialize() {
-    this.disposables.add(
-      dsa.onDidAddedHero( hero => {
-        hero.data.onDidChange("dsa.plugins", (newUrls,oldUrls) => {
-          const [added,removed] = deltaArrays(shouldPlugins,arePlugins);
-          this.removeHeroFrom(hero,...removed);
-          this.addHeroTo(hero,...added);
-        });
-        this.addHeroTo(hero,...hero.data.get("dsa.plugins"));
-      }),
-      dsa.onDidRemovedHero( hero => this.removeHeroFrom(hero,...hero.data.get("dsa.plugins")) ),
-    );
     this.addAll(...this.defaultPlugins);
   }
 
@@ -34,21 +23,11 @@ export class PluginManager {
   }
 
   addAll(...urls) { return urls.map( url => this.add(url) ); }
-  addHeroTo(hero,...urls) { urls.forEach( url => this.add(url)?.addHero(hero) ); }
-
-  removeHeroFrom(hero,...urls) {
-    for (const url of urls) {
-      const plugin = this.get(url);
-      if (!plugin) continue;
-      plugin.removeHero(hero);
-      if (plugin.required()) continue;
-      this.remove(plugin.url);
-    }
-  }
 
   remove(...urls) {
     for (const url of urls) {
       if (!this.plugins.has(url)) continue;
+      this.plugins.get(url).dispose();
       this.plugins.delete(url);
       this.events.emit("did-removed-plugin", url);
     }
@@ -56,70 +35,82 @@ export class PluginManager {
 
   get(url) { return this.plugins.get(url); }
   getAll() { return [...this.plugins.values()]; }
-  getAllUrls() { return [...this.plugins.keys()]; }
-  removeAll() { this.remove(...this.plugins.getAllUrls()); }
+  getAllURLs() { return [...this.plugins.keys()]; }
+  removeAll() { this.remove(...this.plugins.getAllURLs()); }
 
   has(url) { return this.plugins.has(url); }
 
-  getImportURL(url) {
+  resolveURL(url) {
     if (/^[a-z]+(?:-[a-z]+)*$/.test(url)) {
       return new URL(url + "/index.js", this.baseURL).toString();
     }
     return url;
   }
 
-  requiredPlugin(plugin) {
-    return this.defaultPlugins.includes(plugin.url);
-  }
-
   dispose() {
     this.removeAll();
-    this.disposables.dispose();
   }
 
   onDidAddedPlugin(callback) { return this.events.on( "did-added-plugin", callback ); }
   onDidRemovedPlugin(callback) { return this.events.on( "did-removed-plugin", callback ); }
 }
 
+export class HeroPluginManager extends PluginManager {
+  constructor(character) {
+    super();
+    this.character = character;
+  }
+
+  initialize() {
+    this.character.data.onDidChange("dsa.plugins", (newURLs,oldURLs) => {
+      const [added,removed] = deltaArrays(newURLs,oldURLs);
+      this.remove(...removed);
+      this.addAll(...added);
+    });
+    this.character.data.onDidChange("dsa.plugins.default-enabled", enabled => {
+      if (enabled) {
+        this.addAll(...this.defaultPlugins);
+      } else {
+        this.remove(...this.defaultPlugins);
+      }
+    });
+    if (this.character.data.get("dsa.plugins.default-enabled")) {
+      this.addAll(...this.defaultPlugins);
+    }
+    this.addAll(...this.character.data.get("dsa.plugins"));
+  }
+}
+
 export class Plugin {
   loaded = false;
-  heros = new Map();
   events = new EventEmitter();
+  disposables = new Disposables();
 
   constructor(plugins,url) {
     this.plugins = plugins;
     this.url = url;
-    this.load = import(this.plugins.getImportURL(this.url)).then( e => {
-      this.exports = e;
-      this.loaded = true;
-      if (this.exports.addHero) this.getAllHeros().forEach( hero =>
-        this.heros.set(hero,this.exports.addHero(hero))
-      );
-      return this;
-    });
+    this.load = import(this.resolveURL()).then( this.handleFinishedImport.bind(this) );
   }
 
-  addHero(...heros) {
-    heros.forEach( hero => {
-      if (this.heros.has(hero)) return;
-      this.heros.set(hero,this.exports?.addHero?.(hero));
-    });
+  handleFinishedImport(exports) {
+    this.exports = exports;
+    this.loaded = true;
+    this.disposables.add(
+      ...this.plugins.character ? [
+        this.exports.dataSchema && this.plugins.character.data.addSchema(this.exports.dataSchema),
+        this.exports.addCharacter?.(this.plugins.character),
+      ] : [
+        this.exports.add?.(),
+      ],
+    );
+    return this;
   }
 
-  getAllHeros() { return [...this.heros.keys()] }
-
-  removeHero(...heros) {
-    heros.forEach( hero => {
-      this.heros.get(hero)?.dispose();
-      this.heros.delete(hero);
-    });
-  }
-
-  required() {
-    return this.heros.size !== 0 || this.plugins.requiredPlugin(this);
+  resolveURL() {
+    return this.plugins.resolveURL(this.url);
   }
 
   dispose() {
-    this.heros.values().forEach( disposable => disposable?.dispose?.() );
+    this.disposables.dispose();
   }
 }

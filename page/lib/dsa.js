@@ -1,70 +1,67 @@
-import {createElement,EventEmitter,Disposables} from "./utils.js";
+import {EventEmitter} from "./utils.js";
 import {PluginManager} from "./plugin.js";
-import {Hero} from "./hero.js";
+import {Character} from "./character.js";
+import {ButtonPanel} from "./button.js";
 
 export class DSA {
-  heros = new Set();
+  characters = new Set();
   events = new EventEmitter();
-  disposables = new Disposables();
+  plugins = new PluginManager();
+  buttons = new ButtonPanel();
+  element = {
+    main: document.createElement("dsa"),
+    characters: document.createElement("dsa-characters"),
+  };
 
   constructor() {
-    this.disposables.add(
-      this.plugins = new PluginManager(),
+    this.append(
+      this.element.characters,
+      this.buttons.getOuterElement(),
     );
-    this.herosElement = createElement("dsa-heros",{
-      parent: document.body,
-    });
-    this.buttonsElement = createElement("dsa-buttons",{
-      parent: document.body,
-      rawChilds: [
-        {
-          tag: "dsa-button",
-          innerText: "New",
-          events: {
-            click: () => this.addHero(),
-          },
-        },
-        {
-          tag: "dsa-button",
-          innerText: "Import",
-          events: {
-            click: () => alert("Not available jet"), // TODO
-          },
-        },
-      ],
-    });
+
+    this.buttons.addNew("New", () => this.addCharacter());
+    this.buttons.addNew("Import", () => alert("Not available jet"));
   }
 
   initialize() {
     this.plugins.initialize();
   }
 
-  addHero(data) {
-    const hero = new Hero(data);
-    this.herosElement.appendChild(hero.casing);
-    this.heros.add(hero);
-    this.events.emit("did-added-hero", hero);
-    return hero;
+  append(...elements) { this.element.main.append(...elements); }
+  appendToCharacters(...elements) { this.element.characters.append(...elements); }
+  appendToButtons(...elements) { this.element.buttons.append(...elements); }
+
+  getOuterElement() {
+    return this.element.main;
   }
 
-  removeHero(hero) {
-    if (!this.heros.has(hero)) return;
-    this.heros.delete(hero);
-    this.herosElement.removeChild(hero.casing);
-    this.events.emit("did-removed-hero",hero);
-    hero.dispose();
+  addCharacter(data) {
+    const character = new Character(data);
+    this.appendToCharacters(character.getOuterElement());
+    this.characters.add(character);
+    character.initialize();
+    this.events.emit("did-added-character", character);
+    return character;
   }
 
-  removeAllHeros() {
-    this.heros.forEach( hero => this.removeHero(hero) );
+  getCharacters() { return [...this.characters]; }
+
+  removeCharacter(character) {
+    if (!this.characters.has(character)) return;
+    this.characters.delete(character);
+    character.dispose();
+    this.events.emit("did-removed-character");
+  }
+
+  removeAllCharacters() {
+    this.characters.forEach( character => this.removeCharacter(character) );
   }
 
   dispose() {
-    this.removeAllHeros();
-    this.disposables.dispose();
+    this.removeAllCharacters();
+    this.plugins.dispose();
   }
 
-  onDidAddedHero(callback) { return this.events.on( "did-added-hero", callback ); }
-  onDidRemovedHero(callback) { return this.events.on( "did-removed-hero", callback ); }
-  onDispose(callback) { return this.disposables.onDispose( callback ); }
+  onDidAddedCharacter(callback) { return this.events.on( "did-added-character", callback ); }
+  onDidRemovedCharacter(callback) { return this.events.on( "did-removed-character", callback ); }
 }

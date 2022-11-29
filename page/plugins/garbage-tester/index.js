@@ -1,28 +1,30 @@
-const {Disposables} = DSA;
-const disposables = new Disposables();
+function addToPluginManager(plugins) {
+  const disposables = new DSA.Disposables();
 
-let pluginRegistry = new FinalizationRegistry( url => console.log(`garbage collected plugin: ${JSON.stringify(url)}`) );
-disposables.onDispose( () => "garbage-collector disposed" );
+  function initialize() {
+    function getRegister() {
+      const pluginRegistry = new FinalizationRegistry( url => console.log(`garbage collected plugin: ${JSON.stringify(url)}`) );
+      return plugin => pluginRegistry.register(plugin,plugin.url);
+    }
 
-export const files = [
-  "./test.js",
-];
+    const register = getRegister();
 
-dsa.plugins.getAll().map( plugin => {
-  console.log(plugin.url);
-  pluginRegistry?.register(plugin,plugin.url);
-});
+    plugins.getAll().map( register );
+    disposables.add( plugins.onDidAddedPlugin( register ) );
+  }
+  initialize();
 
-disposables.add(
-  dsa.plugins.onDidAddedPlugin( plugin => {
-    console.log(`added ${plugin.url}`);
-    pluginRegistry?.register(plugin,plugin.url);
-  }),
-  dsa.plugins.onDidRemovedPlugin( url => console.log(`remove ${url}`) ),
-);
+  disposables.add(
+    dsa.plugins.onDidRemovedPlugin( url => console.log(`remove plugin: ${url}`) ),
+  );
 
+  return disposables;
+}
 
-export function dispose() {
-  pluginRegistry = undefined;
-  disposables.dispose();
+export function add() {
+  return addToPluginManager(dsa.plugins);
+}
+
+export function addCharacter(character) {
+  return addToPluginManager(character.plugins);
 }

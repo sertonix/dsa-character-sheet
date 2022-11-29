@@ -5,13 +5,19 @@ export class StyleManager {
   events = new EventEmitter();
   baseURL = new URL("./themes/",import.meta.url);
 
-  constructor(hero) {
-    this.hero = hero;
+  constructor(character) {
+    this.character = character;
     this.element = createElement("dsa-style-manager",{
-      parent: this.hero.element,
+      parent: character.element,
     });
+
+    // this.character.data.onDidChange("theme.theme", url => {
+    //   const [added,removed] = deltaArrays(newUrls,oldUrls);
+    //   this.remove(...removed);
+    //   this.addAll(...added);
+    // });
     // TODO style changer
-    ( style => this.hero.heading.addEventListener("click", () => style.setURL(style.url === "black-and-white" ? "dark-minimal" : "black-and-white") ) )(this.addStyle("dark-minimal"));
+    ( style => character.top.addEventListener("click", () => style.setURL(style.url === "black-and-white" ? "dark-minimal" : "black-and-white") ) )(this.addStyle("dark-minimal"));
   }
 
   addStyle(url) {
@@ -21,6 +27,7 @@ export class StyleManager {
   }
 
   removeStyle(styles) {
+    this.styles.get(style).dispose();
     this.styles.delete(styles);
   }
 
@@ -43,10 +50,14 @@ export class Style {
     this.element = createElement("link",{
       attributes: {
         rel: "styleSheet",
-        href: this.styles.getStyleURL(url),
+        href: this.getStyleURL(),
       },
       parent: this.styles.element,
     });
+  }
+
+  getStyleURL() {
+    return this.styles.getStyleURL(this.url);
   }
 
   setURL(url) {
@@ -59,4 +70,4 @@ export class Style {
   }
 }
 
-export const addHero = hero => new StyleManager(hero);
+export const addCharacter = character => new StyleManager(character);

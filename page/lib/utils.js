@@ -1,30 +1,3 @@
-export function createElement(tag,options) {
-  return initializeElement(document.createElement(tag,options),options);
-}
-
-export function initializeElement(element,{
-  attributes = {},
-  shadow = undefined,
-  childs = [],
-  rawChilds = [],
-  parent = undefined,
-  innerText = undefined,
-  events = {},
-  classes = [],
-} = {}) {
-  Object.entries(attributes).forEach( ([name,value]) => element.setAttribute(name,value) );
-  if (classes.length) element.classList.add(...classes);
-  element.append(
-    ...childs,
-    ...rawChilds.map( options => createElement(options.tag ?? "div",options) ),
-    innerText ? [innerText] : [],
-  );
-  if (shadow) initializeElement(element.attachShadow({mode: "open"}),shadow);
-  parent?.appendChild(element);
-  Object.entries(events).forEach( ([name,callback]) => element.addEventListener(name,callback) );
-  return element;
-}
-
 export function deltaArrays(arr1,arr2) {
   arr1 = uniqueArray(arr1);
   arr2 = uniqueArray(arr2);
@@ -92,7 +65,8 @@ export class Disposables {
   add(...disposables) {
     if (this.disposed) return;
     disposables.forEach( disposable => {
-      if (!disposable || !disposable.dispose) throw new Error("not disposable");
+      if (!disposable) return;
+      if (!disposable.dispose) throw new Error("not disposable");
       this.disposables.add(disposable);
     });
   }
@@ -112,10 +86,3 @@ export class Disposables {
 
   onDispose(callback) { return this.events.on( "dispose", callback ); }
 }
-
-/*
-export const DisposableProperty = (()=>{
-  const toWeak = f => (obj,n) => f(new WeakRef(obj),n);
-  return toWeak( (obj,n) => new Disposable( () => delete obj.deref()?.[n] ) );
-})();
-*/

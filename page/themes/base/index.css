@@ -2,7 +2,7 @@
 @import "./info.css";
 @import "./attribute.css";
 
-dsa-hero {
+dsa-character {
   background-color: var(--color-1);
   line-height: 1; /* allows the use of em as 1 line high */
   color: var(--color-2);
@@ -13,13 +13,13 @@ dsa-hero {
   padding: 10px;
 }
 
-dsa-hero-heading {
+dsa-character-heading {
   display: block;
   width: 100%;
   text-align: center;
 }
 
-dsa-button.dsa-hero-close {
+dsa-button.dsa-character-close {
   display: block;
   position: absolute;
   top: 3px;
