@@ -47,8 +47,8 @@ export class Character {
     // TODO
   }
 
-  export() {
-    return this.data.export();
+  exportString(options) {
+    return this.data.exportString(options);
   }
 
   dispose() {

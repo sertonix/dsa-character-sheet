@@ -2,7 +2,9 @@ const CHARACTER_FILE_TYPES = "application/json,.dsa-char";
 const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 
 function saveCharacter(character) {
-  const fileContent = JSON.stringify(character.export(),null,2);
+  const fileContent = character.exportString({
+    space: character.data.get("import-export.stringify-space"),
+  });
   const blob = new Blob([fileContent]);
   const objectURL = URL.createObjectURL(blob);
 
@@ -44,3 +46,11 @@ export function addCharacter(character) {
 export function add() {
   dsa.buttons.addNew("Import", importCharacter);
 }
+
+export const dataSchema = {
+  "import-export.stringify-space": {
+    type: "integer",
+    min: 0,
+    default: 2,
+  }
+};

@@ -27,8 +27,8 @@ export class DataManager {
     this.events.emit( `did-change-${name}`, value, oldValue );
   }
 
-  export() {
-    return this.data;
+  exportString({space}={}) {
+    return JSON.stringify(this.data,null,space);
   }
 
   addSchema(schema) {
