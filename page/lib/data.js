@@ -27,6 +27,10 @@ export class DataManager {
     this.events.emit( `did-change-${name}`, value, oldValue );
   }
 
+  export() {
+    return this.data;
+  }
+
   addSchema(schema) {
     for (const [name,subSchema] of Object.entries(schema)) {
       const value = this.get(name);
