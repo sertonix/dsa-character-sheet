@@ -1,8 +1,12 @@
+function getDisposableFromElement(element) {
+  return { dispose: () => element.remove() };
+}
+
 export function addCharacter(character) {
   const element = document.createElement("dsa-character-heading");
   element.innerText = character.data.get("heading.title"); // TODO on title change
   character.appendToTop(element);
-  return { dispose: () => element.remove() };
+  return getDisposableFromElement(element);
 }
 
 export const dataSchema = {
