@@ -6,21 +6,18 @@ dsa-button.dsa-character-close {
   width: 15px;
   height: 15px;
   cursor: pointer;
+  padding: 3px;
+  border: solid 1px;
+  border-radius: 2px;
+}
+/* TODO prevent douplicate with /style/index.css */
+
+dsa-button.dsa-character-close:hover {
+  padding: 2px;
+  border: solid 2px;
 }
 
 dsa-button.dsa-character-close > svg {
   stroke: #ffffff;
   stroke-width: 10;
-}
-
-dsa-button {
-  cursor: pointer;
-  padding: 3px;
-  border: solid 1px;
-  border-radius: 2px;
-}
-
-dsa-button:hover {
-  padding: 2px;
-  border: solid 2px;
 }
