@@ -52,5 +52,5 @@ export const dataSchema = {
     type: "integer",
     min: 0,
     default: 2,
-  }
+  },
 };

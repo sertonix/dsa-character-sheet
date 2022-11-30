@@ -1,7 +1,10 @@
 export const dataSchema = {
   "dsa.plugins": {
     type: "array",
-    items: { type: "string" },
+    items: {
+      type: "string",
+      required: true,
+    },
     default: [],
   },
   "dsa.plugins.default-enabled": {
