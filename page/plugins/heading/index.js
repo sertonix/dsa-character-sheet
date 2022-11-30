@@ -5,7 +5,7 @@ function getDisposableFromElement(element) {
 export function addCharacter(character) {
   const element = document.createElement("dsa-character-heading");
   element.innerText = character.data.get("heading.title"); // TODO on title change
-  character.appendToTop(element);
+  character.topBar.appendToMiddle(element);
   return getDisposableFromElement(element);
 }
 
@@ -15,5 +15,3 @@ export const dataSchema = {
     default: "Character",
   }
 };
-
-export const styleURL = "./index.css";

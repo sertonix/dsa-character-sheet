@@ -6,11 +6,34 @@ dsa-character {
   line-height: 1; /* allows the use of em as 1 line high */
   font-family: monospace;
 
-  display: block;
-  position: relative;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 dsa-style-manager {
   display: none;
+}
+
+dsa-horizontal-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+dsa-horizontal-bar-left, dsa-horizontal-bar-middle, dsa-horizontal-bar-right {
+  display: flex;
+  flex-grow: 1;
+}
+
+dsa-horizontal-bar-left {
+  flex-direction: row;
+}
+
+dsa-horizontal-bar-middle {
+  justify-content: center;
+}
+
+dsa-horizontal-bar-right {
+  flex-direction: row-reverse;
 }

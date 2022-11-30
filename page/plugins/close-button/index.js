@@ -11,7 +11,7 @@ export function addCharacter(character) {
       <path d="M 100,0 0,100"/>
     </svg>
   `;
-  character.appendToTop(element);
+  character.topBar.appendToRight(element);
 
   return new DSA.Disposables(
     DSA.getDisposableEventListener(element, "click", getRemoveCharacter(character)),

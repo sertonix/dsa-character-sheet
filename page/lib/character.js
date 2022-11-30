@@ -4,6 +4,7 @@ import {HeroPluginManager} from "./plugin.js";
 import {ThemeManager} from "./theme.js";
 import {StyleManager} from "./style.js";
 import {dataSchema} from "./data-schema.js";
+import {HorizontalBar} from "./bar.js";
 
 export class Character {
   sections = new Set();
@@ -11,10 +12,10 @@ export class Character {
   plugins = new HeroPluginManager(this);
   style = new StyleManager(this);
   theme = new ThemeManager(this);
+  topBar = new HorizontalBar();
+  bottomBar = new HorizontalBar();
   element = {
-    top: document.createElement("dsa-character-top"),
     middle: document.createElement("dsa-character-middle"),
-    bottom: document.createElement("dsa-character-bottom"),
     main: document.createElement("dsa-character"),
     casing: document.createElement("dsa-character-casing"),
   };
@@ -23,10 +24,13 @@ export class Character {
     this.data = new DataManager(data);
     this.element.casing.attachShadow({mode: "open"}).append(this.element.main);
 
+    this.topBar.getOuterElement().classList.add("dsa-character-top");
+    this.bottomBar.getOuterElement().classList.add("dsa-character-bottom");
+
     this.append(
-      this.element.top,
+      this.topBar.getOuterElement(),
       this.element.middle,
-      this.element.bottom,
+      this.bottomBar.getOuterElement(),
     );
     this.data.addSchema(dataSchema);
   }
@@ -38,9 +42,7 @@ export class Character {
   }
 
   append(...elements) { this.element.main.append(...elements); }
-  appendToTop(...elements) { this.element.top.append(...elements); }
   appendToMiddle(...elements) { this.element.middle.append(...elements); }
-  appendToBottom(...elements) { this.element.bottom.append(...elements); }
   getOuterElement() { return this.element.casing; }
 
   addSection(section) {
@@ -55,12 +57,12 @@ export class Character {
     this.theme.dispose();
     this.style.dispose();
     this.plugins.dispose();
+    this.topBar.dispose();
+    this.bottomBar.dispose();
 
     this.element.casing.remove();
     this.element.main.remove();
-    this.element.top.remove();
     this.element.middle.remove();
-    this.element.bottom.remove();
   }
 }
 
