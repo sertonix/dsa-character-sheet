@@ -23,7 +23,7 @@ export class Character {
     this.data = new DataManager(data);
     this.element.casing.attachShadow({mode: "open"}).append(this.element.main);
 
-    this.element.main.append(
+    this.append(
       this.element.top,
       this.element.middle,
       this.element.bottom,
