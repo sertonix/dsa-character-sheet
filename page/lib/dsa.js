@@ -20,7 +20,6 @@ export class DSA {
     );
 
     this.buttons.addNew("New", () => this.addCharacter());
-    this.buttons.addNew("Import", () => alert("Not available jet"));
   }
 
   initialize() {

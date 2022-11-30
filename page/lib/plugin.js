@@ -1,5 +1,7 @@
 import {EventEmitter,deltaArrays,Disposables,Disposable} from "./utils.js";
 
+// TODO save plugins for offline use
+// TODO provider and consumer
 export class PluginManager {
   plugins = new Map();
   events = new EventEmitter();
@@ -8,6 +10,7 @@ export class PluginManager {
     "garbage-tester",
     "heading",
     "close-button",
+    "import-export",
   ];
 
   initialize() {
