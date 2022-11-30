@@ -1,0 +1,11 @@
+dsa-button {
+  cursor: pointer;
+  padding: 3px;
+  border: solid 1px;
+  border-radius: 2px;
+}
+
+dsa-button:hover {
+  padding: 2px;
+  border: solid 2px;
+}
