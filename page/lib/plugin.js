@@ -11,7 +11,11 @@ export class PluginManager {
   ];
 
   initialize() {
-    this.addAll(...this.defaultPlugins);
+    this.addAll(...this.getInitialPlugins());
+  }
+
+  getInitialPlugins() {
+    return this.defaultPlugins;
   }
 
   add(url) {
@@ -74,10 +78,14 @@ export class HeroPluginManager extends PluginManager {
         this.remove(...this.defaultPlugins);
       }
     });
-    if (this.character.data.get("dsa.plugins.default-enabled")) {
-      this.addAll(...this.defaultPlugins);
-    }
-    this.addAll(...this.character.data.get("dsa.plugins"));
+    super.initialize();
+  }
+
+  getInitialPlugins() {
+    return [
+      ...this.character.data.get("dsa.plugins.default-enabled") ? this.defaultPlugins : [],
+      ...this.character.data.get("dsa.plugins")
+    ];
   }
 }
 
