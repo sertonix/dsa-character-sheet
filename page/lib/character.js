@@ -31,7 +31,6 @@ export class Character {
     this.data.addSchema(dataSchema);
   }
 
-
   initialize() {
     this.style.initialize();
     this.theme.initialize();
@@ -42,10 +41,7 @@ export class Character {
   appendToTop(...elements) { this.element.top.append(...elements); }
   appendToMiddle(...elements) { this.element.middle.append(...elements); }
   appendToBottom(...elements) { this.element.bottom.append(...elements); }
-
-  getOuterElement() {
-    return this.element.casing;
-  }
+  getOuterElement() { return this.element.casing; }
 
   addSection(section) {
     // TODO
