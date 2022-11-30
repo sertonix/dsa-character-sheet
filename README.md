@@ -5,8 +5,6 @@ It allows you to view and manage DSA characters in the browser. You can import a
 
 ## Notes for Plugins
 
-Don't use `export default` for the exports of a plugin!
-
 data names:
   * path joined with dots
   * build-in paths prefixed with `dsa`
