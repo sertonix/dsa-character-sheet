@@ -101,15 +101,18 @@ export class Plugin {
   handleFinishedImport(exports) {
     this.exports = exports;
     this.loaded = true;
-    this.disposables.mayAdd(
-      ...this.plugins.character ? [
-        this.exports.dataSchema && this.plugins.character.data.addSchema(this.exports.dataSchema),
-        this.exports.addCharacter?.(this.plugins.character),
-      ] : [
-        this.exports.add?.(),
-      ],
-    );
+    if (this.plugins.character) {
+      const dataSchema = this.getExport("dataSchema");
+      if (dataSchema) this.disposables.mayAdd(this.plugins.character.data.addSchema(dataSchema));
+      this.disposables.mayAdd(this.getExport("addCharacter")?.(this.plugins.character));
+    } else {
+      this.disposables.mayAdd(this.exports.add?.());
+    }
     return this;
+  }
+
+  getExport(name) {
+    return this.exports[name] ?? this.exports?.[name];
   }
 
   resolveURL() {
