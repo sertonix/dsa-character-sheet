@@ -51,18 +51,29 @@ export class DataManager {
     }
   }
 
-  matchesSchema(data,schema) {
-    if (data == null || !schema) return true;
+  matchesType(data,schema) {
     const {type} = schema;
     if (!type || type === "any") return true;
     if (type === "string") return typeof data === "string";
-    if (type === "number") return typeof data === "number";
+    if (type === "number" || type === "integer") {
+      if (typeof data !== "number") return false;
+      if (type === "integer" && !Number.isInteger(data)) return false;
+      if (min != null && data >= min) return true;
+      if (max != null && data <= max) return true;
+    }
     if (type === "boolean") return typeof data === "boolean";
     if (type === "object") return typeof data === "object";
     if (type === "array") {
       if (!Array.isArray(data)) return false;
       return data.every( data => this.matchesSchema(data,schema.items) );
     }
+  }
+
+  matchesSchema(data,schema) {
+    if (!schema) return true;
+    if (data == null) return !schema.required;
+    if (schema.options && !schema.options.includes(data)) return false;
+    return matchesType(data,schema);
   }
 
   removeSchema(schema) {
