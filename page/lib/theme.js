@@ -1,3 +1,4 @@
+// TODO theme types
 export class ThemeManager {
   baseURL = new URL("../themes/",import.meta.url);
 
@@ -21,5 +22,9 @@ export class ThemeManager {
   set(url) {
     this.url = url;
     this.theme.setURL(this.resolveURL(this.url));
+  }
+
+  dispose() {
+    // TODO
   }
 }
