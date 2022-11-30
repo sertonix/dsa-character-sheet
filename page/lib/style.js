@@ -37,7 +37,7 @@ export class StyleManager {
   }
 
   dispose() {
-    this.getAll().forEach(  );
+    this.getAll().forEach( style => this.remove(style) );
     this.element.remove();
   }
 }
