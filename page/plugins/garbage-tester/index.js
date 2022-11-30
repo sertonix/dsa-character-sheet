@@ -1,30 +1,23 @@
+const
+  logRemoval = url => console.log(`remove plugin: ${JSON.stringify(url)}`),
+  logGarbageCollect = url => console.log(`garbage collected plugin: ${JSON.stringify(url)}`),
+  getRegisterPlugin = registry => plugin => registry.register(plugin,plugin.url)
+  ;
+
 function addToPluginManager(plugins) {
   const disposables = new DSA.Disposables();
+  const pluginRegistry = new FinalizationRegistry( logGarbageCollect );
+  const register = getRegisterPlugin(pluginRegistry);
 
-  function initialize() {
-    function getRegister() {
-      const pluginRegistry = new FinalizationRegistry( url => console.log(`garbage collected plugin: ${JSON.stringify(url)}`) );
-      return plugin => pluginRegistry.register(plugin,plugin.url);
-    }
-
-    const register = getRegister();
-
-    plugins.getAll().map( register );
-    disposables.add( plugins.onDidAddedPlugin( register ) );
-  }
-  initialize();
+  plugins.getAll().map( register );
 
   disposables.add(
-    dsa.plugins.onDidRemovedPlugin( url => console.log(`remove plugin: ${url}`) ),
+    plugins.onDidAddedPlugin( register ),
+    dsa.plugins.onDidRemovedPlugin( logRemoval ),
   );
 
   return disposables;
 }
 
-export function add() {
-  return addToPluginManager(dsa.plugins);
-}
-
-export function addCharacter(character) {
-  return addToPluginManager(character.plugins);
-}
+export const add = () => addToPluginManager(dsa.plugins);
+export const addCharacter = character => addToPluginManager(character.plugins);
