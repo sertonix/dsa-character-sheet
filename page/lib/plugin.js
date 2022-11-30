@@ -103,7 +103,7 @@ export class Plugin {
   handleFinishedImport(exports) {
     this.exports = exports;
     this.loaded = true;
-    this.disposables.add(
+    this.disposables.mayAdd(
       ...this.plugins.character ? [
         this.exports.dataSchema && this.plugins.character.data.addSchema(this.exports.dataSchema),
         this.exports.addCharacter?.(this.plugins.character),

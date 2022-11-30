@@ -65,6 +65,14 @@ export class Disposables {
   add(...disposables) {
     if (this.disposed) return;
     disposables.forEach( disposable => {
+      if (!disposable || !disposable.dispose) throw new Error("not disposable");
+      this.disposables.add(disposable);
+    });
+  }
+
+  mayAdd(...disposables) {
+    if (this.disposed) return;
+    disposables.forEach( disposable => {
       if (!disposable) return;
       if (!disposable.dispose) throw new Error("not disposable");
       this.disposables.add(disposable);
