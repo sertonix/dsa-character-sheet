@@ -1,5 +1,5 @@
 function getDisposableFromElement(element) {
-  return { dispose: () => element.remove() };
+  return new DSA.Disposable(() => element.remove());
 }
 
 export function addCharacter(character) {
