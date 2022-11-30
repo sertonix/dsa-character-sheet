@@ -1,7 +1,3 @@
-@import "./setting.css";
-@import "./info.css";
-@import "./attribute.css";
-
 dsa-character {
   line-height: 1; /* allows the use of em as 1 line high */
   font-family: monospace;
