@@ -99,3 +99,12 @@ export class Disposables {
 
   onDispose(callback) { return this.events.on( "dispose", callback ); }
 }
+
+export function getDisposableEventListener(eventTarget,name,callback) {
+  eventTarget.addEventListener(name,callback,{passive:true});
+  return new Disposable(() => eventTarget.removeEventListener(name,callback));
+}
+
+export function getDisposableElement(element) {
+  return new Disposable(() => element.remove());
+}
