@@ -38,7 +38,7 @@ export class DataManager {
         throw new Error(`value ${JSON.stringify(value)} doesn't match schema ${JSON.stringify(subSchema)}`);
       }
       if (!this.matchesSchema(subSchema.default,subSchema)) {
-        throw new Error(`default ${JSON.stringify(value)} doesn't match schema ${JSON.stringify(subSchema)}`);
+        throw new Error(`default value ${JSON.stringify(value)} doesn't match schema ${JSON.stringify(subSchema)}`);
       }
     }
     this.schemas.add(schema);
@@ -52,7 +52,7 @@ export class DataManager {
   }
 
   matchesType(data,schema) {
-    const {type} = schema;
+    const {type,min,max,items} = schema;
     if (!type || type === "any") return true;
     if (type === "string") return typeof data === "string";
     if (type === "number" || type === "integer") {
@@ -65,7 +65,7 @@ export class DataManager {
     if (type === "object") return typeof data === "object";
     if (type === "array") {
       if (!Array.isArray(data)) return false;
-      return data.every( data => this.matchesSchema(data,schema.items) );
+      return data.every( data => this.matchesSchema(data,items) );
     }
   }
 
@@ -73,7 +73,7 @@ export class DataManager {
     if (!schema) return true;
     if (data == null) return !schema.required;
     if (schema.options && !schema.options.includes(data)) return false;
-    return matchesType(data,schema);
+    return this.matchesType(data,schema);
   }
 
   removeSchema(schema) {
