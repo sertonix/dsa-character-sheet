@@ -19,6 +19,7 @@ export class ThemeManager {
   }
 
   set(url) {
+    this.url = url;
     this.theme.setURL(this.resolveURL(this.url));
   }
 }
