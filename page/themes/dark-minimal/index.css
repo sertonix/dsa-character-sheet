@@ -1,4 +1,4 @@
 dsa-character {
-  --color-1: #272727;
-  --color-2: #bebebe;
+  background-color: #272727;
+  color: #bebebe;
 }

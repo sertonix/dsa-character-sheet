@@ -1,6 +1,5 @@
 dsa-character {
-  --color-1: black;
-  --color-2: white;
-
+  background-color: #000000;
+  color: #ffffff;
   border: solid 1px;
 }

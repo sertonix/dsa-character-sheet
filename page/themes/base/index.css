@@ -3,9 +3,7 @@
 @import "./attribute.css";
 
 dsa-character {
-  background-color: var(--color-1);
   line-height: 1; /* allows the use of em as 1 line high */
-  color: var(--color-2);
   font-family: monospace;
 
   display: block;
