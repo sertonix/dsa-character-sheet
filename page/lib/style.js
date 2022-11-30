@@ -22,10 +22,10 @@ export class StyleManager {
     return style;
   }
 
-  remove(styles) {
+  remove(style) {
     if (!this.styles.has(style)) return;
-    this.styles.get(style).dispose();
-    this.styles.delete(styles);
+    style.dispose();
+    this.styles.delete(style);
   }
 
   getAll() { return [...this.styles]; }
