@@ -40,8 +40,6 @@ export class PluginManager {
   get(url) { return this.plugins.get(url); }
   getAll() { return [...this.plugins.values()]; }
   getAllURLs() { return [...this.plugins.keys()]; }
-  removeAll() { this.remove(...this.plugins.getAllURLs()); }
-
   has(url) { return this.plugins.has(url); }
 
   resolveURL(url) {
@@ -52,7 +50,7 @@ export class PluginManager {
   }
 
   dispose() {
-    this.removeAll();
+    this.remove(...this.getAllURLs());
   }
 
   onDidAddedPlugin(callback) { return this.events.on( "did-added-plugin", callback ); }
