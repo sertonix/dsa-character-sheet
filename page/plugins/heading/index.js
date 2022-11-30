@@ -15,3 +15,5 @@ export const dataSchema = {
     default: "Character",
   }
 };
+
+export const styleURL = "./index.css";

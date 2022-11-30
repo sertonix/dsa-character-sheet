@@ -11,25 +11,6 @@ dsa-character {
   padding: 10px;
 }
 
-dsa-character-heading {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-dsa-button.dsa-character-close {
-  display: block;
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  background-image: url("./icons/close.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
-}
-
 dsa-style-manager {
   display: none;
 }
