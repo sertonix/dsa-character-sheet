@@ -46,13 +46,14 @@ export class Disposable {
   disposed = false;
 
   constructor(onDispose) {
+    if (typeof onDispose !== "function") throw new Error("onDispose is not a function");
     this.onDispose = onDispose;
   }
 
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
-    this.onDispose?.();
+    this.onDispose();
     this.onDispose = null;
   }
 }
