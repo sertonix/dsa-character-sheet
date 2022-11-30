@@ -103,8 +103,10 @@ export class Plugin {
     this.loaded = true;
     if (this.plugins.character) {
       const dataSchema = this.getExport("dataSchema");
+      const styleURL = this.getExport("styleURL");
       if (dataSchema) this.disposables.mayAdd(this.plugins.character.data.addSchema(dataSchema));
       this.disposables.mayAdd(this.getExport("addCharacter")?.(this.plugins.character));
+      if (styleURL) this.plugins.character.style.add(this.resolveStyleURL(styleURL));
     } else {
       this.disposables.mayAdd(this.exports.add?.());
     }
@@ -117,6 +119,10 @@ export class Plugin {
 
   resolveURL() {
     return this.plugins.resolveURL(this.url);
+  }
+
+  resolveStyleURL(url) {
+    return new URL(url,this.resolveURL());
   }
 
   dispose() {
