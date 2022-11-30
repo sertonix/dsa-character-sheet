@@ -43,10 +43,11 @@ export class StyleManager {
 }
 
 export class Style {
+  element = document.createElement("link");
+
   constructor(styles,url) {
     this.styles = styles;
     this.url = url;
-    this.element = document.createElement("link");
     this.element.setAttribute("rel","styleSheet");
     this.element.setAttribute("href",this.resolveURL());
   }
