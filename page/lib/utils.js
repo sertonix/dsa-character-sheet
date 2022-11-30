@@ -62,6 +62,10 @@ export class Disposables {
   disposables = new Set();
   events = new EventEmitter();
 
+  constructor(...disposables) {
+    this.add(...disposables);
+  }
+
   add(...disposables) {
     if (this.disposed) return;
     disposables.forEach( disposable => {
