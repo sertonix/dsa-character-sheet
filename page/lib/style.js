@@ -23,6 +23,7 @@ export class StyleManager {
   }
 
   remove(styles) {
+    if (!this.styles.has(style)) return;
     this.styles.get(style).dispose();
     this.styles.delete(styles);
   }
