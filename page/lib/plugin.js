@@ -26,8 +26,6 @@ export class PluginManager {
     return plugin;
   }
 
-  addAll(...urls) { return urls.map( url => this.add(url) ); }
-
   remove(...urls) {
     for (const url of urls) {
       if (!this.plugins.has(url)) continue;
@@ -37,6 +35,7 @@ export class PluginManager {
     }
   }
 
+  addAll(...urls) { return urls.map( url => this.add(url) ); }
   get(url) { return this.plugins.get(url); }
   getAll() { return [...this.plugins.values()]; }
   getAllURLs() { return [...this.plugins.keys()]; }
