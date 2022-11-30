@@ -24,8 +24,8 @@ export class StyleManager {
 
   remove(style) {
     if (!this.styles.has(style)) return;
-    style.dispose();
     this.styles.delete(style);
+    style.dispose();
   }
 
   getAll() { return [...this.styles]; }
@@ -67,6 +67,7 @@ export class Style {
   }
 
   dispose() {
+    this.styles.remove(this);
     this.element.remove();
   }
 }
