@@ -52,6 +52,10 @@ export class Character {
   }
 
   dispose() {
+    this.theme.dispose();
+    this.style.dispose();
+    this.plugins.dispose();
+
     this.element.casing.remove();
     this.element.main.remove();
     this.element.top.remove();
