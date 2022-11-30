@@ -29,8 +29,9 @@ export class PluginManager {
   remove(...urls) {
     for (const url of urls) {
       if (!this.plugins.has(url)) continue;
-      this.plugins.get(url).dispose();
+      const plugin = this.plugins.get(url);
       this.plugins.delete(url);
+      plugin.dispose();
       this.events.emit("did-removed-plugin", url);
     }
   }
@@ -116,6 +117,7 @@ export class Plugin {
   }
 
   dispose() {
+    this.plugins.remove(this.url);
     this.disposables.dispose();
   }
 }
