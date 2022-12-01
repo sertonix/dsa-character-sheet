@@ -44,7 +44,7 @@ export class Character {
   getOuterElement() { return this.element.casing; }
 
   addSection(section) {
-    // TODO
+    this.sections.add(section);
   }
 
   exportString(options) {
