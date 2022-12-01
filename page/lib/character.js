@@ -7,15 +7,14 @@ import {dataSchema} from "./data-schema.js";
 import {HorizontalBar} from "./bar.js";
 
 export class Character {
-  sections = new Set();
   events = new EventEmitter();
   plugins = new HeroPluginManager(this);
   style = new StyleManager(this);
   theme = new ThemeManager(this);
   topBar = new HorizontalBar();
   bottomBar = new HorizontalBar();
+  sections = new Sections();
   element = {
-    middle: document.createElement("dsa-character-middle"),
     main: document.createElement("dsa-character"),
     casing: document.createElement("dsa-character-casing"),
   };
@@ -29,7 +28,7 @@ export class Character {
 
     this.append(
       this.topBar.getOuterElement(),
-      this.element.middle,
+      this.sections.getOuterElement(),
       this.bottomBar.getOuterElement(),
     );
     this.data.addSchema(dataSchema);
@@ -42,7 +41,6 @@ export class Character {
   }
 
   append(...elements) { this.element.main.append(...elements); }
-  appendToMiddle(...elements) { this.element.middle.append(...elements); }
   getOuterElement() { return this.element.casing; }
 
   addSection(section) {
@@ -59,17 +57,39 @@ export class Character {
     this.plugins.dispose();
     this.topBar.dispose();
     this.bottomBar.dispose();
+    this.sections.dispose();
 
     this.element.casing.remove();
     this.element.main.remove();
-    this.element.middle.remove();
   }
 }
 
-export class CharacterSection {
-  events = new EventEmitter();
+export class Sections {
+  sections = new Set();
+  element = document.createElement("dsa-character-sections");
 
-  constructor() {
-    this.element = document.createElement("dsa-character-selction");
+  add(section) {
+    this.sections.add(section);
+    this.append(section.getOuterElement());
   }
+
+  remove(section) {
+    this.sections.delete(section);
+    this.removeChild(section.getOuterElement());
+  }
+
+  append(...elements) { this.element.append(...elements); }
+  getOuterElement() { return this.element; }
+  removeChild(child) { this.element.removeChild(child); }
+
+  dispose() {
+
+  }
+}
+
+export class Section {
+  events = new EventEmitter();
+  element = document.createElement("dsa-character-section");
+
+  getOuterElement() { return this.element; }
 }
