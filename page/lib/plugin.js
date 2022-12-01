@@ -1,4 +1,4 @@
-import {EventEmitter,deltaArrays,Disposables,Disposable} from "./utils.js";
+import {EventEmitter,deltaArrays,Disposables} from "./utils.js";
 
 // TODO save plugins for offline use
 // TODO provider and consumer
