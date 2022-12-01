@@ -40,7 +40,8 @@ function importCharacter() {
 }
 
 export function addCharacter(character) {
-  return DSA.getDisposableEventListener( character.element.top, "click", () => saveCharacter(character) );
+  // TODO replace with export button
+  return DSA.getDisposableEventListener( character.topBar.getOuterElement(), "click", () => saveCharacter(character) );
 }
 
 export function add() {
