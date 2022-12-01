@@ -39,19 +39,17 @@ function importCharacter() {
   tempInput.click();
 }
 
-export function addCharacter(character) {
+export default {
   // TODO replace with export button
-  return DSA.getDisposableEventListener( character.topBar.getOuterElement(), "click", () => saveCharacter(character) );
-}
-
-export function add() {
-  dsa.buttons.addNew("Import", importCharacter);
-}
-
-export const dataSchema = {
-  "import-export.stringify-space": {
-    type: "integer",
-    min: 0,
-    default: 2,
+  addCharacter: character => DSA.getDisposableEventListener( character.topBar.getOuterElement(), "click", () => saveCharacter(character) ),
+  add() {
+    dsa.buttons.addNew("Import", importCharacter);
+  },
+  dataSchema: {
+    "import-export.stringify-space": {
+      type: "integer",
+      min: 0,
+      default: 2,
+    },
   },
 };

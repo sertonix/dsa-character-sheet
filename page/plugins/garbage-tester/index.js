@@ -19,5 +19,7 @@ function addToPluginManager(plugins) {
   return disposables;
 }
 
-export const add = () => addToPluginManager(dsa.plugins);
-export const addCharacter = character => addToPluginManager(character.plugins);
+export default {
+  add: () => addToPluginManager(dsa.plugins),
+  addCharacter: character => addToPluginManager(character.plugins),
+}
