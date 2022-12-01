@@ -14,4 +14,11 @@ data names:
 
 * right click menu
 * key bindings
-* bundle into one page
+* bundle into single html file
+* allow offline plugins
+* group class methods
+* config manager
+* allow data getters in data manager
+* plugin provided and consumed api
+* priorities for styles, bar elements and sections
+* multiple theme types like layout and color themes

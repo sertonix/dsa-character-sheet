@@ -1,6 +1,5 @@
 import {EventEmitter,Disposable} from "./utils.js";
 
-// TODO allow values getter
 export class DataManager {
   events = new EventEmitter();
   schemas = new Set();

@@ -1,4 +1,3 @@
-// TODO theme types
 export class ThemeManager {
   baseURL = new URL("../themes/",import.meta.url);
 

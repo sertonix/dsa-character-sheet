@@ -1,7 +1,5 @@
 import {EventEmitter,deltaArrays,Disposables} from "./utils.js";
 
-// TODO save plugins for offline use
-// TODO provider and consumer
 export class PluginManager {
   pluginClass = Plugin;
   plugins = new Map();

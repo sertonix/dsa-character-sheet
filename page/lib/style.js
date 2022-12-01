@@ -1,6 +1,5 @@
 import {EventEmitter,Disposables} from "./utils.js";
 
-// TODO order of styles
 export class StyleManager {
   styles = new Set();
   events = new EventEmitter();
