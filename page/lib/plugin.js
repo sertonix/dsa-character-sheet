@@ -3,6 +3,7 @@ import {EventEmitter,deltaArrays,Disposables} from "./utils.js";
 // TODO save plugins for offline use
 // TODO provider and consumer
 export class PluginManager {
+  pluginClass = Plugin;
   plugins = new Map();
   events = new EventEmitter();
   baseURL = new URL("../plugins/",import.meta.url);
@@ -23,7 +24,7 @@ export class PluginManager {
 
   add(url) {
     if (this.plugins.has(url)) return this.plugins.get(url);
-    const plugin = new Plugin(this,url);
+    const plugin = new this.pluginClass(this,url);
     this.plugins.set(url,plugin);
     this.events.emit("did-added-plugin", plugin);
     return plugin;
@@ -61,6 +62,8 @@ export class PluginManager {
 }
 
 export class HeroPluginManager extends PluginManager {
+  pluginClass = HeroPlugin;
+
   constructor(character) {
     super();
     this.character = character;
@@ -98,21 +101,17 @@ export class Plugin {
   constructor(plugins,url) {
     this.plugins = plugins;
     this.url = url;
-    this.load = import(this.resolveURL()).then( this.handleFinishedImport.bind(this) );
+    this.load = import(this.resolveURL()).then( this.handleImports.bind(this) );
   }
 
-  handleFinishedImport(exports) {
+  handleImports(exports) {
     this.exports = exports;
     this.loaded = true;
-    if (this.plugins.character) {
-      const dataSchema = this.getExport("dataSchema");
-      const styleURL = this.getExport("styleURL");
-      if (dataSchema) this.disposables.mayAdd(this.plugins.character.data.addSchema(dataSchema));
-      this.disposables.mayAdd(this.getExport("addCharacter")?.(this.plugins.character));
-      if (styleURL) this.plugins.character.style.add(this.resolveStyleURL(styleURL));
-    } else {
-      this.disposables.mayAdd(this.exports.add?.());
-    }
+    return this.handleFinishedImport();
+  }
+
+  handleFinishedImport() {
+    this.disposables.mayAdd(this.getExport("add")?.());
     return this;
   }
 
@@ -131,5 +130,16 @@ export class Plugin {
   dispose() {
     this.plugins.remove(this.url);
     this.disposables.dispose();
+  }
+}
+
+export class HeroPlugin extends Plugin {
+  handleFinishedImport() {
+    const dataSchema = this.getExport("dataSchema");
+    if (dataSchema) this.disposables.mayAdd(this.plugins.character.data.addSchema(dataSchema));
+    this.disposables.mayAdd(this.getExport("addCharacter")?.(this.plugins.character));
+    const styleURL = this.getExport("styleURL");
+    if (styleURL) this.plugins.character.style.add(this.resolveStyleURL(styleURL));
+    return this;
   }
 }
