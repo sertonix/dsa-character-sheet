@@ -87,7 +87,7 @@ export class HeroPluginManager extends PluginManager {
   getInitialPlugins() {
     return [
       ...this.character.data.get("dsa.plugins.default-enabled") ? this.defaultPlugins : [],
-      ...this.character.data.get("dsa.plugins")
+      ...this.character.data.get("dsa.plugins"),
     ];
   }
 }
