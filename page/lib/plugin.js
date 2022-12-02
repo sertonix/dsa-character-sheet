@@ -115,7 +115,7 @@ export class Plugin {
   }
 
   getExport(name) {
-    return this.exports[name] ?? this.exports?.[name];
+    return this.exports[name] ?? this.exports.default?.[name];
   }
 
   resolveURL() {
