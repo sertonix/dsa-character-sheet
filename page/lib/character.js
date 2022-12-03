@@ -19,7 +19,7 @@ export class Character {
     casing: document.createElement("dsa-character-casing"),
   };
 
-  constructor(data = {}) {
+  constructor(data) {
     this.data = new DataManager(data);
     this.element.casing.attachShadow({mode: "open"}).append(this.element.main);
 

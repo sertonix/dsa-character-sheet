@@ -1,10 +1,10 @@
-import {EventEmitter,Disposable} from "./utils.js";
+import {EventEmitter,Disposable,createEmptyObject} from "./utils.js";
 
 export class DataManager {
   events = new EventEmitter();
   schemas = new Set();
 
-  constructor(data = {}) {
+  constructor(data = createEmptyObject()) {
     this.data = data;
   }
 

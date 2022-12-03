@@ -1,3 +1,5 @@
+import {createEmptyObject} from "./utils.js";
+
 export const dataSchema = {
   "dsa.plugins": {
     type: "array",
@@ -13,7 +15,7 @@ export const dataSchema = {
   },
   "dsa.plugins.offline-files": {
     type: "object",
-    default: {},
+    default: createEmptyObject(),
   },
   "dsa.theme": {
     type: "string",

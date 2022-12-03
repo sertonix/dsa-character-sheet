@@ -11,6 +11,12 @@ export function uniqueArray(array) {
   return [...new Set(array)];
 }
 
+export function createEmptyObject() {
+  // used when the object is used like a Map.
+  // it will prevent the default methods like Object.prototype.hasOwnProperty
+  return Object.create(null);
+}
+
 export class ArgsLikeEvent extends Event {
   constructor(name,args,options) {
     super(name,options);
