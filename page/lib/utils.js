@@ -12,7 +12,7 @@ export function uniqueArray(array) {
 }
 
 export function createEmptyObject() {
-  // used when the object is used like a Map.
+  // used when the object is used like a Map but only for string keys.
   // it will prevent the default methods like Object.prototype.hasOwnProperty
   return Object.create(null);
 }
@@ -66,7 +66,7 @@ export class Disposable {
 
 export class Disposables {
   disposed = false;
-  disposables = new Set();
+  disposables = new Set(); // TODO WeakSet
   events = new EventEmitter();
 
   constructor(...disposables) {
@@ -106,6 +106,7 @@ export class Disposables {
   onDispose(callback) { return this.events.on( "dispose", callback ); }
 }
 
+// weak references to arguments
 export function getDisposableEventListener(eventTarget,name,callback) {
   eventTarget.addEventListener(name,callback,{passive:true});
   return new Disposable(() => eventTarget.removeEventListener(name,callback));
