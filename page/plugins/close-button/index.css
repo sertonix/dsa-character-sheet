@@ -1,9 +1,6 @@
 dsa-button.dsa-character-close {
   width: 15px;
   height: 15px;
-}
-
-dsa-button.dsa-character-close > svg {
   stroke: #ffffff;
   stroke-width: 10;
 }
