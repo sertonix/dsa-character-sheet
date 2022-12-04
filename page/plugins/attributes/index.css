@@ -9,7 +9,6 @@ dsa-attributes {
 dsa-attribute {
   display: flex;
   flex-direction: column;
-  flex-flow: space-around;
   align-items: center;
   border: 1.25px solid var(--dsa-attribute-color);
 
