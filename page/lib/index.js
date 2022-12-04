@@ -8,6 +8,7 @@ window.DSA = {
   ... await import("./data.js"),
   ... await import("./dsa.js"),
   ... await import("./plugin.js"),
+  ... await import("./section.js"),
   ... await import("./style.js"),
   ... await import("./theme.js"),
   ... await import("./utils.js"),

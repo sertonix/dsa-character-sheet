@@ -3,6 +3,7 @@ import {HeroPluginManager} from "./plugin.js";
 import {ThemeManager} from "./theme.js";
 import {StyleManager} from "./style.js";
 import {HorizontalBar} from "./bar.js";
+import {Sections} from "./section.js";
 
 export class Character {
   plugins = new HeroPluginManager(this);
@@ -54,34 +55,4 @@ export class Character {
     this.element.casing.remove();
     this.element.main.remove();
   }
-}
-
-export class Sections {
-  sections = new Set();
-  element = document.createElement("dsa-character-sections");
-
-  add(section) {
-    this.sections.add(section);
-    this.append(section.getOuterElement());
-  }
-
-  remove(section) {
-    this.sections.delete(section);
-    this.removeChild(section.getOuterElement());
-  }
-
-  append(...elements) { this.element.append(...elements); }
-  getOuterElement() { return this.element; }
-  removeChild(child) { this.element.removeChild(child); }
-
-  dispose() {
-
-  }
-}
-
-export class Section {
-  events = new EventEmitter();
-  element = document.createElement("dsa-character-section");
-
-  getOuterElement() { return this.element; }
 }
