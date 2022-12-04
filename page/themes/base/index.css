@@ -1,6 +1,13 @@
-@import "../../style/shared.css";
+@import "../../style/shared.css"; /* TODO include base theme in main page to prevent wierd import  */
 
-/* TODO color variables to allow themes and plugins styles to fit together */
+/*
+TODO color variables to allow themes and plugins styles to fit together
+:root {
+  --dsa-bg: black;
+  --dsa-highlight: white;
+}
+*/
+
 
 dsa-character {
   line-height: 1; /* allows the use of em as 1 line high */
