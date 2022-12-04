@@ -12,13 +12,20 @@ data names:
 
 ## Ideas/TODOs
 
-* right click menu
-* key bindings
-* bundle into single html file
-* allow offline plugins
-* group class methods
 * config manager
-* allow data getters in data manager
 * plugin provided and consumed api
-* priorities for styles, bar elements and sections
+* use Disposables
+* translation
+* allow offline plugins
+* key bindings
+* right click menu
+* bundle into single html file
+* group class methods
+* priorities for styles, bar elements and sections; consistent order
 * multiple theme types like layout and color themes
+* add eslint with platform support
+* add jsdoc and tsserver with checkjs
+* plugins:
+  * settings
+  * character infos
+  * fullscreen character
