@@ -22,7 +22,8 @@ dsa-character-casing {
 
 dsa-buttons {
   display: flex;
-  margin: 10px;
+  flex-wrap: wrap;
   justify-content: center;
+  margin: 10px;
   gap: 5px;
 }
