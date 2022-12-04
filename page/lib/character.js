@@ -1,4 +1,3 @@
-import {EventEmitter} from "./utils.js";
 import {DataManager} from "./data.js";
 import {HeroPluginManager} from "./plugin.js";
 import {ThemeManager} from "./theme.js";
@@ -6,7 +5,6 @@ import {StyleManager} from "./style.js";
 import {HorizontalBar} from "./bar.js";
 
 export class Character {
-  events = new EventEmitter();
   plugins = new HeroPluginManager(this);
   style = new StyleManager(this);
   theme = new ThemeManager(this);
