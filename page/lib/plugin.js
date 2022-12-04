@@ -10,6 +10,7 @@ export class PluginManager {
     "heading",
     "close-button",
     "import-export",
+    "attributes",
     "test", // TODO remove plugin and maybe replace with test mode
   ];
 
