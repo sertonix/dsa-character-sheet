@@ -20,4 +20,4 @@ export default {
     );
   },
   styleURL: "./index.css",
-}
+};
