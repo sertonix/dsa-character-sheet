@@ -3,7 +3,6 @@ import {DataManager} from "./data.js";
 import {HeroPluginManager} from "./plugin.js";
 import {ThemeManager} from "./theme.js";
 import {StyleManager} from "./style.js";
-import {dataSchema} from "./data-schema.js";
 import {HorizontalBar} from "./bar.js";
 
 export class Character {
@@ -31,7 +30,6 @@ export class Character {
       this.sections.getOuterElement(),
       this.bottomBar.getOuterElement(),
     );
-    this.data.addSchema(dataSchema);
   }
 
   initialize() {
