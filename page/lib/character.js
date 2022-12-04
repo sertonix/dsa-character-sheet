@@ -41,10 +41,6 @@ export class Character {
   append(...elements) { this.element.main.append(...elements); }
   getOuterElement() { return this.element.casing; }
 
-  addSection(section) {
-    this.sections.add(section);
-  }
-
   exportString(options) {
     return this.data.exportString(options);
   }
