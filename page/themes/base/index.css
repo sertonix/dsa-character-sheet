@@ -18,6 +18,8 @@ dsa-style-manager {
 dsa-horizontal-bar {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
   width: 100%;
 }
 
