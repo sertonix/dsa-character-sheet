@@ -7,6 +7,8 @@ export class DataManager {
 
   constructor(data = createEmptyObject(),baseSchema = dataSchema) {
     this.data = data;
+
+    this.addSchema(baseSchema);
   }
 
   get(name) {
