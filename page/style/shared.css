@@ -3,6 +3,7 @@ dsa-button {
   padding: 3px;
   border: solid 1px;
   border-radius: 2px;
+  overflow-wrap: anywhere;
 }
 
 dsa-button:hover {
