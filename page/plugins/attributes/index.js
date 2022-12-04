@@ -1,3 +1,14 @@
+const ATTRIBUTES = [ // TODO api to change attributes
+  ["~M~ut","red"],
+  ["~K~lugheit","purple"],
+  ["~I~ntuition","green"],
+  ["~C~harisma","#151515"], // TODO fix black on black in the theme
+  ["~Finger~fertigkeit","yellow"],
+  ["~G~ewandheit","blue"],
+  ["~K~onstitution","white"],
+  ["~Körper~kraft","orange"],
+];
+
 export class Attributes {
   attributes = new Set();
   element = document.createElement("dsa-attributes");
@@ -6,46 +17,9 @@ export class Attributes {
     this.section = section;
     this.section.append(this.getOuterElement());
 
-    this.addNew({
-      name: "Mut",
-      abbreviation: "MU",
-      color: "red",
-    });
-    this.addNew({
-      name: "Klugheit",
-      abbreviation: "KL",
-      color: "purple",
-    });
-    this.addNew({
-      name: "Intuition",
-      abbreviation: "IN",
-      color: "green",
-    });
-    this.addNew({
-      name: "Charisma",
-      abbreviation: "CH",
-      color: "#151515",
-    });
-    this.addNew({
-      name: "Fingerfertigkeit",
-      abbreviation: "FF",
-      color: "yellow",
-    });
-    this.addNew({
-      name: "Gewandheit",
-      abbreviation: "GE",
-      color: "blue",
-    });
-    this.addNew({
-      name: "Konstitution",
-      abbreviation: "KO",
-      color: "white",
-    });
-    this.addNew({
-      name: "Körperkraft",
-      abbreviation: "KK",
-      color: "orange",
-    });
+    for (const [name,color] of ATTRIBUTES) {
+      this.addNew({name,color});
+    }
   }
 
   addNew(options) {
@@ -74,12 +48,11 @@ export class Attribute {
     name,
     value = 8,
     color = [],
-    abbreviation,
   }) {
     this.color = color;
-    this.name = new AttributeName(name);
+    this.name = new AttributeName(name.replace(/~/g,""));
     this.value = new AttributeValue(value);
-    this.abbreviation = new AttributeAbbreviation(abbreviation);
+    this.abbreviation = new AttributeAbbreviation(name.replace(/(?<!~)./g,"").toUpperCase());
 
     this.append(
       this.abbreviation.getOuterElement(),
