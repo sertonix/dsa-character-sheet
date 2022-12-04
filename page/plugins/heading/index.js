@@ -15,4 +15,5 @@ export default {
       default: "Character",
     }
   },
+  styleURL: "./index.css",
 };
