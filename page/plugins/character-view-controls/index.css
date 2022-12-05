@@ -1,6 +1,7 @@
-dsa-button.dsa-character-close, dsa-button.dsa-character-maximize, dsa-button.dsa-character-minimize {
-  width: 15px;
-  height: 15px;
+dsa-button:is(.dsa-character-close, .dsa-character-maximize, .dsa-character-minimize) {
+  display: block;
+  width: 5px;
+  height: 5px;
   stroke: currentcolor;
 }
 
