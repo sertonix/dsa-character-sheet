@@ -3,6 +3,7 @@ dsa-button:is(.dsa-character-close, .dsa-character-maximize, .dsa-character-mini
   height: 5px;
   stroke: currentcolor;
   border-color: transparent; /* TODO replace hack with button attribute */
+  align-self: flex-start;
 }
 
 dsa-button:is(.dsa-character-close, .dsa-character-minimize) {
