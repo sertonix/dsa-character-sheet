@@ -4,11 +4,11 @@ dsa-button.dsa-character-close, dsa-button.dsa-character-maximize, dsa-button.ds
   stroke: currentcolor;
 }
 
-dsa-button.dsa-character-close {
+dsa-button:is(.dsa-character-close, .dsa-character-minimize) {
   stroke-width: 10;
 }
 
-dsa-button.dsa-character-maximize, dsa-button.dsa-character-minimize {
+dsa-button.dsa-character-maximize {
   stroke-width: 15;
 }
 
