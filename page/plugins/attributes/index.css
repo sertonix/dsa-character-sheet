@@ -22,6 +22,6 @@ dsa-attribute-e.dsa-name {
   display: none;
 }
 
-dsa-attribute-e.dsa-value[edit=true] { /* TODO allow edit to be activated by a parent */
+dsa-attribute-e.dsa-value[edit=true] {
   outline: 0 solid transparent;
 }
