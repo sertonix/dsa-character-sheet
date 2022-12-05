@@ -1,3 +1,4 @@
+// TODO extract to plugin
 export class HorizontalBar {
   element = {
     main: document.createElement("dsa-horizontal-bar"),

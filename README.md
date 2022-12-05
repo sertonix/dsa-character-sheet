@@ -16,7 +16,9 @@ data names:
 
 * config manager
 * plugin provided and consumed api
+* style/theme manager to casing
 * order priorities and id for consistent order
+* edit mode
 * plugins:
   * config view
   * character infos
