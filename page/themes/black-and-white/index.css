@@ -4,6 +4,6 @@ dsa-character {
   border: solid 1px;
 }
 
-dsa-character[maximized] {
+dsa-character[view-state=maximized] {
   border: none;
 }
