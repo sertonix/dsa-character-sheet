@@ -1,5 +1,4 @@
 dsa-button:is(.dsa-character-close, .dsa-character-maximize, .dsa-character-minimize) {
-  display: block;
   width: 5px;
   height: 5px;
   stroke: currentcolor;
