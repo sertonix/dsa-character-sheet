@@ -95,7 +95,7 @@ export class AttributeValue extends AttributeElement {
   constructor(value) {
     super();
     this.value = value;
-    this.element.classList.add("dsa-attribute-value");
+    this.element.classList.add("dsa-value");
     this.element.innerText = value;
   }
 }
@@ -104,7 +104,7 @@ export class AttributeName extends AttributeElement {
   constructor(name) {
     super();
     this.name = name;
-    this.element.classList.add("dsa-attribute-name");
+    this.element.classList.add("dsa-name");
     this.element.innerText = name;
   }
 }
@@ -113,7 +113,7 @@ export class AttributeAbbreviation extends AttributeElement {
   constructor(abbreviation) {
     super();
     this.abbreviation = abbreviation;
-    this.element.classList.add("dsa-attribute-abbreviation");
+    this.element.classList.add("dsa-abbreviation");
     this.element.innerText = abbreviation;
   }
 }
