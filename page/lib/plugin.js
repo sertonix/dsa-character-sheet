@@ -11,11 +11,11 @@ export class PluginManager {
     "character-view-controls",
     "import-export",
     "attributes",
-    "test", // TODO remove plugin and maybe replace with test mode
   ];
 
   initialize() {
     this.addAll(...this.getInitialPlugins());
+    if (new URLSearchParams(window.location.search).has("test")) this.add("test");
   }
 
   getInitialPlugins() {
