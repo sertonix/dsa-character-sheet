@@ -1,4 +1,4 @@
-dsa-button.dsa-character-close, dsa-button.dsa-character-maximize {
+dsa-button.dsa-character-close, dsa-button.dsa-character-maximize, dsa-button.dsa-character-minimize {
   width: 15px;
   height: 15px;
   stroke: currentcolor;
@@ -8,7 +8,7 @@ dsa-button.dsa-character-close {
   stroke-width: 10;
 }
 
-dsa-button.dsa-character-maximize {
+dsa-button.dsa-character-maximize, dsa-button.dsa-character-minimize {
   stroke-width: 15;
 }
 
@@ -17,4 +17,8 @@ dsa-character[view-state=maximized] { /* TODO fix doubled scrollbar */
   z-index: 2;
   inset: 0;
   overflow-y: auto;
+}
+
+dsa-character[view-state=minimized] > :not(dsa-horizontal-bar.dsa-character-top) {
+  display: none;
 }
