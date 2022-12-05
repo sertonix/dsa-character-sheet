@@ -9,6 +9,8 @@ TODO color variables to allow themes and plugins styles to fit together
 dsa-character {
   line-height: 1; /* allows the use of em as 1 line high */
   font-family: monospace;
+  background-color: black;
+  color: white;
 
   padding: 10px;
   display: flex;
