@@ -27,22 +27,22 @@ dsa-horizontal-bar {
   width: 100%;
 }
 
-dsa-horizontal-bar-left, dsa-horizontal-bar-middle, dsa-horizontal-bar-right {
+dsa-horizontal-bar-e {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
   gap: 3px;
 }
 
-dsa-horizontal-bar-left {
+dsa-horizontal-bar-e[pos=left] {
   flex-direction: row;
 }
 
-dsa-horizontal-bar-middle {
+dsa-horizontal-bar-e[pos=middle] {
   justify-content: center;
 }
 
-dsa-horizontal-bar-right {
+dsa-horizontal-bar-e[pos=right] {
   flex-direction: row-reverse;
 }
 
