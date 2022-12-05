@@ -12,7 +12,7 @@ data names:
   * build-in paths prefixed with `dsa`
   * path for plugins prefixed with name
 
-## TODOs
+## To-dos
 
 * config manager
 * plugin provided and consumed api
