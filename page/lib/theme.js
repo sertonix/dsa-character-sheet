@@ -6,6 +6,8 @@ export class ThemeManager {
   }
 
   initialize() {
+    this.character.data.onDidChange( "dsa.theme", url => this.set(url) );
+
     this.url = this.character.data.get("dsa.theme");
     this.baseTheme = this.character.style.add(this.resolveURL("base"));
     this.theme = this.character.style.add(this.resolveURL(this.url));
