@@ -1,8 +1,11 @@
 /*
 TODO color variables to allow themes and plugins styles to fit together
 :root {
-  --dsa-bg: black;
-  --dsa-highlight: white;
+  --dsa-color-bg: black;
+  --dsa-color-fg: white;
+  --dsa-color-text: var(--dsa-color-fg);
+  --dsa-color-border: var(--dsa-color-fg);
+  --dsa-color-icon: var(--dsa-color-fg);
 }
 */
 
