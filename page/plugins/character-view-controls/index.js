@@ -53,6 +53,7 @@ export default {
     return new DSA.Disposables(
       addCloseButton(character),
       addMaximizeButton(character),
+      // TODO minimize button
     );
   },
   styleURL: "./index.css",
