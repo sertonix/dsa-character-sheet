@@ -3,3 +3,7 @@ dsa-character {
   color: #ffffff;
   border: solid 1px;
 }
+
+dsa-character[maximized] {
+  border: none;
+}

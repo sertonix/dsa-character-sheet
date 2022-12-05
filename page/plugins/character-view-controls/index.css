@@ -1,6 +1,22 @@
-dsa-button.dsa-character-close {
+dsa-button.dsa-character-close, dsa-button.dsa-character-maximize {
   width: 15px;
   height: 15px;
   stroke: #ffffff;
+}
+
+dsa-button.dsa-character-close {
   stroke-width: 10;
+}
+
+dsa-button.dsa-character-maximize {
+  stroke-width: 15;
+}
+
+dsa-character[maximized] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* min-height: 100vh; */
 }
