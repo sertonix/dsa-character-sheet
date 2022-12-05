@@ -12,11 +12,10 @@ dsa-button.dsa-character-maximize {
   stroke-width: 15;
 }
 
-dsa-character[maximized] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* min-height: 100vh; */
+dsa-character[maximized] { /* TODO fix doubled scrollbar */
+  position: fixed;
+  z-index: 2;
+  inset: 0;
+  overflow-y: auto;
+  width: 100%:
 }
