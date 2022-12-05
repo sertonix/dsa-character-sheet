@@ -8,7 +8,7 @@ export class PluginManager {
   defaultPlugins = [
     "garbage-tester",
     "heading",
-    "close-button",
+    "character-view-controls",
     "import-export",
     "attributes",
     "test", // TODO remove plugin and maybe replace with test mode
