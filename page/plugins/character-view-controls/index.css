@@ -17,5 +17,5 @@ dsa-character[maximized] { /* TODO fix doubled scrollbar */
   z-index: 2;
   inset: 0;
   overflow-y: auto;
-  width: 100%:
+  width: 100%;
 }
