@@ -1,7 +1,7 @@
 dsa-button.dsa-character-close, dsa-button.dsa-character-maximize {
   width: 15px;
   height: 15px;
-  stroke: #ffffff;
+  stroke: currentcolor;
 }
 
 dsa-button.dsa-character-close {
