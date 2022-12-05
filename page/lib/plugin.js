@@ -7,7 +7,7 @@ export class PluginManager {
   baseURL = new URL("../plugins/",import.meta.url);
   defaultPlugins = [
     "garbage-tester",
-    "heading",
+    "title",
     "character-view-controls",
     "import-export",
     "attributes",
