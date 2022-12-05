@@ -2,7 +2,7 @@ dsa-button:is(.dsa-character-close, .dsa-character-maximize, .dsa-character-mini
   width: 5px;
   height: 5px;
   stroke: currentcolor;
-  border-color: transparent; /* TODO replace hack with button attribute */
+  outline: none; /* TODO replace hack with button attribute */
   align-self: flex-start;
 }
 

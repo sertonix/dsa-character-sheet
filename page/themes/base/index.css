@@ -54,15 +54,14 @@ dsa-horizontal-bar-e[pos=right] {
 
 dsa-button {
   cursor: pointer;
-  padding: 3px;
-  border: solid 1px;
+  padding: 4px;
+  outline: currentColor solid 1px;
   border-radius: 3px;
   overflow-wrap: anywhere;
 }
 
 dsa-button:hover {
-  padding: 2px;
-  border: solid 2px;
+  outline: currentColor solid 2px;
 }
 
 dsa-button > svg {
