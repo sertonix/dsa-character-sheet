@@ -13,7 +13,7 @@ dsa-button:is(.dsa-character-close, .dsa-character-minimize) {
 }
 
 dsa-button:hover:is(.dsa-character-close, .dsa-character-minimize) {
-  stroke-width: 20;
+  stroke-width: 15;
 }
 
 dsa-button.dsa-character-maximize {
@@ -21,7 +21,7 @@ dsa-button.dsa-character-maximize {
 }
 
 dsa-button.dsa-character-maximize:hover {
-  stroke-width: 40;
+  stroke-width: 30;
 }
 
 dsa-character[view-state=maximized] { /* TODO fix doubled scrollbar */
