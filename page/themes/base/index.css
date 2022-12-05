@@ -58,6 +58,8 @@ dsa-button {
   outline: currentColor solid 1px;
   border-radius: 3px;
   overflow-wrap: anywhere;
+  transition-property: outline;
+  transition-duration: 0.1s;
 }
 
 dsa-button:hover {

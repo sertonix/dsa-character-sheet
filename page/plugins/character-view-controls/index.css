@@ -4,6 +4,8 @@ dsa-button:is(.dsa-character-close, .dsa-character-maximize, .dsa-character-mini
   stroke: currentcolor;
   outline: none; /* TODO replace hack with button attribute */
   align-self: flex-start;
+  transition-property: stroke-width;
+  transition-duration: 0.1s;
 }
 
 dsa-button:is(.dsa-character-close, .dsa-character-minimize) {
@@ -11,7 +13,7 @@ dsa-button:is(.dsa-character-close, .dsa-character-minimize) {
 }
 
 dsa-button:hover:is(.dsa-character-close, .dsa-character-minimize) {
-  stroke-width: 15;
+  stroke-width: 20;
 }
 
 dsa-button.dsa-character-maximize {
@@ -19,7 +21,7 @@ dsa-button.dsa-character-maximize {
 }
 
 dsa-button.dsa-character-maximize:hover {
-  stroke-width: 30;
+  stroke-width: 40;
 }
 
 dsa-character[view-state=maximized] { /* TODO fix doubled scrollbar */
