@@ -11,6 +11,7 @@ dsa-attribute {
   flex-direction: column;
   align-items: center;
   border: 1.25px solid var(--dsa-attribute-color);
+  outline: #ffffff solid 0.2px;
 
   padding: 3px;
   width: 2em;

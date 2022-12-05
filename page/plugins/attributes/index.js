@@ -2,7 +2,7 @@ const ATTRIBUTES = [ // TODO api to change attributes
   ["~M~ut","red"],
   ["~K~lugheit","purple"],
   ["~I~ntuition","green"],
-  ["~C~harisma","#151515"], // TODO fix black on black in the theme
+  ["~C~harisma","#000000"],
   ["~Finger~fertigkeit","yellow"],
   ["~G~ewandheit","blue"],
   ["~K~onstitution","white"],
