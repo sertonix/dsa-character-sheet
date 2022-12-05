@@ -16,16 +16,16 @@ data names:
 
 * config manager
 * plugin provided and consumed api
-* use Disposables
-* translation
-* group class methods
-* priorities for styles, bar elements and sections; consistent order
+* order priorities and id for consistent order
 * plugins:
   * config view
   * character infos
 
 ## Ideas
 
+* translation
+* group class methods
+* use Disposables more often
 * allow offline plugins
 * key bindings
 * right click menu
