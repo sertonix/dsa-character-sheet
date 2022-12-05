@@ -41,7 +41,7 @@ function importCharacter() {
 
 export default {
   // TODO replace with export button
-  addCharacter: character => DSA.getDisposableEventListener( character.topBar.getOuterElement(), "click", () => saveCharacter(character) ),
+  // addCharacter: character => DSA.getDisposableEventListener( character.topBar.getOuterElement(), "click", () => saveCharacter(character) ),
   add() {
     dsa.buttons.addNew("Import", importCharacter);
   },
