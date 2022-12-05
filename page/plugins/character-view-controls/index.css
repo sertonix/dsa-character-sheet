@@ -2,14 +2,23 @@ dsa-button:is(.dsa-character-close, .dsa-character-maximize, .dsa-character-mini
   width: 5px;
   height: 5px;
   stroke: currentcolor;
+  border-color: transparent; /* TODO replace hack with button attribute */
 }
 
 dsa-button:is(.dsa-character-close, .dsa-character-minimize) {
   stroke-width: 10;
 }
 
-dsa-button.dsa-character-maximize {
+dsa-button:hover:is(.dsa-character-close, .dsa-character-minimize) {
   stroke-width: 15;
+}
+
+dsa-button.dsa-character-maximize {
+  stroke-width: 20;
+}
+
+dsa-button.dsa-character-maximize:hover {
+  stroke-width: 30;
 }
 
 dsa-character[view-state=maximized] { /* TODO fix doubled scrollbar */
