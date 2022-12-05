@@ -12,22 +12,24 @@ data names:
   * build-in paths prefixed with `dsa`
   * path for plugins prefixed with name
 
-## Ideas/TODOs
+## TODOs
 
 * config manager
 * plugin provided and consumed api
 * use Disposables
 * translation
+* group class methods
+* priorities for styles, bar elements and sections; consistent order
+* plugins:
+  * config view
+  * character infos
+
+## Ideas
+
 * allow offline plugins
 * key bindings
 * right click menu
 * bundle into single html file
-* group class methods
-* priorities for styles, bar elements and sections; consistent order
-* multiple theme types like layout and color themes
 * add eslint with platform support
 * add jsdoc and tsserver with checkjs
-* plugins:
-  * settings
-  * character infos
-  * fullscreen character
+* multiple theme types like layout and color themes
