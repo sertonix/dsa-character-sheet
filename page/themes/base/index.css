@@ -33,6 +33,7 @@ dsa-horizontal-bar {
 dsa-horizontal-bar-left, dsa-horizontal-bar-middle, dsa-horizontal-bar-right {
   display: flex;
   flex-grow: 1;
+  gap: 3px;
 }
 
 dsa-horizontal-bar-left {
