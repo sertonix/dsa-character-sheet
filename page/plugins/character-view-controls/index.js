@@ -19,12 +19,12 @@ function addCloseButton(character) {
   );
 }
 
-function getToggleMaximize(element) {
+function getViewStateToggle(state,element) {
   return () => {
-    if (element.hasAttribute("maximized")) {
-      element.removeAttribute("maximized");
+    if (element.getAttribute("view-state") === state) {
+      element.removeAttribute("view-state");
     } else {
-      element.setAttribute("maximized","");
+      element.setAttribute("view-state",state);
     }
   };
 }
@@ -43,7 +43,7 @@ function addMaximizeButton(character) {
   character.topBar.appendToRight(element);
 
   return new DSA.Disposables(
-    DSA.getDisposableEventListener(element, "click", getToggleMaximize(character.element.main)),
+    DSA.getDisposableEventListener(element, "click", getViewStateToggle("maximized",character.element.main)),
     DSA.getDisposableElement(element),
   );
 }

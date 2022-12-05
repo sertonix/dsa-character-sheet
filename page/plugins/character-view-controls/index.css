@@ -12,7 +12,7 @@ dsa-button.dsa-character-maximize {
   stroke-width: 15;
 }
 
-dsa-character[maximized] { /* TODO fix doubled scrollbar */
+dsa-character[view-state=maximized] { /* TODO fix doubled scrollbar */
   position: fixed;
   z-index: 2;
   inset: 0;
