@@ -39,9 +39,22 @@ function importCharacter() {
   tempInput.click();
 }
 
+function getSaveCharacter(character) {
+  return () => saveCharacter(character);
+}
+
 export default {
-  // TODO replace with export button
-  // addCharacter: character => DSA.getDisposableEventListener( character.topBar.getOuterElement(), "click", () => saveCharacter(character) ),
+  addCharacter(character) {
+    const element = document.createElement("dsa-button");
+    element.classList.add("dsa-character-export");
+    element.innerText = "Export";
+    character.topBar.appendToLeft(element);
+
+    return new DSA.Disposables(
+      DSA.getDisposableEventListener(element, "click", getSaveCharacter(character)),
+      DSA.getDisposableElement(element),
+    );
+  },
   add() {
     dsa.buttons.addNew("Import", importCharacter);
   },
