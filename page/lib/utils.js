@@ -66,7 +66,7 @@ export class Disposable {
 
 export class Disposables {
   disposed = false;
-  disposables = new Set(); // TODO WeakSet
+  disposables = new Set();
   events = new EventEmitter();
 
   constructor(...disposables) {
