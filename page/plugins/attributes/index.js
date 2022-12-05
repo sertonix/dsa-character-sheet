@@ -75,13 +75,8 @@ export class Attribute {
   }
 }
 
-export class AttributeValue {
-  element = document.createElement("dsa-attribute-value");
-
-  constructor(value) {
-    this.value = value;
-    this.element.innerText = value;
-  }
+export class AttributeElement {
+  element = document.createElement("dsa-attribute-e");
 
   set(value) {
     this.value = value;
@@ -96,45 +91,30 @@ export class AttributeValue {
   }
 }
 
-export class AttributeName {
-  element = document.createElement("dsa-attribute-name");
-
-  constructor(name) {
-    this.name = name;
-    this.element.innerText = name;
-  }
-
-  set(name) {
-    this.name = name;
-    this.element.innerText = name;
-  }
-
-  append(...elements) { this.element.append(...elements); }
-  getOuterElement() { return this.element; }
-
-  dispose() {
-    this.element.remove();
+export class AttributeValue extends AttributeElement {
+  constructor(value) {
+    super();
+    this.value = value;
+    this.element.classList.add("dsa-attribute-value");
+    this.element.innerText = value;
   }
 }
 
-export class AttributeAbbreviation {
-  element = document.createElement("dsa-attribute-abbreviation");
+export class AttributeName extends AttributeElement {
+  constructor(name) {
+    super();
+    this.name = name;
+    this.element.classList.add("dsa-attribute-name");
+    this.element.innerText = name;
+  }
+}
 
+export class AttributeAbbreviation extends AttributeElement {
   constructor(abbreviation) {
+    super();
     this.abbreviation = abbreviation;
+    this.element.classList.add("dsa-attribute-abbreviation");
     this.element.innerText = abbreviation;
-  }
-
-  set(abbreviation) {
-    this.abbreviation = abbreviation;
-    this.element.innerText = abbreviation;
-  }
-
-  append(...elements) { this.element.append(...elements); }
-  getOuterElement() { return this.element; }
-
-  dispose() {
-    this.element.remove();
   }
 }
 
