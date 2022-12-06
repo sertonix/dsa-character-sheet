@@ -1,11 +1,11 @@
-import {EventEmitter,Disposable,createEmptyObject} from "./utils.js";
+import {EventEmitter,Disposable} from "./utils.js";
 import {dataSchema} from "./data-schema.js";
 
 export class DataManager {
   events = new EventEmitter();
   schemas = new Set();
 
-  constructor(data = createEmptyObject(),baseSchema = dataSchema) {
+  constructor(data = Object.create(null),baseSchema = dataSchema) {
     this.data = data;
 
     this.addSchema(baseSchema);

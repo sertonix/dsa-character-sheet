@@ -1,7 +1,5 @@
-import {createEmptyObject} from "./utils.js";
-
 export class Sections {
-  types = createEmptyObject();
+  types = Object.create(null);
   sections = new Set();
   element = document.createElement("dsa-character-sections");
 
