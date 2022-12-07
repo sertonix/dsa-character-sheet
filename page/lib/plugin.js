@@ -65,6 +65,7 @@ export class HeroPluginManager extends PluginManager {
   }
 
   initialize() {
+    super.initialize();
     this.character.data.onDidChange("dsa.plugins", (newURLs,oldURLs) => {
       for (const oldURL of oldURLs) {
         if (newURLs.includes(oldURL)) continue;
@@ -82,7 +83,6 @@ export class HeroPluginManager extends PluginManager {
         this.remove(...this.defaultPlugins);
       }
     });
-    super.initialize();
   }
 
   getInitialPlugins() {
