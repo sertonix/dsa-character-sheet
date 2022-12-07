@@ -13,6 +13,7 @@ window.DSA = {
   ... await import("./theme.js"),
   ... await import("./event.js"),
   ... await import("./safe-json-parse.js"),
+  ... await import("./uri.js"),
 };
 
 const dsa = window.dsa = new DSA();
