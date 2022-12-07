@@ -37,6 +37,6 @@ export class Character {
     this.plugins.initialize();
   }
 
-  append(...elements) { this.element.main.append(...elements); }
   getOuterElement() { return this.element.casing; }
+  append(...elements) { this.element.main.append(...elements); }
 }

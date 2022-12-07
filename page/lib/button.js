@@ -15,11 +15,8 @@ export class ButtonPanel {
     this.append(button.getOuterElement());
   }
 
-  getOuterElement() {
-    return this.element;
-  }
-
   append(...elements) { this.element.append(...elements); }
+  getOuterElement() { return this.element; }
 }
 
 export class Button {
@@ -32,9 +29,7 @@ export class Button {
     this.element.innerText = text;
   }
 
-  getOuterElement() {
-    return this.element;
-  }
+  getOuterElement() { return this.element; }
 
   onClick(callback) { return this.events.on( "click", callback ); }
 }

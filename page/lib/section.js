@@ -20,8 +20,8 @@ export class Sections {
     this.types[name] = Class;
   }
 
-  append(...elements) { this.element.append(...elements); }
   getOuterElement() { return this.element; }
+  append(...elements) { this.element.append(...elements); }
   removeChild(child) { this.element.removeChild(child); }
 }
 
@@ -36,10 +36,7 @@ export class Section {
   }
 
   getOuterElement() { return this.element; }
-
-  append(...elements) {
-    return this.element.append(...elements);
-  }
+  append(...elements) { return this.element.append(...elements); }
 }
 
 /*

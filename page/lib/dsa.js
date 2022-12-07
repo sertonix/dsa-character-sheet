@@ -26,13 +26,7 @@ export class DSA {
     this.plugins.initialize();
   }
 
-  append(...elements) { this.element.main.append(...elements); }
-  appendToCharacters(...elements) { this.element.characters.append(...elements); }
-  appendToButtons(...elements) { this.element.buttons.append(...elements); }
 
-  getOuterElement() {
-    return this.element.main;
-  }
 
   addCharacter(data) {
     const character = new Character(data);
@@ -49,6 +43,11 @@ export class DSA {
     if (!this.characters.has(character)) return;
     this.characters.delete(character);
   }
+  
+  getOuterElement() { return this.element.main; }
+  append(...elements) { this.element.main.append(...elements); }
+  appendToCharacters(...elements) { this.element.characters.append(...elements); }
+  appendToButtons(...elements) { this.element.buttons.append(...elements); }
 
   onDidAddedCharacter(callback) { return this.events.on( "did-added-character", callback ); }
 }

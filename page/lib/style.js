@@ -17,7 +17,7 @@ export class StyleManager {
   add(url) {
     const style = new Style(this,url);
     this.styles.add(style);
-    style.addToElement(this.element);
+    this.append(style.getOuterElement());
     return style;
   }
 
@@ -34,6 +34,8 @@ export class StyleManager {
     }
     return url;
   }
+
+  append(...elements) { return this.element.append(...elements); }
 }
 
 export class Style {
@@ -58,4 +60,6 @@ export class Style {
   addToElement(element) {
     element.append(this.element);
   }
+
+  getOuterElement() { return this.element; }
 }
