@@ -34,3 +34,5 @@ data names:
 * add eslint with platform support
 * add jsdoc and tsserver with checkjs
 * multiple theme types like layout and color themes
+* view raw mode
+* babel for older versions

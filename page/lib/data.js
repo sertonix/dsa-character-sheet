@@ -6,7 +6,7 @@ export class DataManager {
   schemas = new Set();
 
   constructor(data = Object.create(null), baseSchema = dataSchema) {
-    this.data = data;
+    this.data = data; // TODO copy and prevent prototypes
 
     this.addSchema(baseSchema);
   }
@@ -63,7 +63,7 @@ export class DataManager {
       if (max != null && data <= max) return true;
     }
     if (type === "boolean") return typeof data === "boolean";
-    if (type === "object") return typeof data === "object";
+    if (type === "object") return typeof data === "object"; // TODO key and property schema
     if (type === "array") {
       if (!Array.isArray(data)) return false;
       return data.every( data => this.matchesSchema(data,items) );
