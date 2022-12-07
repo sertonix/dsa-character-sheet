@@ -17,18 +17,16 @@ function saveCharacter(character) {
   tempLink.remove();
 }
 
-function importFromFileList(files) {
-  for (const file of files) {
-    file.text().then( str => dsa.addCharacter(JSON.parse(str)) );
-  }
-}
-
 function importCharacter() {
   const tempInput = document.createElement("input");
   tempInput.setAttribute("type", "file");
   tempInput.setAttribute("multiple", "");
   tempInput.setAttribute("accept", CHARACTER_FILE_TYPES);
-  tempInput.once("change", () => importFromFileList(tempInput.files) );
+  tempInput.once("change", () => tempInput.files.forEach( file =>
+    file.text().then( str =>
+      dsa.addCharacter(JSON.parse(str))
+    )
+  ));
   tempInput.click();
 }
 
