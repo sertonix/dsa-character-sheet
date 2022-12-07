@@ -1,4 +1,4 @@
-import {EventEmitter} from "./utils.js";
+import {EventEmitter} from "./event.js";
 import {PluginManager} from "./plugin.js";
 import {Character} from "./character.js";
 import {ButtonPanel} from "./button.js";

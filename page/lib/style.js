@@ -1,4 +1,4 @@
-import {EventEmitter} from "./utils.js";
+import {EventEmitter} from "./event.js";
 
 export class StyleManager {
   styles = new Set();

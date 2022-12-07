@@ -1,4 +1,4 @@
-import {EventEmitter} from "./utils.js";
+import {EventEmitter} from "./event.js";
 import {dataSchema} from "./data-schema.js";
 
 export class DataManager {

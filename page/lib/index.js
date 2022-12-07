@@ -11,7 +11,7 @@ window.DSA = {
   ... await import("./section.js"),
   ... await import("./style.js"),
   ... await import("./theme.js"),
-  ... await import("./utils.js"),
+  ... await import("./event.js"),
 };
 
 const dsa = window.dsa = new DSA();
