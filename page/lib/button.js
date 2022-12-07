@@ -20,10 +20,6 @@ export class ButtonPanel {
   }
 
   append(...elements) { this.element.append(...elements); }
-
-  dispose() {
-    this.element.remove();
-  }
 }
 
 export class Button {
@@ -38,10 +34,6 @@ export class Button {
 
   getOuterElement() {
     return this.element;
-  }
-
-  dispose() {
-    this.element.remove();
   }
 
   onClick(callback) { return this.events.on( "click", callback ); }

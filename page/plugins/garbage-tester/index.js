@@ -5,18 +5,13 @@ const
   ;
 
 function addToPluginManager(plugins) {
-  const disposables = new DSA.Disposables();
   const pluginRegistry = new FinalizationRegistry( logGarbageCollect );
   const register = getRegisterPlugin(pluginRegistry);
 
   plugins.getAll().map( register );
 
-  disposables.add(
-    plugins.onDidAddedPlugin( register ),
-    dsa.plugins.onDidRemovedPlugin( logRemoval ),
-  );
-
-  return disposables;
+  plugins.onDidAddedPlugin( register );
+  dsa.plugins.onDidRemovedPlugin( logRemoval );
 }
 
 export default {

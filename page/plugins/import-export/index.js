@@ -28,14 +28,7 @@ function importCharacter() {
   tempInput.setAttribute("type", "file");
   tempInput.setAttribute("multiple", "");
   tempInput.setAttribute("accept", CHARACTER_FILE_TYPES);
-  const disposables = new DSA.Disposables(
-    DSA.getDisposableEventListener( tempInput, "change", () => {
-      importFromFileList(tempInput.files);
-      disposables.dispose();
-    }),
-    DSA.getDisposableElement(tempInput),
-  );
-
+  tempInput.once("change", () => importFromFileList(tempInput.files) );
   tempInput.click();
 }
 
@@ -49,11 +42,7 @@ export default {
     element.classList.add("dsa-character-export");
     element.innerText = "Export";
     character.topBar.appendToLeft(element);
-
-    return new DSA.Disposables(
-      DSA.getDisposableEventListener(element, "click", getSaveCharacter(character)),
-      DSA.getDisposableElement(element),
-    );
+    element.addEventListener("click", getSaveCharacter(character));
   },
   add() {
     dsa.buttons.addNew("Import", importCharacter);

@@ -1,4 +1,4 @@
-import {EventEmitter,Disposable} from "./utils.js";
+import {EventEmitter} from "./utils.js";
 import {dataSchema} from "./data-schema.js";
 
 export class DataManager {
@@ -44,7 +44,6 @@ export class DataManager {
       }
     }
     this.schemas.add(schema);
-    return new Disposable( () => this.removeSchema(schema) );
   }
 
   getSchemaFor(name) {

@@ -23,10 +23,6 @@ export class Sections {
   append(...elements) { this.element.append(...elements); }
   getOuterElement() { return this.element; }
   removeChild(child) { this.element.removeChild(child); }
-
-  dispose() {
-    this.element.remove();
-  }
 }
 
 export class Section {
@@ -43,11 +39,6 @@ export class Section {
 
   append(...elements) {
     return this.element.append(...elements);
-  }
-
-  dispose() {
-    this.instance?.dispose();
-    this.element.remove();
   }
 }
 

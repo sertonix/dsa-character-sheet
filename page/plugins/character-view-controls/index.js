@@ -12,11 +12,7 @@ function addCloseButton(character) {
     </svg>
   `;
   character.topBar.appendToRight(element);
-
-  return new DSA.Disposables(
-    DSA.getDisposableEventListener(element, "click", getRemoveCharacter(character)),
-    DSA.getDisposableElement(element),
-  );
+  element.addEventListener("click", getRemoveCharacter(character));
 }
 
 function getViewStateToggle(state,element) {
@@ -41,11 +37,7 @@ function addMaximizeButton(character) {
     </svg>
   `;
   character.topBar.appendToRight(element);
-
-  return new DSA.Disposables(
-    DSA.getDisposableEventListener(element, "click", getViewStateToggle("maximized",character.element.main)),
-    DSA.getDisposableElement(element),
-  );
+  element.addEventListener("click", getViewStateToggle("maximized",character.element.main));
 }
 
 function addMinimizeButton(character) {
@@ -57,20 +49,14 @@ function addMinimizeButton(character) {
     </svg>
   `;
   character.topBar.appendToRight(element);
-
-  return new DSA.Disposables(
-    DSA.getDisposableEventListener(element, "click", getViewStateToggle("minimized",character.element.main)),
-    DSA.getDisposableElement(element),
-  );
+  element.addEventListener("click", getViewStateToggle("minimized",character.element.main));
 }
 
 export default {
   addCharacter(character) {
-    return new DSA.Disposables(
-      addCloseButton(character),
-      addMaximizeButton(character),
-      addMinimizeButton(character),
-    );
+    addCloseButton(character);
+    addMaximizeButton(character);
+    addMinimizeButton(character);
   },
   styleURL: "./index.css",
 };

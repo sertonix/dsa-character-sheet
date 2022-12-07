@@ -48,17 +48,11 @@ export class DSA {
   removeCharacter(character) {
     if (!this.characters.has(character)) return;
     this.characters.delete(character);
-    character.dispose();
     this.events.emit("did-removed-character");
   }
 
   removeAllCharacters() {
     this.characters.forEach( character => this.removeCharacter(character) );
-  }
-
-  dispose() {
-    this.removeAllCharacters();
-    this.plugins.dispose();
   }
 
   onDidAddedCharacter(callback) { return this.events.on( "did-added-character", callback ); }

@@ -43,16 +43,4 @@ export class Character {
   exportString(options) {
     return this.data.exportString(options);
   }
-
-  dispose() {
-    this.theme.dispose();
-    this.style.dispose();
-    this.plugins.dispose();
-    this.topBar.dispose();
-    this.bottomBar.dispose();
-    this.sections.dispose();
-
-    this.element.casing.remove();
-    this.element.main.remove();
-  }
 }

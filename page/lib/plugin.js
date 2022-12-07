@@ -1,4 +1,4 @@
-import {EventEmitter,deltaArrays,Disposables} from "./utils.js";
+import {EventEmitter,deltaArrays} from "./utils.js";
 
 export class PluginManager {
   pluginClass = Plugin;
@@ -35,7 +35,6 @@ export class PluginManager {
       if (!this.plugins.has(url)) continue;
       const plugin = this.plugins.get(url);
       this.plugins.delete(url);
-      plugin.dispose();
       this.events.emit("did-removed-plugin", url);
     }
   }
@@ -51,10 +50,6 @@ export class PluginManager {
       return new URL(url + "/index.js", this.baseURL).toString();
     }
     return url;
-  }
-
-  dispose() {
-    this.remove(...this.getAllURLs());
   }
 
   onDidAddedPlugin(callback) { return this.events.on( "did-added-plugin", callback ); }
@@ -96,7 +91,6 @@ export class HeroPluginManager extends PluginManager {
 export class Plugin {
   loaded = false;
   events = new EventEmitter();
-  disposables = new Disposables();
 
   constructor(plugins,url) {
     this.plugins = plugins;
@@ -111,7 +105,7 @@ export class Plugin {
   }
 
   handleFinishedImport() {
-    this.disposables.mayAdd(this.getExport("add")?.());
+    this.getExport("add")?.();
     return this;
   }
 
@@ -126,18 +120,13 @@ export class Plugin {
   resolveStyleURL(url) {
     return new URL(url,this.resolveURL());
   }
-
-  dispose() {
-    this.plugins.remove(this.url);
-    this.disposables.dispose();
-  }
 }
 
 export class HeroPlugin extends Plugin {
   handleFinishedImport() {
     const dataSchema = this.getExport("dataSchema");
-    if (dataSchema) this.disposables.mayAdd(this.plugins.character.data.addSchema(dataSchema));
-    this.disposables.mayAdd(this.getExport("addCharacter")?.(this.plugins.character));
+    if (dataSchema) this.plugins.character.data.addSchema(dataSchema);
+    this.getExport("addCharacter")?.(this.plugins.character);
     const styleURL = this.getExport("styleURL");
     if (styleURL) this.plugins.character.style.add(this.resolveStyleURL(styleURL));
     return this;

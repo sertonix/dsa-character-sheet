@@ -1,4 +1,4 @@
-import {EventEmitter,Disposables} from "./utils.js";
+import {EventEmitter} from "./utils.js";
 
 export class StyleManager {
   styles = new Set();
@@ -24,7 +24,6 @@ export class StyleManager {
   remove(style) {
     if (!this.styles.has(style)) return;
     this.styles.delete(style);
-    style.dispose();
   }
 
   getAll() { return [...this.styles]; }
@@ -34,11 +33,6 @@ export class StyleManager {
       return new URL(url + "/index.css", this.baseURL).toString();
     }
     return url;
-  }
-
-  dispose() {
-    this.getAll().forEach( style => this.remove(style) );
-    this.element.remove();
   }
 }
 
@@ -63,10 +57,5 @@ export class Style {
 
   addToElement(element) {
     element.append(this.element);
-  }
-
-  dispose() {
-    this.styles.remove(this);
-    this.element.remove();
   }
 }

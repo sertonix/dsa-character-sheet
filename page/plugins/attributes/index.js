@@ -35,10 +35,6 @@ export class Attributes {
   append(...elements) { this.element.append(...elements); }
   getOuterElement() { return this.element; }
   removeChild(child) { this.element.removeChild(child); }
-
-  dispose() {
-    // TODO
-  }
 }
 
 export class Attribute {
@@ -65,14 +61,6 @@ export class Attribute {
 
   append(...elements) { this.element.append(...elements); }
   getOuterElement() { return this.element; }
-
-  dispose() {
-    this.name.dispose();
-    this.value.dispose();
-    this.abbreviation.dispose();
-
-    this.element.remove();
-  }
 }
 
 export class AttributeElement {
@@ -85,10 +73,6 @@ export class AttributeElement {
 
   append(...elements) { this.element.append(...elements); }
   getOuterElement() { return this.element; }
-
-  dispose() {
-    this.element.remove();
-  }
 }
 
 export class AttributeValue extends AttributeElement {

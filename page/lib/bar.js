@@ -23,11 +23,4 @@ export class HorizontalBar {
   appendToLeft(...elements) { this.element.left.append(...elements); }
   appendToMiddle(...elements) { this.element.middle.append(...elements); }
   appendToRight(...elements) { this.element.right.append(...elements); }
-
-  dispose() {
-    this.element.main.remove();
-    this.element.left.remove();
-    this.element.middle.remove();
-    this.element.right.remove();
-  }
 }

@@ -27,7 +27,6 @@ data names:
 
 * translation
 * group class methods
-* use Disposables more often
 * allow offline plugins
 * key bindings
 * right click menu
