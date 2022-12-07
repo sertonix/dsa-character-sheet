@@ -12,6 +12,7 @@ window.DSA = {
   ... await import("./style.js"),
   ... await import("./theme.js"),
   ... await import("./event.js"),
+  ... await import("./safe-json-parse.js"),
 };
 
 const dsa = window.dsa = new DSA();

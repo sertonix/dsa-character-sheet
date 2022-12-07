@@ -24,7 +24,7 @@ function importCharacter() {
   tempInput.setAttribute("accept", CHARACTER_FILE_TYPES);
   tempInput.once("change", () => tempInput.files.forEach( file =>
     file.text().then( str =>
-      dsa.addCharacter(JSON.parse(str))
+      dsa.addCharacter(DSA.safeJSONParse(str))
     )
   ));
   tempInput.click();
