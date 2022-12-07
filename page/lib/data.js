@@ -5,7 +5,7 @@ export class DataManager {
   events = new EventEmitter();
   schemas = new Set();
 
-  constructor(data = Object.create(null),baseSchema = dataSchema) {
+  constructor(data = Object.create(null), baseSchema = dataSchema) {
     this.data = data;
 
     this.addSchema(baseSchema);
