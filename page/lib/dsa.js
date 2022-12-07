@@ -50,9 +50,5 @@ export class DSA {
     this.characters.delete(character);
   }
 
-  removeAllCharacters() {
-    this.characters.forEach( character => this.removeCharacter(character) );
-  }
-
   onDidAddedCharacter(callback) { return this.events.on( "did-added-character", callback ); }
 }
