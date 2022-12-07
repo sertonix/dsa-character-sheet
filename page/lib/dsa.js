@@ -26,8 +26,6 @@ export class DSA {
     this.plugins.initialize();
   }
 
-
-
   addCharacter(data) {
     const character = new Character(data);
     this.appendToCharacters(character.getOuterElement());
@@ -43,7 +41,7 @@ export class DSA {
     if (!this.characters.has(character)) return;
     this.characters.delete(character);
   }
-  
+
   getOuterElement() { return this.element.main; }
   append(...elements) { this.element.main.append(...elements); }
   appendToCharacters(...elements) { this.element.characters.append(...elements); }
