@@ -2,7 +2,7 @@ const CHARACTER_FILE_TYPES = "application/json,.dsa-char";
 const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 
 function saveCharacter(character) {
-  const fileContent = character.exportString({
+  const fileContent = character.data.exportString({
     space: character.data.get("import-export.stringify-space"),
   });
   const blob = new Blob([fileContent]);
