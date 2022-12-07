@@ -1,4 +1,4 @@
-import {EventEmitter,deltaArrays} from "./utils.js";
+import {EventEmitter} from "./utils.js";
 
 export class PluginManager {
   pluginClass = Plugin;
@@ -66,9 +66,14 @@ export class HeroPluginManager extends PluginManager {
 
   initialize() {
     this.character.data.onDidChange("dsa.plugins", (newURLs,oldURLs) => {
-      const [added,removed] = deltaArrays(newURLs,oldURLs);
-      this.remove(...removed);
-      this.addAll(...added);
+      for (const oldURL of oldURLs) {
+        if (newURLs.includes(oldURL)) continue;
+        this.remove(oldURL);
+      }
+      for (const newURL of newURLs) {
+        if (!oldURLs.includes(newURL)) continue;
+        this.add(newURL);
+      }
     });
     this.character.data.onDidChange("dsa.plugins.default-enabled", enabled => {
       if (enabled) {

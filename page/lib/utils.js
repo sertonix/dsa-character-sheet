@@ -1,16 +1,3 @@
-export function deltaArrays(arr1,arr2) {
-  arr1 = uniqueArray(arr1);
-  arr2 = uniqueArray(arr2);
-  return [
-    arr1.filter( elem => !arr2.includes(elem) ),
-    arr2.filter( elem => !arr1.includes(elem) ),
-  ];
-}
-
-export function uniqueArray(array) {
-  return [...new Set(array)];
-}
-
 export class ArgsLikeEvent extends Event {
   constructor(name,args,options) {
     super(name,options);
