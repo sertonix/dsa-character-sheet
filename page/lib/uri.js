@@ -153,10 +153,11 @@ export class URI {
     }).toString();
   }
 
-  static joinPath(uriPath1,uriPath2) {
-    if (uriPath2 === "") return this.normalizePath(uriPath1);
-    if (uriPath2.startsWith("/")) return this.normalizePath(uriPath2);
-    const joinedPath = ( uriPath1.endsWith("/") ? uriPath1 : uriPath1.split("/").slice(0,-1).join("/") + "/" ) + uriPath2;
+  static joinPath(...paths) {
+    paths = paths.filter( path => path !== "" );
+    const lastAbsolutePathIndex = paths.findLastIndex( path => path.startsWith("/") );
+    if (lastAbsolutePathIndex !== -1) uris = uris.slice(0,lastAbsolutePathIndex);
+    const joinedPath = paths.map( (path,i) => path.endsWith("/") && i === paths.length - 1 ? path : path.split("/").slice(0,-1) ).flat(1).join("/");
     return this.normalizePath(joinedPath);
   }
 
