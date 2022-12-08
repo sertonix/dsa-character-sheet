@@ -49,8 +49,10 @@ export class URI {
       },
       host() {
         if (parse.ip6()) return;
-        components.host = segments[i];
-        i++;
+        let length = segments.slice(i).findIndex( s => ["#","?","/"].includes(s) );
+        if (length === -1) length = segments.length - i;
+        components.host = segments.slice(i,i + length).join("");
+        i += length;
       },
       ip6() {
         if (segments[i] !== "[") return;
