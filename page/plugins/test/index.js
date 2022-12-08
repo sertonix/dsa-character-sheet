@@ -1,6 +1,4 @@
-import {importP} from "./import.js";
-
-await importP("./more.js",import.meta.url);
+import "./module.js";
 
 dsa.buttons.addNew("New Test", () => dsa.addCharacter({
   "title.title": "Test Character",
