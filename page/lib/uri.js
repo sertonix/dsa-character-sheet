@@ -35,7 +35,7 @@ export class URI {
   }
 
   static fromString(uri) {
-    return new URI(URI.parse(uri));
+    return new this(this.parse(uri));
   }
 
   static parse(uri) {
@@ -136,27 +136,27 @@ export class URI {
   }
 
   static join(uri1,uri2) {
-    if (uri2.isAbsolute()) return new URI(uri2);
-    if (uri2.host) return new URI({
+    if (uri2.isAbsolute()) return new this(uri2);
+    if (uri2.host) return new this({
       ...uri2,
       scheme: uri1.scheme,
     });
-    return new URI({
+    return new this({
       scheme: uri1.scheme,
       userinfo: uri1.userinfo,
       host: uri1.host,
       port: uri1.port,
-      path: URI.joinPath(uri1.path,uri2.path),
+      path: this.joinPath(uri1.path,uri2.path),
       query: uri2.query ?? uri1.query,
       fragment: uri2.fragment ?? uri1.fragment,
     });
   }
 
   static joinPath(uriPath1,uriPath2) {
-    if (uriPath2 === "") return URI.normalizePath(uriPath1);
-    if (uriPath2.startsWith("/")) return URI.normalizePath(uriPath2);
+    if (uriPath2 === "") return this.normalizePath(uriPath1);
+    if (uriPath2.startsWith("/")) return this.normalizePath(uriPath2);
     const joinedPath = ( uriPath1.endsWith("/") ? uriPath1 : uriPath1.split("/").slice(0,-1).join("/") + "/" ) + uriPath2;
-    return URI.normalizePath(joinedPath);
+    return this.normalizePath(joinedPath);
   }
 
   static normalizePath(uriPath) {
