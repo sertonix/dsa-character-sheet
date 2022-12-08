@@ -26,9 +26,9 @@ export class URI {
   static parse(uri) {
     const parse = {
       scheme() {
-        if (sections[i] === ":") throw new Error("scheme has to be non-empty");
-        if (sections[i+1] !== ":") return;
-        components.scheme = sections[i];
+        if (segments[i] === ":") throw new Error("scheme has to be non-empty");
+        if (segments[i+1] !== ":") return;
+        components.scheme = segments[i];
         if (!/[A-Za-z]/.test(components.scheme[0])) throw new Error(`first character of a scheme has to be a letter not ${JSON.stringify(components.scheme[0])}`);
         for (const c of components.scheme)
           if (!/[A-Za-z0-9+.\-]/.test(c))
@@ -36,37 +36,37 @@ export class URI {
         i += 2;
       },
       authority() {
-        if (sections[i] !== "/" || sections[i+1] !== "/") return;
+        if (segments[i] !== "/" || segments[i+1] !== "/") return;
         i += 2;
         parse.userInfo();
         parse.host();
         parse.port();
       },
       userInfo() {
-        if (sections[i+1] !== "@") return;
-        components.userInfo = sections[i];
+        if (segments[i+1] !== "@") return;
+        components.userInfo = segments[i];
         i += 2;
       },
       host() {
         if (parse.ip6()) return;
-        components.host = sections[i];
+        components.host = segments[i];
         i++;
       },
       ip6() {
-        if (sections[i] !== "[") return;
-        const length = sections.slice(i).indexOf("]") + 1; // TODO replace with while loop for better errors and better validation
+        if (segments[i] !== "[") return;
+        const length = segments.slice(i).indexOf("]") + 1; // TODO replace with while loop for better errors and better validation
         if (length === 0) throw new Error("ip6 bracket is not closed");
-        components.host = sections.slice(i,i + length).join("");
+        components.host = segments.slice(i,i + length).join("");
         i += length;
         return true;
       },
       port() {
-        if (sections[i] !== ":") return;
+        if (segments[i] !== ":") return;
         i++;
-        if (["#","?","/"].includes(sections[i])) {
+        if (["#","?","/"].includes(segments[i])) {
           components.port = "";
         } else {
-          components.port = sections[i];
+          components.port = segments[i];
           for (let j = 0; j < components.port.length; j++) {
             if (!/[0-9]/.test(components.port[j])) throw new Error(`invalid character ${JSON.stringify(components.port[j])} at index ${i+j}. port has to be a decimal number`);
           }
@@ -74,24 +74,24 @@ export class URI {
         }
       },
       path() {
-        if (["#","?"].includes(sections[i])) return components.path = "";
-        let length = sections.slice(i).findIndex( s => ["#","?"].includes(s) );
-        if (length === -1) length = sections.length - i;
-        components.path = sections.slice(i,i + length).join("");
+        if (["#","?"].includes(segments[i])) return components.path = "";
+        let length = segments.slice(i).findIndex( s => ["#","?"].includes(s) );
+        if (length === -1) length = segments.length - i;
+        components.path = segments.slice(i,i + length).join("");
         i += length;
       },
       query() {
-        if (sections[i] !== "?") return;
+        if (segments[i] !== "?") return;
         i++;
-        let length = sections.slice(i).indexOf("#");
-        if (length === -1) length = sections.length - i;
-        components.query = sections.slice(i,i + length).join("");
+        let length = segments.slice(i).indexOf("#");
+        if (length === -1) length = segments.length - i;
+        components.query = segments.slice(i,i + length).join("");
         i += length;
       },
       fragment() {
-        if (sections[i] !== "#") return;
-        components.fragment = sections.splice(i+1).join("");
-        i = sections.length;
+        if (segments[i] !== "#") return;
+        components.fragment = segments.splice(i+1).join("");
+        i = segments.length;
       },
     };
 
@@ -103,7 +103,7 @@ export class URI {
         throw new Error(`invalid character ${JSON.stringify(uri[i])} in uri at index ${i}`);
       }
     }
-    const sections = uri.split(/(?<=[:/?#\[\]@])|(?=[:/?#\[\]@])/g); // split reserved characters and groups of other characters
+    const segments = uri.split(/(?<=[:/?#\[\]@])|(?=[:/?#\[\]@])/g); // split reserved characters and groups of other characters
     const components = {};
     let i = 0;
 
@@ -113,7 +113,7 @@ export class URI {
     parse.query();
     parse.fragment();
 
-    if (i !== sections.length) throw new Error("didn't finished parsing of uri");
+    if (i !== segments.length) throw new Error("didn't finished parsing of uri");
 
     return components;
   }
@@ -144,6 +144,7 @@ export class URI {
   }
 
   static resolvePath(uriPath) {
+    return uriPath;
     // TODO resolve uri path
   }
 }
