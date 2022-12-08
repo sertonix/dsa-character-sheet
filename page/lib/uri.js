@@ -136,6 +136,7 @@ export class URI {
   }
 
   static join(...uris) {
+    uris = uris.map( uri => URI.fromString(uri) );
     const lastAbsoluteURIIndex = uris.findLastIndex( uri => uri.isAbsolute() );
     if (lastAbsoluteURIIndex !== -1) uris = uris.slice(0,lastAbsoluteURIIndex);
     const scheme = uris[0]?.scheme;
