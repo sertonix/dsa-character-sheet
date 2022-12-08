@@ -138,7 +138,7 @@ export class URI {
   }
 
   static joinPath(uriPath1,uriPath2) {
-    if (uriPath2[0] === "/") return uriPath2;
+    if (uriPath2.startsWith("/")) return URI.normalizePath(uriPath2);
     const joinedPath = ( uriPath1.endsWith("/") ? uriPath1 : uriPath1.split("/").slice(0,-1).join("/") + "/" ) + uriPath2;
     return URI.normalizePath(joinedPath);
   }
