@@ -138,6 +138,12 @@ export class URI {
   }
 
   static joinPath(uriPath1,uriPath2) {
-    return uriPath1 + uriPath2; // TODO finish join url paths
+    if (uriPath2[0] === "/") return uriPath2;
+    const joinedPath = ( uriPath1.endsWith("/") ? uriPath1 : uriPath1.split("/").slice(0,-1).join("/") + "/" ) + uriPath2;
+    return resolvePath(joinedPath);
+  }
+
+  static resolvePath(uriPath) {
+    // TODO resolve uri path
   }
 }
