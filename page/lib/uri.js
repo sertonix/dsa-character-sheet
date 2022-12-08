@@ -157,7 +157,7 @@ export class URI {
     paths = paths.filter( path => path !== "" );
     const lastAbsolutePathIndex = paths.findLastIndex( path => path.startsWith("/") );
     if (lastAbsolutePathIndex !== -1) paths.splice(0,lastAbsolutePathIndex);
-    const joinedPath = paths.map( (path,i) => path.endsWith("/") || i === paths.length - 1 ? path.split("/") : path.split("/").slice(0,-1) ).flat(1).join("/");
+    const joinedPath = paths.map( (path,i) => i === paths.length - 1 ? path.split("/") : path.split("/").slice(0,-1) ).flat(1).join("/");
     return this.normalizePath(joinedPath);
   }
 
