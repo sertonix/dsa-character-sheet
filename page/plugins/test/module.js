@@ -27,6 +27,7 @@ pros:
   better offline storage
   top level return
   custom globals without real globals
+  run independent from the mime type a server returns
 
 cons:
   unusual syntax
