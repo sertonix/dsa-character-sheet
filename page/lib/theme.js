@@ -1,27 +1,27 @@
 export class ThemeManager {
-  baseURL = new URL("../themes/",import.meta.url);
+  baseURI = new URL("../themes/",import.meta.url);
 
   constructor(character) {
     this.character = character;
   }
 
   initialize() {
-    this.character.data.onDidChange( "dsa.theme", url => this.set(url) );
+    this.character.data.onDidChange( "dsa.theme", uri => this.set(uri) );
 
-    this.url = this.character.data.get("dsa.theme");
-    this.baseTheme = this.character.style.add(this.resolveURL("base"));
-    this.theme = this.character.style.add(this.resolveURL(this.url));
+    this.uri = this.character.data.get("dsa.theme");
+    this.baseTheme = this.character.style.add(this.resolveURI("base"));
+    this.theme = this.character.style.add(this.resolveURI(this.uri));
   }
 
-  resolveURL(url) {
-    if (/^[a-z]+(?:-[a-z]+)*$/.test(url)) {
-      return new URL(url + "/index.css", this.baseURL).toString();
+  resolveURI(uri) {
+    if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
+      return new URL(uri + "/index.css", this.baseURI).toString();
     }
-    return url;
+    return uri;
   }
 
-  set(url) {
-    this.url = url;
-    this.theme.setURL(this.resolveURL(this.url));
+  set(uri) {
+    this.uri = uri;
+    this.theme.setURI(this.resolveURI(this.uri));
   }
 }

@@ -6,14 +6,14 @@ function saveCharacter(character) {
     space: character.data.get("import-export.stringify-space"),
   });
   const blob = new Blob([fileContent]);
-  const objectURL = URL.createObjectURL(blob);
+  const objectURI = URL.createObjectURL(blob);
 
   const tempLink = document.createElement("a");
-  tempLink.setAttribute("href", objectURL);
+  tempLink.setAttribute("href", objectURI);
   tempLink.setAttribute("download", `dsa-character${DEFAULT_CHARACTER_FILE_ENDING}`);
   tempLink.click();
 
-  URL.revokeObjectURL(objectURL);
+  URL.revokeObjectURL(objectURI);
   tempLink.remove();
 }
 

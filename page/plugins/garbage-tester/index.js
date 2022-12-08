@@ -1,7 +1,7 @@
 const
-  logRemoval = url => console.log(`remove plugin: ${JSON.stringify(url)}`),
-  logGarbageCollect = url => console.log(`garbage collected plugin: ${JSON.stringify(url)}`),
-  getRegisterPlugin = registry => plugin => registry.register(plugin,plugin.url)
+  logRemoval = uri => console.log(`remove plugin: ${JSON.stringify(uri)}`),
+  logGarbageCollect = uri => console.log(`garbage collected plugin: ${JSON.stringify(uri)}`),
+  getRegisterPlugin = registry => plugin => registry.register(plugin,plugin.uri)
   ;
 
 function addToPluginManager(plugins) {

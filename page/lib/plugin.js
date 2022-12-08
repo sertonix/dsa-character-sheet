@@ -4,7 +4,7 @@ export class PluginManager {
   pluginClass = Plugin;
   plugins = new Map();
   events = new EventEmitter();
-  baseURL = new URL("../plugins/",import.meta.url);
+  baseURI = new URL("../plugins/",import.meta.url);
   defaultPlugins = [
     "garbage-tester",
     "title",
@@ -22,34 +22,34 @@ export class PluginManager {
     return this.defaultPlugins;
   }
 
-  add(url) {
-    if (this.plugins.has(url)) return this.plugins.get(url);
-    const plugin = new this.pluginClass(this,url);
-    this.plugins.set(url,plugin);
+  add(uri) {
+    if (this.plugins.has(uri)) return this.plugins.get(uri);
+    const plugin = new this.pluginClass(this,uri);
+    this.plugins.set(uri,plugin);
     this.events.emit("did-added-plugin", plugin);
     return plugin;
   }
 
-  remove(...urls) {
-    for (const url of urls) {
-      if (!this.plugins.has(url)) continue;
-      const plugin = this.plugins.get(url);
-      this.plugins.delete(url);
-      this.events.emit("did-removed-plugin", url);
+  remove(...uris) {
+    for (const uri of uris) {
+      if (!this.plugins.has(uri)) continue;
+      const plugin = this.plugins.get(uri);
+      this.plugins.delete(uri);
+      this.events.emit("did-removed-plugin", uri);
     }
   }
 
-  addAll(...urls) { return urls.map( url => this.add(url) ); }
-  get(url) { return this.plugins.get(url); }
+  addAll(...uris) { return uris.map( uri => this.add(uri) ); }
+  get(uri) { return this.plugins.get(uri); }
   getAll() { return [...this.plugins.values()]; }
-  getAllURLs() { return [...this.plugins.keys()]; }
-  has(url) { return this.plugins.has(url); }
+  getAllURIs() { return [...this.plugins.keys()]; }
+  has(uri) { return this.plugins.has(uri); }
 
-  resolveURL(url) {
-    if (/^[a-z]+(?:-[a-z]+)*$/.test(url)) {
-      return new URL(url + "/index.js", this.baseURL).toString();
+  resolveURI(uri) {
+    if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
+      return new URL(uri + "/index.js", this.baseURI).toString();
     }
-    return url;
+    return uri;
   }
 
   onDidAddedPlugin(callback) { return this.events.on( "did-added-plugin", callback ); }
@@ -66,14 +66,14 @@ export class HeroPluginManager extends PluginManager {
 
   initialize() {
     super.initialize();
-    this.character.data.onDidChange("dsa.plugins", (newURLs,oldURLs) => {
-      for (const oldURL of oldURLs) {
-        if (newURLs.includes(oldURL)) continue;
-        this.remove(oldURL);
+    this.character.data.onDidChange("dsa.plugins", (newURIs,oldURIs) => {
+      for (const oldURI of oldURIs) {
+        if (newURIs.includes(oldURI)) continue;
+        this.remove(oldURI);
       }
-      for (const newURL of newURLs) {
-        if (!oldURLs.includes(newURL)) continue;
-        this.add(newURL);
+      for (const newURI of newURIs) {
+        if (!oldURIs.includes(newURI)) continue;
+        this.add(newURI);
       }
     });
     this.character.data.onDidChange("dsa.plugins.default-enabled", enabled => {
@@ -97,10 +97,10 @@ export class Plugin {
   loaded = false;
   events = new EventEmitter();
 
-  constructor(plugins,url) {
+  constructor(plugins,uri) {
     this.plugins = plugins;
-    this.url = url;
-    this.load = import(this.resolveURL()).then( this.handleImports.bind(this) );
+    this.uri = uri;
+    this.load = import(this.resolveURI()).then( this.handleImports.bind(this) );
   }
 
   handleImports(exports) {
@@ -118,12 +118,12 @@ export class Plugin {
     return this.exports[name] ?? this.exports.default?.[name];
   }
 
-  resolveURL() {
-    return this.plugins.resolveURL(this.url);
+  resolveURI() {
+    return this.plugins.resolveURI(this.uri);
   }
 
-  resolveStyleURL(url) {
-    return new URL(url,this.resolveURL());
+  resolveStyleURI(uri) {
+    return new URL(uri,this.resolveURI());
   }
 }
 
@@ -132,8 +132,8 @@ export class HeroPlugin extends Plugin {
     const dataSchema = this.getExport("dataSchema");
     if (dataSchema) this.plugins.character.data.addSchema(dataSchema);
     this.getExport("addCharacter")?.(this.plugins.character);
-    const styleURL = this.getExport("styleURL");
-    if (styleURL) this.plugins.character.style.add(this.resolveStyleURL(styleURL));
+    const styleURI = this.getExport("styleURI");
+    if (styleURI) this.plugins.character.style.add(this.resolveStyleURI(styleURI));
     return this;
   }
 }

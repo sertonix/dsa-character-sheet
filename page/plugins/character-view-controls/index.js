@@ -58,5 +58,5 @@ export default {
     addMaximizeButton(character);
     addMinimizeButton(character);
   },
-  styleURL: "./index.css",
+  styleURI: "./index.css",
 };

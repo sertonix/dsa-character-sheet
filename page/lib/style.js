@@ -3,7 +3,7 @@ import {EventEmitter} from "./event.js";
 export class StyleManager {
   styles = new Set();
   events = new EventEmitter();
-  baseURL = new URL("../style/character/",import.meta.url);
+  baseURI = new URL("../style/character/",import.meta.url);
   element = document.createElement("dsa-style-manager");
 
   constructor(character) {
@@ -14,8 +14,8 @@ export class StyleManager {
     this.character.append(this.element);
   }
 
-  add(url) {
-    const style = new Style(this,url);
+  add(uri) {
+    const style = new Style(this,uri);
     this.styles.add(style);
     this.append(style.getOuterElement());
     return style;
@@ -28,11 +28,11 @@ export class StyleManager {
 
   getAll() { return [...this.styles]; }
 
-  resolveURL(url) {
-    if (/^[a-z]+(?:-[a-z]+)*$/.test(url)) {
-      return new URL(url + "/index.css", this.baseURL).toString();
+  resolveURI(uri) {
+    if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
+      return new URL(uri + "/index.css", this.baseURI).toString();
     }
-    return url;
+    return uri;
   }
 
   append(...elements) { return this.element.append(...elements); }
@@ -41,20 +41,20 @@ export class StyleManager {
 export class Style {
   element = document.createElement("link");
 
-  constructor(styles,url) {
+  constructor(styles,uri) {
     this.styles = styles;
-    this.url = url;
+    this.uri = uri;
     this.element.setAttribute("rel","styleSheet");
-    this.element.setAttribute("href",this.resolveURL());
+    this.element.setAttribute("href",this.resolveURI());
   }
 
-  resolveURL() {
-    return this.styles.resolveURL(this.url);
+  resolveURI() {
+    return this.styles.resolveURI(this.uri);
   }
 
-  setURL(url) {
-    this.url = url;
-    this.element.setAttribute("href",this.resolveURL());
+  setURI(uri) {
+    this.uri = uri;
+    this.element.setAttribute("href",this.resolveURI());
   }
 
   addToElement(element) {

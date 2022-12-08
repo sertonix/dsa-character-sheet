@@ -107,5 +107,5 @@ export default {
     character.sections.registerType("attributes",Attributes);
     return character.sections.add("attributes");
   },
-  styleURL: "./index.css",
+  styleURI: "./index.css",
 };
