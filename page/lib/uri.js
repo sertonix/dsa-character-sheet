@@ -173,6 +173,7 @@ export class URI {
         i -= 2;
       }
     }
+    if (segments[0] !== "") segments.unshift("");
     return segments.join("/");
   }
 }
