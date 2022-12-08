@@ -135,20 +135,20 @@ export class URI {
     return components;
   }
 
-  static join(uri1,uri2) {
-    if (uri2.isAbsolute()) return new this(uri2);
-    if (uri2.host) return new this({
-      ...uri2,
-      scheme: uri1.scheme,
-    });
-    return new this({
-      scheme: uri1.scheme,
-      userinfo: uri1.userinfo,
-      host: uri1.host,
-      port: uri1.port,
-      path: this.joinPath(uri1.path,uri2.path),
-      query: uri2.query ?? uri1.query,
-      fragment: uri2.fragment ?? uri1.fragment,
+  static join(...uris) {
+    const lastAbsoluteURIIndex = uris.findLastIndex( uri => uri.isAbsolute() );
+    if (lastAbsoluteURIIndex !== -1) uris = uris.slice(0,lastAbsoluteURIIndex);
+    const scheme = uris[0]?.scheme;
+    const lastURIIndexWithHost = uris.findLastIndex( uri => uri.host != null );
+    if (lastURIIndexWithHost !== -1) uris = uris.slice(0,lastURIIndexWithHost);
+    return new URI({
+      scheme,
+      userinfo: uris[0]?.userinfo,
+      host: uris[0]?.host,
+      port: uris[0]?.port,
+      path: URI.joinPath(...uris),
+      query: uris.findLast( uri => uri.query )?.query,
+      fragment: uris.findLast( uri => uri.fragment )?.fragment,
     });
   }
 
