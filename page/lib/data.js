@@ -6,7 +6,7 @@ export class DataManager {
   schemas = new Set();
 
   constructor(data = Object.create(null), baseSchema = dataSchema) {
-    this.data = data; // TODO copy and prevent prototypes
+    this.data = data; // TODO remove object prototypes
 
     this.addSchema(baseSchema);
   }

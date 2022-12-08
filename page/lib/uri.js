@@ -1,3 +1,5 @@
+// TODO maybe publish as independent package
+
 export class URI {
   constructor(components) {
     ({
@@ -185,3 +187,5 @@ export class URI {
     return segments.join("/");
   }
 }
+
+// TODO add some uri schemes and better api to add custom parsing
