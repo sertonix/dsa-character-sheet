@@ -138,10 +138,10 @@ export class URI {
   static join(...uris) {
     uris = uris.map( uri => URI.fromString(uri) );
     const lastAbsoluteURIIndex = uris.findLastIndex( uri => uri.isAbsolute() );
-    if (lastAbsoluteURIIndex !== -1) uris = uris.slice(0,lastAbsoluteURIIndex);
+    if (lastAbsoluteURIIndex !== -1) uris.splice(0,lastAbsoluteURIIndex);
     const scheme = uris[0]?.scheme;
     const lastURIIndexWithHost = uris.findLastIndex( uri => uri.host != null );
-    if (lastURIIndexWithHost !== -1) uris = uris.slice(0,lastURIIndexWithHost);
+    if (lastURIIndexWithHost !== -1) uris.splice(0,lastURIIndexWithHost);
     return new URI({
       scheme,
       userinfo: uris[0]?.userinfo,
@@ -156,7 +156,7 @@ export class URI {
   static joinPath(...paths) {
     paths = paths.filter( path => path !== "" );
     const lastAbsolutePathIndex = paths.findLastIndex( path => path.startsWith("/") );
-    if (lastAbsolutePathIndex !== -1) paths = paths.slice(0,lastAbsolutePathIndex+1);
+    if (lastAbsolutePathIndex !== -1) paths.splice(0,lastAbsolutePathIndex);
     const joinedPath = paths.map( (path,i) => path.endsWith("/") || i === paths.length - 1 ? path.split("/") : path.split("/").slice(0,-1) ).flat(1).join("/");
     return this.normalizePath(joinedPath);
   }
