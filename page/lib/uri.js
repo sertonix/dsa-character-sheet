@@ -144,8 +144,18 @@ export class URI {
     return URI.normalizePath(joinedPath);
   }
 
-    return uriPath;
-    // TODO resolve uri path
   static normalizePath(uriPath) {
+    const segments = uriPath.split("/");
+    for (let i = 0; i < segments.length && segments.length; i++) {
+      const segment = segments[i];
+      if (segments[i] === ".") {
+        segments.splice(i,1);
+        i--;
+      } else if (segments[i] === "..") {
+        segments.splice(Math.max(i-1,0),2);
+        i -= 2;
+      }
+    }
+    return segments.join("/");
   }
 }
