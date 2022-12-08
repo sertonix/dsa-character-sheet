@@ -54,13 +54,13 @@ export class URI {
       authority() {
         if (segments[i] !== "/" || segments[i+1] !== "/") return;
         i += 2;
-        parse.userInfo();
+        parse.userinfo();
         parse.host();
         parse.port();
       },
-      userInfo() {
+      userinfo() {
         if (segments[i+1] !== "@") return;
-        components.userInfo = segments[i];
+        components.userinfo = segments[i];
         i += 2;
       },
       host() {
