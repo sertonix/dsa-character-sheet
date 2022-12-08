@@ -20,6 +20,21 @@ export class URI {
   isAbsolute() { return !!this.scheme; }
   isRelative() { return !this.scheme; }
 
+  toString() {
+    const authority = this.getAuthority();
+    return `${
+      this.scheme != null ? `${this.scheme}:` : ""
+    }${
+      authority != null ? `//${authority}` : ""
+    }${
+      this.path
+    }${
+      this.query != null ? `?${this.query}` : ""
+    }${
+      this.fragment != null ? `#${this.fragment}` : ""
+    }`;
+  }
+
   static fromString(uri) {
     return new URI(URI.parse(uri));
   }
