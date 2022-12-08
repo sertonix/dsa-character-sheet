@@ -19,7 +19,7 @@ export class URI {
   isAbsolute() { return !!this.scheme; }
   isRelative() { return !this.scheme; }
 
-  toString() {
+  toString() { // TODO add normalization option
     const authority = this.getAuthority();
     return `${
       this.scheme != null ? `${this.scheme}:` : ""
@@ -38,7 +38,7 @@ export class URI {
     return new this(this.parse(uri));
   }
 
-  static parse(uri) {
+  static parse(uri) { // TODO add strict option
     const parse = {
       scheme() {
         if (segments[i] === ":") throw new Error("scheme has to be non-empty");
