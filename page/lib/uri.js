@@ -156,7 +156,7 @@ export class URI {
   static joinPath(...paths) {
     paths = paths.filter( path => path !== "" );
     const lastAbsolutePathIndex = paths.findLastIndex( path => path.startsWith("/") );
-    if (lastAbsolutePathIndex !== -1) uris = uris.slice(0,lastAbsolutePathIndex);
+    if (lastAbsolutePathIndex !== -1) paths = paths.slice(0,lastAbsolutePathIndex);
     const joinedPath = paths.map( (path,i) => path.endsWith("/") && i === paths.length - 1 ? path : path.split("/").slice(0,-1) ).flat(1).join("/");
     return this.normalizePath(joinedPath);
   }
