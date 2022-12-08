@@ -140,11 +140,11 @@ export class URI {
   static joinPath(uriPath1,uriPath2) {
     if (uriPath2[0] === "/") return uriPath2;
     const joinedPath = ( uriPath1.endsWith("/") ? uriPath1 : uriPath1.split("/").slice(0,-1).join("/") + "/" ) + uriPath2;
-    return resolvePath(joinedPath);
+    return URI.normalizePath(joinedPath);
   }
 
-  static resolvePath(uriPath) {
     return uriPath;
     // TODO resolve uri path
+  static normalizePath(uriPath) {
   }
 }
