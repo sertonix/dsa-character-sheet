@@ -174,9 +174,11 @@ export class URI {
       if (segments[i] === ".") {
         segments.splice(i,1);
         i--;
+        if (i === segments.length - 1) segments.push("");
       } else if (segments[i] === "..") {
         segments.splice(Math.max(i-1,0),2);
         i -= 2;
+        if (i === segments.length - 1) segments.push("");
       }
     }
     if (segments[0] !== "") segments.unshift("");
