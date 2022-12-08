@@ -52,4 +52,5 @@ export default {
       default: 2,
     },
   },
+  styleURI: "./index.css",
 };
