@@ -149,7 +149,7 @@ export class URI {
       path: URI.joinPath(...uris),
       query: uris.findLast( uri => uri.query )?.query,
       fragment: uris.findLast( uri => uri.fragment )?.fragment,
-    });
+    }).toString();
   }
 
   static joinPath(uriPath1,uriPath2) {
