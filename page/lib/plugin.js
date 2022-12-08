@@ -16,7 +16,6 @@ export class PluginManager {
 
   initialize() {
     this.addAll(...this.getInitialPlugins());
-    if (new URLSearchParams(window.location.search).has("test")) this.add("test"); // TODO remove/replace test
   }
 
   getInitialPlugins() {
