@@ -1,10 +1,11 @@
 import {EventEmitter} from "./event.js";
+import {URI} from "./uri.js";
 
 export class PluginManager {
   pluginClass = Plugin;
   plugins = new Map();
   events = new EventEmitter();
-  baseURI = new URL("../plugins/",import.meta.url);
+  baseURI = URI.join(import.meta.url,"../plugins/");
   defaultPlugins = [
     "garbage-tester",
     "title",
@@ -47,7 +48,7 @@ export class PluginManager {
 
   resolveURI(uri) {
     if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
-      return new URL(uri + "/index.js", this.baseURI).toString();
+      return URI.join(this.baseURI, uri + "/", "index.js");
     }
     return uri;
   }
@@ -123,7 +124,7 @@ export class Plugin {
   }
 
   resolveStyleURI(uri) {
-    return new URL(uri,this.resolveURI());
+    return URI.join(this.resolveURI(),uri);
   }
 }
 

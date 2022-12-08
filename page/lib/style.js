@@ -1,9 +1,10 @@
 import {EventEmitter} from "./event.js";
+import {URI} from "./uri.js";
 
 export class StyleManager {
   styles = new Set();
   events = new EventEmitter();
-  baseURI = new URL("../style/character/",import.meta.url);
+  baseURI = URI.join(import.meta.url,"../style/character/");
   element = document.createElement("dsa-style-manager");
 
   constructor(character) {
@@ -30,7 +31,7 @@ export class StyleManager {
 
   resolveURI(uri) {
     if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
-      return new URL(uri + "/index.css", this.baseURI).toString();
+      return URI.join(this.baseURI, uri + "/", "index.css");
     }
     return uri;
   }

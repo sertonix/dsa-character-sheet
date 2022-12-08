@@ -1,5 +1,7 @@
+import {URI} from "./uri.js";
+
 export class ThemeManager {
-  baseURI = new URL("../themes/",import.meta.url);
+  baseURI = URI.join(import.meta.url,"../themes/");
 
   constructor(character) {
     this.character = character;
@@ -15,7 +17,7 @@ export class ThemeManager {
 
   resolveURI(uri) {
     if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
-      return new URL(uri + "/index.css", this.baseURI).toString();
+      return URI.join(this.baseURI, uri + "/", "index.css");
     }
     return uri;
   }
