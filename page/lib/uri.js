@@ -137,8 +137,6 @@ export class URI {
   }
 
   static join(uri1,uri2) {
-    uri1 = new URI(uri1);
-    uri2 = new URI(uri2);
     if (uri2.isAbsolute()) return new URI(uri2);
     if (uri2.host) return new URI({
       ...uri2,
