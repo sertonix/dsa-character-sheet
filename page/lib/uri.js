@@ -142,12 +142,18 @@ export class URI {
     const scheme = uris[0]?.scheme;
     const lastURIIndexWithHost = uris.findLastIndex( uri => uri.host != null );
     if (lastURIIndexWithHost !== -1) uris.splice(0,lastURIIndexWithHost);
-    return new URI({
-      scheme,
+    const authority = {
       userinfo: uris[0]?.userinfo,
       host: uris[0]?.host,
       port: uris[0]?.port,
-      path: URI.joinPath(...uris.map( uri => uri.path )),
+    };
+    const path = URI.joinPath(...uris.map( uri => uri.path ));
+    const lastIndexWithPath = uris.findLastIndex( uri => uri.path );
+    if (lastIndexWithPath !== -1) uris.splice(0,lastIndexWithPath);
+    return new URI({
+      scheme,
+      ...authority,
+      path,
       query: uris.findLast( uri => uri.query )?.query,
       fragment: uris.findLast( uri => uri.fragment )?.fragment,
     }).toString();
