@@ -13,6 +13,7 @@ export class URI {
   }
 
   getAuthority() {
+    if (this.host != null) return;
     return `${this.userinfo ? `${this.userinfo}@` : ""}${this.host}${this.port ? `:${this.port}` : ""}`;
   }
 
