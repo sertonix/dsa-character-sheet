@@ -1,6 +1,5 @@
 export class URI {
   constructor(components) {
-    if (typeof components === "string") components = URI.parse(components);
     ({
       scheme: this.scheme,
       userinfo: this.userinfo,
