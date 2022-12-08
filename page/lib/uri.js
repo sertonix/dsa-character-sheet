@@ -147,7 +147,7 @@ export class URI {
       userinfo: uris[0]?.userinfo,
       host: uris[0]?.host,
       port: uris[0]?.port,
-      path: URI.joinPath(...uris),
+      path: URI.joinPath(...uris.map( uri => uri.path )),
       query: uris.findLast( uri => uri.query )?.query,
       fragment: uris.findLast( uri => uri.fragment )?.fragment,
     }).toString();
