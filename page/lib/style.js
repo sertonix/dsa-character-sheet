@@ -4,7 +4,6 @@ import {URI} from "./uri.js";
 export class StyleManager {
   styles = new Set();
   events = new EventEmitter();
-  baseURI = URI.join(import.meta.url,"../style/character/");
   element = document.createElement("dsa-style-manager");
 
   constructor(character) {
@@ -29,13 +28,6 @@ export class StyleManager {
 
   getAll() { return [...this.styles]; }
 
-  resolveURI(uri) {
-    if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
-      return URI.join(this.baseURI, uri + "/", "index.css");
-    }
-    return uri;
-  }
-
   append(...elements) { return this.element.append(...elements); }
 }
 
@@ -50,7 +42,7 @@ export class Style {
   }
 
   resolveURI() {
-    return this.styles.resolveURI(this.uri);
+    return dsa.resolveURI(this.uri);
   }
 
   setURI(uri) {

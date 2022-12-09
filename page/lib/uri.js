@@ -28,12 +28,17 @@ export class URI {
     }${
       authority != null ? `//${authority}` : ""
     }${
-      this.path
+      this.path[0] === "/" ? this.path : "/" + this.path
     }${
       this.query != null ? `?${this.query}` : ""
     }${
       this.fragment != null ? `#${this.fragment}` : ""
     }`;
+  }
+
+  static from(uri) {
+    if (uri instanceof this) return new this(uri);
+    return this.fromString(uri);
   }
 
   static fromString(uri) {
@@ -96,7 +101,7 @@ export class URI {
         if (["#","?"].includes(segments[i])) return components.path = "";
         let length = segments.slice(i).findIndex( s => ["#","?"].includes(s) );
         if (length === -1) length = segments.length - i;
-        components.path = segments.slice(i,i + length).join("");
+        components.path = segments.slice(segments[i] === "/" ? i+1 : i,i + length).join("");
         i += length;
       },
       query() {
@@ -138,7 +143,7 @@ export class URI {
   }
 
   static join(...uris) {
-    uris = uris.map( uri => URI.fromString(uri) );
+    uris = uris.map( uri => URI.from(uri) );
     const lastAbsoluteURIIndex = uris.findLastIndex( uri => uri.isAbsolute() );
     if (lastAbsoluteURIIndex !== -1) uris.splice(0,lastAbsoluteURIIndex);
     const scheme = uris[0]?.scheme;
@@ -158,7 +163,7 @@ export class URI {
       path,
       query: uris.findLast( uri => uri.query )?.query,
       fragment: uris.findLast( uri => uri.fragment )?.fragment,
-    }).toString();
+    });
   }
 
   static joinPath(...paths) {
@@ -183,9 +188,11 @@ export class URI {
         if (i === segments.length - 1) segments.push("");
       }
     }
-    if (segments[0] !== "") segments.unshift("");
+    // if (segments[0] !== "") segments.unshift("");
     return segments.join("/");
   }
-}
 
-// TODO add some uri schemes and better api to add custom parsing
+  static fixedPath(path) {
+    return path.endsWith("/") ? path : path + "/";
+  }
+}

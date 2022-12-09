@@ -5,7 +5,6 @@ export class PluginManager {
   pluginClass = Plugin;
   plugins = new Map();
   events = new EventEmitter();
-  baseURI = URI.join(import.meta.url,"../plugins/");
   defaultPlugins = [
     "garbage-tester",
     "title",
@@ -44,13 +43,6 @@ export class PluginManager {
   getAll() { return [...this.plugins.values()]; }
   getAllURIs() { return [...this.plugins.keys()]; }
   has(uri) { return this.plugins.has(uri); }
-
-  resolveURI(uri) {
-    if (/^[a-z]+(?:-[a-z]+)*$/.test(uri)) {
-      return URI.join(this.baseURI, uri + "/", "index.js");
-    }
-    return uri;
-  }
 
   onDidAddedPlugin(callback) { return this.events.on( "did-added-plugin", callback ); }
   onDidRemovedPlugin(callback) { return this.events.on( "did-removed-plugin", callback ); }
@@ -119,7 +111,7 @@ export class Plugin {
   }
 
   resolveURI() {
-    return this.plugins.resolveURI(this.uri);
+    return dsa.resolveURI(URI.join("dsa-plugin:",this.uri));
   }
 
   resolveStyleURI(uri) {
