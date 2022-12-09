@@ -28,7 +28,7 @@ export class URI {
     }${
       authority != null ? `//${authority}` : ""
     }${
-      this.path[0] === "/" ? this.path : "/" + this.path
+      authority != null ? `/${this.path}` : this.path
     }${
       this.query != null ? `?${this.query}` : ""
     }${
@@ -67,6 +67,7 @@ export class URI {
       userinfo() {
         if (segments[i+1] !== "@") return;
         components.userinfo = segments[i];
+        components.userinfo
         i += 2;
       },
       host() {
@@ -98,10 +99,10 @@ export class URI {
         }
       },
       path() {
-        if (["#","?"].includes(segments[i])) return components.path = "";
+        if (["#","?",undefined].includes(segments[i])) return components.path = "";
         let length = segments.slice(i).findIndex( s => ["#","?"].includes(s) );
         if (length === -1) length = segments.length - i;
-        components.path = segments.slice(segments[i] === "/" ? i+1 : i,i + length).join("");
+        components.path = segments.slice(components.host ? i+1 : i,i + length).join("");
         i += length;
       },
       query() {
@@ -188,7 +189,6 @@ export class URI {
         if (i === segments.length - 1) segments.push("");
       }
     }
-    // if (segments[0] !== "") segments.unshift("");
     return segments.join("/");
   }
 
