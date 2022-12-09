@@ -195,4 +195,12 @@ export class URI {
   static fixedPath(path) {
     return path.endsWith("/") ? path : path + "/";
   }
+
+  static setEndSlash(path,endSlash) {
+    if (endSlash) {
+      return path.endsWith("/") ? path : path + "/";
+    } else {
+      return path.endsWith("/") ? path.substring(0,path.length - 2) : path;
+    }
+  }
 }

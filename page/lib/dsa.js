@@ -17,21 +17,9 @@ export class DSA {
   };
 
   constructor() {
-    const libURI = URI.join(import.meta.url,".");
-    this.uriResolver.set("dsa", uri => new URI({
-      ...libURI,
-      path: URI.joinPath(libURI.path,uri),
-    }));
-    const pluginURI = URI.join(import.meta.url,"../plugins/");
-    this.uriResolver.set("dsa-plugin", uri => new URI({
-      ...pluginURI,
-      path: URI.joinPath(pluginURI.path,URI.fixedPath(uri.path), "index.js"),
-    }));
-    const themeURI = URI.join(import.meta.url,"../themes/");
-    this.uriResolver.set("dsa-theme", uri => new URI({
-      ...themeURI,
-      path: URI.joinPath(themeURI.path,URI.fixedPath(uri.path), "index.css"),
-    }));
+    this.uriResolver.setProxy("dsa",URI.join(import.meta.url,"."),".js");
+    this.uriResolver.setProxy("dsa-plugin",URI.join(import.meta.url,"../plugins/"),".js","index");
+    this.uriResolver.setProxy("dsa-theme",URI.join(import.meta.url,"../themes/"),".css","index");
 
     this.append(
       this.element.characters,
@@ -56,6 +44,10 @@ export class DSA {
 
   resolveURI(uri) {
     return this.uriResolver.resolve(uri);
+  }
+
+  import(uri) {
+    return import(this.resolveURI(uri));
   }
 
   getCharacters() { return [...this.characters]; }

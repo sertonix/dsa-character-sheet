@@ -1,5 +1,6 @@
 const CHARACTER_FILE_TYPES = "application/json,.dsa-char";
 const DEFAULT_CHARACTER_FILE_ENDING = ".json";
+const safeJSONParse = await dsa.import("dsa:safe-json-parse");
 
 function saveCharacter(character) {
   const fileContent = character.data.exportString({
@@ -24,7 +25,7 @@ function importCharacter() {
   tempInput.setAttribute("accept", CHARACTER_FILE_TYPES);
   tempInput.once("change", () => tempInput.files.forEach( file =>
     file.text().then( str =>
-      dsa.addCharacter(DSA.safeJSONParse(str))
+      dsa.addCharacter(safeJSONParse(str))
     )
   ));
   tempInput.click();
