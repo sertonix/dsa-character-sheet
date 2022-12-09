@@ -1,5 +1,3 @@
-import "./module.js";
-
 dsa.buttons.addNew("New Test", () => dsa.addCharacter({
   "title.title": "Test Character",
   "dsa.theme": "dark-minimal",
