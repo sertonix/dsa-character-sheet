@@ -122,7 +122,7 @@ export class URI {
 
     for (let i = 0; i < uri.length; i++) {
       if (uri[i] === "%") {
-        if (!/[0-9a-fA-F]{2}/.test(uri.substring(i,i+2))) throw new Error(`invalid percent escape sequence at index ${i} in ${JSON.stringify(uri)}`);
+        if (!/[0-9a-fA-F]{2}/.test(uri.substring(i+1,i+3))) throw new Error(`invalid percent escape sequence at index ${i} in ${JSON.stringify(uri)}`);
         i += 2;
       } else if (!/[!#$&-;=?-[\]_a-z~]/.test(uri[i])) {
         throw new Error(`invalid character ${JSON.stringify(uri[i])} in uri at index ${i}`);
