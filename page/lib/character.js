@@ -6,16 +6,16 @@ import {HorizontalBar} from "./bar.js";
 import {Sections} from "./section.js";
 
 export class Character {
-  plugins = new HeroPluginManager(this);
-  theme = new ThemeManager(this);
-  topBar = new HorizontalBar();
-  bottomBar = new HorizontalBar();
-  sections = new Sections();
   element = {
     main: document.createElement("dsa-character"),
     casing: document.createElement("dsa-character-casing"),
   };
   style = new StyleManager();
+  topBar = new HorizontalBar();
+  sections = new Sections();
+  bottomBar = new HorizontalBar();
+  plugins = new HeroPluginManager(this);
+  theme = new ThemeManager(this);
 
   constructor(data) {
     this.data = new DataManager(data);
