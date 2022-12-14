@@ -3,7 +3,6 @@ import {URI} from "./uri.js";
 
 export class StyleManager {
   styles = new Set();
-  events = new EventEmitter();
   element = document.createElement("dsa-style-manager");
 
   add(uri) {
