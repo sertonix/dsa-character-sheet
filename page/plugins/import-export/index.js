@@ -23,11 +23,13 @@ function importCharacter() {
   tempInput.setAttribute("type", "file");
   tempInput.setAttribute("multiple", "");
   tempInput.setAttribute("accept", CHARACTER_FILE_TYPES);
-  tempInput.once("change", () => tempInput.files.forEach( file =>
-    file.text().then( str =>
-      dsa.addCharacter(safeJSONParse(str))
-    )
-  ));
+  tempInput.addEventListener("change", () => {
+    for (const file of tempInput.files) {
+      file.text().then( str =>
+        dsa.addCharacter(safeJSONParse(str))
+      )
+    }
+  }, {once:true,passive:true});
   tempInput.click();
 }
 
