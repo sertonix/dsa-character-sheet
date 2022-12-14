@@ -9,6 +9,34 @@ TODO color variables to allow themes and plugins styles to fit together
 }
 */
 
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+
+  background-color: #000000;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+dsa-characters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+dsa-character-casing {
+  display: contents;
+}
+
+dsa-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+  gap: 5px;
+}
+
 dsa-character {
   line-height: 1; /* allows the use of em as 1 line high */
   font-family: monospace;

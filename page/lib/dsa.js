@@ -1,6 +1,7 @@
 import {EventEmitter} from "./event.js";
 import {PluginManager} from "./plugin.js";
 import {Character} from "./character.js";
+import {StyleManager} from "./style.js";
 import {ButtonPanel} from "./button.js";
 import {URIResolver} from "./uri-resolver.js";
 import {URI} from "./uri.js";
@@ -10,6 +11,7 @@ export class DSA {
   events = new EventEmitter();
   plugins = new PluginManager();
   buttons = new ButtonPanel();
+  style = new StyleManager();
   uriResolver = new URIResolver();
   element = {
     main: document.createElement("dsa"),
@@ -22,6 +24,7 @@ export class DSA {
     this.uriResolver.setProxy("dsa-theme",URI.join(import.meta.url,"../themes/"),".css","index");
 
     this.append(
+      this.style.getOuterElement(),
       this.element.characters,
       this.buttons.getOuterElement(),
     );
@@ -30,6 +33,7 @@ export class DSA {
   }
 
   initialize() {
+    this.style.add("dsa-theme:base");
     this.plugins.initialize();
   }
 
