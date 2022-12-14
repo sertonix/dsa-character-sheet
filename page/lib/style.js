@@ -6,14 +6,6 @@ export class StyleManager {
   events = new EventEmitter();
   element = document.createElement("dsa-style-manager");
 
-  constructor(character) {
-    this.character = character;
-  }
-
-  initialize() {
-    this.character.append(this.element);
-  }
-
   add(uri) {
     const style = new Style(this,uri);
     this.styles.add(style);
@@ -28,6 +20,7 @@ export class StyleManager {
 
   getAll() { return [...this.styles]; }
 
+  getOuterElement() { return this.element; }
   append(...elements) { return this.element.append(...elements); }
 }
 

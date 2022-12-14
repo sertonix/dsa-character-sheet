@@ -7,7 +7,6 @@ import {Sections} from "./section.js";
 
 export class Character {
   plugins = new HeroPluginManager(this);
-  style = new StyleManager(this);
   theme = new ThemeManager(this);
   topBar = new HorizontalBar();
   bottomBar = new HorizontalBar();
@@ -16,6 +15,7 @@ export class Character {
     main: document.createElement("dsa-character"),
     casing: document.createElement("dsa-character-casing"),
   };
+  style = new StyleManager();
 
   constructor(data) {
     this.data = new DataManager(data);
@@ -25,6 +25,7 @@ export class Character {
     this.bottomBar.getOuterElement().classList.add("dsa-character-bottom");
 
     this.append(
+      this.style.getOuterElement(),
       this.topBar.getOuterElement(),
       this.sections.getOuterElement(),
       this.bottomBar.getOuterElement(),
@@ -32,7 +33,6 @@ export class Character {
   }
 
   initialize() {
-    this.style.initialize();
     this.theme.initialize();
     this.plugins.initialize();
   }
