@@ -4,7 +4,7 @@
   "description": "A sheet to view and edit your dsa character.",
   "main": "index.js",
   "scripts": {
-    "start:server": "http-server ./page -c-1 -p 80 -P http://localhost/index? -d false -i false --cors --no-dotfiles"
+    "start:server": "http-server ./page -c-1 -p 80 -P http://localhost/index? -d false -i false --cors"
   },
   "author": "Sertonix",
   "license": "MIT",
