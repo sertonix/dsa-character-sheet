@@ -1,7 +1,7 @@
 {
   "name": "dsa-character-sheet",
   "version": "1.0.0",
-  "description": "A sheet to view and edit your dsa character.",
+  "description": "A manager for DSA characters",
   "main": "index.js",
   "scripts": {
     "start:server": "http-server ./page -c-1 -p 80 -P http://localhost/index? -d false -i false --cors"
