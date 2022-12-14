@@ -43,7 +43,7 @@ export default {
     element.classList.add("dsa-character-export");
     element.innerText = "Export";
     character.topBar.appendToLeft(element);
-    element.addEventListener("click", getSaveCharacter(character));
+    element.addEventListener("click", getSaveCharacter(character), {passive:true});
   },
   add() {
     dsa.buttons.addNew("Import", importCharacter);
