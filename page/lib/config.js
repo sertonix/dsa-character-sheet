@@ -34,6 +34,10 @@ export class ConfigManager {
     callback(this.get(name));
   }
 
+  export() {
+    return this.config;
+  }
+
   addSchema(schema) {
     for (const [name,subSchema] of Object.entries(schema)) {
       const value = this.get(name);
