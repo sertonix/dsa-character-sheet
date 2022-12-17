@@ -33,7 +33,7 @@ export class DSA {
   }
 
   initialize() {
-    this.style.add("dsa-theme:base");
+    this.style.set("base","dsa-theme:base");
     this.plugins.initialize();
   }
 

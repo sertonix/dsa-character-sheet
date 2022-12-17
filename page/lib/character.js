@@ -1,6 +1,5 @@
 import {DataManager} from "./data.js";
 import {HeroPluginManager} from "./plugin.js";
-import {ThemeManager} from "./theme.js";
 import {StyleManager} from "./style.js";
 import {HorizontalBar} from "./bar.js";
 import {Sections} from "./section.js";
@@ -15,7 +14,6 @@ export class Character {
   sections = new Sections();
   bottomBar = new HorizontalBar();
   plugins = new HeroPluginManager(this);
-  theme = new ThemeManager(this);
 
   constructor(data) {
     this.data = new DataManager(data);
@@ -30,10 +28,14 @@ export class Character {
       this.sections.getOuterElement(),
       this.bottomBar.getOuterElement(),
     );
+
+    this.style.set("base",dsa.resolveURI("dsa-theme:base"));
+    this.data.observe( "dsa.theme", uri =>
+      this.style.set("theme",dsa.resolveURI(this.data.get("dsa.theme")))
+    );
   }
 
   initialize() {
-    this.theme.initialize();
     this.plugins.initialize();
   }
 

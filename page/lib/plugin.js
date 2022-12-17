@@ -125,7 +125,7 @@ export class HeroPlugin extends Plugin {
     if (dataSchema) this.plugins.character.data.addSchema(dataSchema);
     this.getExport("addCharacter")?.(this.plugins.character);
     const styleURI = this.getExport("styleURI");
-    if (styleURI) this.plugins.character.style.add(this.resolveStyleURI(styleURI));
+    if (styleURI) this.plugins.character.style.set(`dsa-plugin:${this.url}`,this.resolveStyleURI(styleURI));
     return this;
   }
 }
