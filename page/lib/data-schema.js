@@ -17,6 +17,6 @@ export const dataSchema = {
   },
   "dsa.theme": {
     type: "string",
-    default: "black-and-white",
+    default: "dsa-theme:black-and-white",
   },
 };
