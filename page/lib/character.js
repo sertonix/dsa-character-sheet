@@ -18,7 +18,7 @@ export class Character {
   bottomBar = new HorizontalBar();
   plugins = new HeroPluginManager(this);
 
-  constructor({config,data,formatVersion}) {
+  constructor({config,data,formatVersion}={formatVersion:1}) {
     if (formatVersion !== FORMAT_VERSION) throw new Error(`Invalid format version! got ${formatVersion} expected ${FORMAT_VERSION}`);
     this.config = new ConfigManager(config);
     this.element.casing.attachShadow({mode: "open"}).append(this.element.main);
