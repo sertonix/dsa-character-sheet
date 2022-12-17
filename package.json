@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A manager for DSA characters",
   "main": "index.js",
+  "repository": "https://github.com/Sertonix/dsa-character-sheet",
   "scripts": {
     "start:server": "http-server ./page -c-1 -p 80 -P http://localhost/index? -d false -i false --cors"
   },
