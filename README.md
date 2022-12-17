@@ -7,13 +7,6 @@ It allows you to view and edit a DSA characters in your browser. You can import 
 
 You can use it [here](https://sertonix.github.io/dsa-character-sheet/).
 
-## Notes for Plugins
-
-data names:
-  * path joined with dots
-  * build-in paths prefixed with `dsa`
-  * path for plugins prefixed with name
-
 ## To-dos
 
 * config manager
