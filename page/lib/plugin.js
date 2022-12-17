@@ -6,11 +6,11 @@ export class PluginManager {
   plugins = new Map();
   events = new EventEmitter();
   defaultPlugins = [
-    "garbage-tester",
-    "title",
-    "character-view-controls",
-    "import-export",
-    "attributes",
+    "dsa-plugin:garbage-tester",
+    "dsa-plugin:title",
+    "dsa-plugin:character-view-controls",
+    "dsa-plugin:import-export",
+    "dsa-plugin:attributes",
   ];
 
   initialize() {
