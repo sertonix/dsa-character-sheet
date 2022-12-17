@@ -11,10 +11,6 @@ export const configSchema = {
     type: "boolean",
     default: true,
   },
-  "dsa.plugins.offline-files": {
-    type: "object",
-    default: Object.create(null),
-  },
   "dsa.theme": {
     type: "string",
     default: "dsa-theme:black-and-white",
