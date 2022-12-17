@@ -24,6 +24,7 @@ export class Character {
     formatVersion = FORMAT_VERSION,
   } = {}) {
     if (formatVersion !== FORMAT_VERSION) throw new Error(`Invalid format version! got ${formatVersion} expected ${FORMAT_VERSION}`);
+    this.data = data;
     this.config = new ConfigManager(config);
     this.element.casing.attachShadow({mode: "open"}).append(this.element.main);
 
