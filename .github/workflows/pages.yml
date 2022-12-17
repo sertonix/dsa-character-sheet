@@ -10,12 +10,12 @@ jobs:
   publish:
     if: |
       github.event_name != 'push' ||
-      startsWith(github.event.head_commit.message, '[publish-pages]')
+      endsWith(github.event.head_commit.message, '[publish-pages]')
     runs-on: ubuntu-latest
     steps:
       - name: Check out
         uses: actions/checkout@v2
-      
+
       - name: disable jekyll
         run: touch ./page/.nojekyll
 
