@@ -10,7 +10,7 @@ jobs:
   publish:
     if: |
       github.event_name != 'push' ||
-      endsWith(github.event.head_commit.message, '[publish-pages]')
+      endsWith(github.event.head_commit.message, '!p')
     runs-on: ubuntu-latest
     steps:
       - name: Check out
