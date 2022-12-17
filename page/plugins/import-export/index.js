@@ -2,9 +2,11 @@ const CHARACTER_FILE_TYPES = "application/json,.dsa-char";
 const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 
 function saveCharacter(character) {
-  const fileContent = character.config.exportString({
-    space: character.config.get("import-export.stringify-space"),
-  });
+  const fileContent = JSON.stringify(
+    character.export(),
+    null,
+    character.config.get("import-export.stringify-space")
+  );
   const blob = new Blob([fileContent]);
   const objectURI = URL.createObjectURL(blob);
 

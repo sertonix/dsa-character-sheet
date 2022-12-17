@@ -5,6 +5,8 @@ import {HorizontalBar} from "./bar.js";
 import {Sections} from "./section.js";
 import {safeJSONParse} from "./safe-json-parse.js";
 
+const FORMAT_VERSION = 1;
+
 export class Character {
   element = {
     main: document.createElement("dsa-character"),
@@ -16,7 +18,8 @@ export class Character {
   bottomBar = new HorizontalBar();
   plugins = new HeroPluginManager(this);
 
-  constructor(config) {
+  constructor({config,data,formatVersion}) {
+    if (formatVersion !== FORMAT_VERSION) throw new Error(`Invalid format version! got ${formatVersion} expected ${FORMAT_VERSION}`);
     this.config = new ConfigManager(config);
     this.element.casing.attachShadow({mode: "open"}).append(this.element.main);
 
@@ -42,6 +45,22 @@ export class Character {
 
   getOuterElement() { return this.element.casing; }
   append(...elements) { this.element.main.append(...elements); }
+
+  exportData() {
+    const data = {};
+    // TODO export data api
+    return data;
+  }
+
+  export() {
+    return {
+      formatVersion: FORMAT_VERSION,
+      config: this.config.export(),
+      data: this.exportData(),
+      // TODO tempData: {},
+    };
+  }
+
   static from(raw) {
     return new Character(
       typeof raw === "string" ?
