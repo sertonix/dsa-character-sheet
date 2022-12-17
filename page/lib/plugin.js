@@ -92,7 +92,7 @@ export class Plugin {
   constructor(plugins,uri) {
     this.plugins = plugins;
     this.uri = uri;
-    this.load = import(this.resolveURI()).then( this.handleImports.bind(this) );
+    this.load = import(dsa.resolveURI(this.uri)).then( this.handleImports.bind(this) );
   }
 
   handleImports(exports) {
@@ -110,12 +110,8 @@ export class Plugin {
     return this.exports[name] ?? this.exports.default?.[name];
   }
 
-  resolveURI() {
-    return dsa.resolveURI(URI.join("dsa-plugin:",this.uri));
-  }
-
   resolveStyleURI(uri) {
-    return URI.join(this.resolveURI(),uri);
+    return dsa.resolveURI(URI.join(dsa.resolveURI(this.uri),uri));
   }
 }
 
