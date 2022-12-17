@@ -58,7 +58,7 @@ export class HeroPluginManager extends PluginManager {
 
   initialize() {
     super.initialize();
-    this.character.data.onDidChange("dsa.plugins", (newURIs,oldURIs) => {
+    this.character.config.onDidChange("dsa.plugins", (newURIs,oldURIs) => {
       for (const oldURI of oldURIs) {
         if (newURIs.includes(oldURI)) continue;
         this.remove(oldURI);
@@ -68,7 +68,7 @@ export class HeroPluginManager extends PluginManager {
         this.add(newURI);
       }
     });
-    this.character.data.onDidChange("dsa.plugins.default-enabled", enabled => {
+    this.character.config.onDidChange("dsa.plugins.default-enabled", enabled => {
       if (enabled) {
         this.addAll(...this.defaultPlugins);
       } else {
@@ -79,8 +79,8 @@ export class HeroPluginManager extends PluginManager {
 
   getInitialPlugins() {
     return [
-      ...this.character.data.get("dsa.plugins.default-enabled") ? this.defaultPlugins : [],
-      ...this.character.data.get("dsa.plugins"),
+      ...this.character.config.get("dsa.plugins.default-enabled") ? this.defaultPlugins : [],
+      ...this.character.config.get("dsa.plugins"),
     ];
   }
 }
@@ -119,8 +119,8 @@ export class Plugin {
 
 export class HeroPlugin extends Plugin {
   handleFinishedImport() {
-    const dataSchema = this.getExport("dataSchema");
-    if (dataSchema) this.plugins.character.data.addSchema(dataSchema);
+    const configSchema = this.getExport("configSchema");
+    if (configSchema) this.plugins.character.config.addSchema(configSchema);
     this.getExport("addCharacter")?.(this.plugins.character);
     const styleURI = this.getExport("styleURI");
     if (styleURI) this.plugins.character.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));

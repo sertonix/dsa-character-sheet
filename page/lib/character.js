@@ -1,4 +1,4 @@
-import {DataManager} from "./data.js";
+import {ConfigManager} from "./config.js";
 import {HeroPluginManager} from "./plugin.js";
 import {StyleManager} from "./style.js";
 import {HorizontalBar} from "./bar.js";
@@ -15,8 +15,8 @@ export class Character {
   bottomBar = new HorizontalBar();
   plugins = new HeroPluginManager(this);
 
-  constructor(data) {
-    this.data = new DataManager(data);
+  constructor(config) {
+    this.config = new ConfigManager(config);
     this.element.casing.attachShadow({mode: "open"}).append(this.element.main);
 
     this.topBar.getOuterElement().classList.add("dsa-character-top");
@@ -30,8 +30,8 @@ export class Character {
     );
 
     this.style.set("base",dsa.resolveURI("dsa-theme:base"));
-    this.data.observe( "dsa.theme", uri =>
-      this.style.set("theme",dsa.resolveURI(this.data.get("dsa.theme")))
+    this.config.observe( "dsa.theme", uri =>
+      this.style.set("theme",dsa.resolveURI(this.config.get("dsa.theme")))
     );
   }
 

@@ -1,41 +1,41 @@
 import {EventEmitter} from "./event.js";
-import {dataSchema} from "./data-schema.js";
+import {configSchema} from "./config-schema.js";
 
-export class DataManager {
+export class ConfigManager {
   events = new EventEmitter();
   schemas = new Set();
 
-  constructor(data = Object.create(null), baseSchema = dataSchema) {
-    this.data = data; // TODO remove object prototypes
+  constructor(config = Object.create(null), baseSchema = configSchema) {
+    this.config = config; // TODO remove object prototypes
 
     this.addSchema(baseSchema);
   }
 
   get(name) {
-    return this.data[name] ?? this.getSchemaFor(name)?.default;
+    return this.config[name] ?? this.getSchemaFor(name)?.default;
   }
 
   set(name,value) {
-    if (this.data[name] === name || (name == null && this.data[name] == null)) return;
+    if (this.config[name] === name || (name == null && this.config[name] == null)) return;
     const schema = this.getSchemaFor(name);
     if (schema && !this.matchesSchema(value,schema)) throw new Error(`value ${JSON.stringify(value)} doesn't match schema ${JSON.stringify(schema)}`);
-    const oldValue = this.data[name];
+    const oldValue = this.config[name];
     if (name != null) {
-      this.data[name] = value;
+      this.config[name] = value;
     } else {
-      delete this.data[name];
+      delete this.config[name];
     }
     this.events.emit( "did-change", name, value, oldValue );
     this.events.emit( `did-change-${name}`, value, oldValue );
   }
-  
+
   observe(name,callback) {
     this.onDidAnyChange( name, callback );
     callback(this.get(name));
   }
 
   exportString({space}={}) {
-    return JSON.stringify(this.data,null,space);
+    return JSON.stringify(this.config,null,space);
   }
 
   addSchema(schema) {
@@ -57,29 +57,29 @@ export class DataManager {
     }
   }
 
-  matchesType(data,schema) {
+  matchesType(config,schema) {
     const {type,min,max,items} = schema;
     if (!type || type === "any") return true;
-    if (type === "string") return typeof data === "string";
+    if (type === "string") return typeof config === "string";
     if (type === "number" || type === "integer") {
-      if (typeof data !== "number") return false;
-      if (type === "integer" && !Number.isInteger(data)) return false;
-      if (min != null && data >= min) return true;
-      if (max != null && data <= max) return true;
+      if (typeof config !== "number") return false;
+      if (type === "integer" && !Number.isInteger(config)) return false;
+      if (min != null && config >= min) return true;
+      if (max != null && config <= max) return true;
     }
-    if (type === "boolean") return typeof data === "boolean";
-    if (type === "object") return typeof data === "object"; // TODO key and property schema
+    if (type === "boolean") return typeof config === "boolean";
+    if (type === "object") return typeof config === "object"; // TODO key and property schema
     if (type === "array") {
-      if (!Array.isArray(data)) return false;
-      return data.every( data => this.matchesSchema(data,items) );
+      if (!Array.isArray(config)) return false;
+      return config.every( config => this.matchesSchema(config,items) );
     }
   }
 
-  matchesSchema(data,schema) {
+  matchesSchema(config,schema) {
     if (!schema) return true;
-    if (data == null) return !schema.required;
-    if (schema.options && !schema.options.includes(data)) return false;
-    return this.matchesType(data,schema);
+    if (config == null) return !schema.required;
+    if (schema.options && !schema.options.includes(config)) return false;
+    return this.matchesType(config,schema);
   }
 
   removeSchema(schema) {

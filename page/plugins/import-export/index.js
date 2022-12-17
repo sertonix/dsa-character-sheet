@@ -3,8 +3,8 @@ const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 const {safeJSONParse} = await dsa.import("dsa:safe-json-parse");
 
 function saveCharacter(character) {
-  const fileContent = character.data.exportString({
-    space: character.data.get("import-export.stringify-space"),
+  const fileContent = character.config.exportString({
+    space: character.config.get("import-export.stringify-space"),
   });
   const blob = new Blob([fileContent]);
   const objectURI = URL.createObjectURL(blob);
@@ -48,7 +48,7 @@ export default {
   add() {
     dsa.buttons.addNew("Import", importCharacter);
   },
-  dataSchema: {
+  configSchema: {
     "import-export.stringify-space": {
       type: "integer",
       min: 0,

@@ -37,8 +37,8 @@ export class DSA {
     this.plugins.initialize();
   }
 
-  addCharacter(data) {
-    const character = new Character(data);
+  addCharacter(rawCharacter) {
+    const character = new Character(rawCharacter);
     this.element.characters.appendChild(character.getOuterElement());
     this.characters.add(character);
     character.initialize();
