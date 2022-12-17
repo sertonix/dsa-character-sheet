@@ -9,7 +9,6 @@ You can use it [here](https://sertonix.github.io/dsa-character-sheet/).
 
 ## To-dos
 
-* config manager
 * plugin provided and consumed api
 * order priorities and id for consistent order
 * edit mode
@@ -21,4 +20,3 @@ You can use it [here](https://sertonix.github.io/dsa-character-sheet/).
 
 * key bindings
 * right click menu
-* multiple theme types like layout and color themes
