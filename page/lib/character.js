@@ -3,6 +3,7 @@ import {HeroPluginManager} from "./plugin.js";
 import {StyleManager} from "./style.js";
 import {HorizontalBar} from "./bar.js";
 import {Sections} from "./section.js";
+import {safeJSONParse} from "./safe-json-parse.js";
 
 export class Character {
   element = {
@@ -41,4 +42,11 @@ export class Character {
 
   getOuterElement() { return this.element.casing; }
   append(...elements) { this.element.main.append(...elements); }
+  static from(raw) {
+    return new Character(
+      typeof raw === "string" ?
+        safeJSONParse(raw) :
+        raw
+    );
+  }
 }

@@ -38,7 +38,7 @@ export class DSA {
   }
 
   addCharacter(rawCharacter) {
-    const character = new Character(rawCharacter);
+    const character = Character.from(rawCharacter);
     this.element.characters.appendChild(character.getOuterElement());
     this.characters.add(character);
     character.initialize();
