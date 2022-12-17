@@ -1,12 +1,14 @@
 name: Publish to github pages
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'master'
 
 jobs:
   publish:
+    if: !startsWith(github.event.head_commit.message, '[publish-pages]')
     runs-on: ubuntu-latest
     steps:
       - name: Check out
