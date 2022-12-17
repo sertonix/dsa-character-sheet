@@ -28,6 +28,11 @@ export class DataManager {
     this.events.emit( "did-change", name, value, oldValue );
     this.events.emit( `did-change-${name}`, value, oldValue );
   }
+  
+  observe(name,callback) {
+    this.onDidAnyChange( name, callback );
+    callback(this.get(name));
+  }
 
   exportString({space}={}) {
     return JSON.stringify(this.data,null,space);
