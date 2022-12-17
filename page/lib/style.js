@@ -2,19 +2,19 @@ export class StyleManager {
   styles = Object.create(null);
   element = document.createElement("dsa-style-manager");
 
-  set(name,uri) {
+  set(id,uri) {
     if (uri == null) {
-      this.styles[name].remove();
-      delete this.styles[name];
+      this.styles[id].remove();
+      delete this.styles[id];
       return;
     }
-    if (this.styles[name] == null) {
+    if (this.styles[id] == null) {
       const element = document.createElement("link");
       element.setAttribute("rel","styleSheet");
       this.append(element);
-      this.styles[name] = element;
+      this.styles[id] = element;
     }
-    this.styles[name].setAttribute("href",dsa.resolveURI(uri));
+    this.styles[id].setAttribute("href",dsa.resolveURI(uri));
   }
 
   getOuterElement() { return this.element; }
