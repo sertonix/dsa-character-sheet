@@ -30,7 +30,7 @@ export class ConfigManager {
   }
 
   observe(name,callback) {
-    this.onDidAnyChange( name, callback );
+    this.onDidChange( name, callback );
     callback(this.get(name));
   }
 
