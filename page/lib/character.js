@@ -51,17 +51,11 @@ export class Character {
   getOuterElement() { return this.element.casing; }
   append(...elements) { this.element.main.append(...elements); }
 
-  exportData() {
-    const data = {};
-    // TODO export data api
-    return data;
-  }
-
   export() {
     return {
       formatVersion: FORMAT_VERSION,
       config: this.config.export(),
-      data: this.exportData(),
+      data: this.data,
       // TODO tempData: {},
     };
   }
