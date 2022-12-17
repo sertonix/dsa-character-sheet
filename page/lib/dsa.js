@@ -39,7 +39,7 @@ export class DSA {
 
   addCharacter(data) {
     const character = new Character(data);
-    this.appendToCharacters(character.getOuterElement());
+    this.element.characters.appendChild(character.getOuterElement());
     this.characters.add(character);
     character.initialize();
     this.events.emit("did-added-character", character);
@@ -59,11 +59,11 @@ export class DSA {
   removeCharacter(character) {
     if (!this.characters.has(character)) return;
     this.characters.delete(character);
+    this.element.characters.removeChild(character.getOuterElement());
   }
 
   getOuterElement() { return this.element.main; }
   append(...elements) { this.element.main.append(...elements); }
-  appendToCharacters(...elements) { this.element.characters.append(...elements); }
   appendToButtons(...elements) { this.element.buttons.append(...elements); }
 
   onDidAddedCharacter(callback) { return this.events.on( "did-added-character", callback ); }
