@@ -103,6 +103,8 @@ export class Plugin {
 
   handleFinishedImport() {
     this.getExport("add")?.();
+    const styleURI = this.getExport("styleURI");
+    if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
     return this;
   }
 
