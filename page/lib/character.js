@@ -20,7 +20,7 @@ export class Character {
 
   constructor({
     config,
-    data,
+    data = {},
     formatVersion = FORMAT_VERSION,
   } = {}) {
     if (formatVersion !== FORMAT_VERSION) throw new Error(`Invalid format version! got ${formatVersion} expected ${FORMAT_VERSION}`);
