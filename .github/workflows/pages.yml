@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v2
+      
+      - name: disable jekyll
+        run: touch ./page/.nojekyll
 
       - name: Publish to github pages
         uses: rayluo/github-pages-overwriter@v1.2
