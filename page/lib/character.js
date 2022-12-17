@@ -29,7 +29,7 @@ export class Character {
       this.bottomBar.getOuterElement(),
     );
 
-    this.style.set("base",dsa.resolveURI("dsa-theme:base"));
+    this.style.set("dsa.base",dsa.resolveURI("dsa-theme:base"));
     this.config.observe( "dsa.theme", uri =>
       this.style.set("theme",dsa.resolveURI(this.config.get("dsa.theme")))
     );
