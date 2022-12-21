@@ -1,0 +1,8 @@
+body, dsa-character {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+dsa-character:not([view-state=maximized]) {
+  border: solid 1px;
+}

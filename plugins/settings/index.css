@@ -1,0 +1,57 @@
+dsa-settings {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 20px;
+  background-color: #353535;
+  border: 1px solid rgb(190 190 190);
+  overflow-y: scroll;
+}
+
+dsa-settings[dsa-open] {
+  display: block;
+}
+
+dsa-settings-close-button {
+  display: block;
+  position: fixed;
+  top: 3px;
+  right: 3px;
+  flex-shrink: 0;
+  background-image: url("./icons/close.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* TODO finish settings css */
+
+dsa-setting-select {
+  display: inline-block;
+  position: relative;
+}
+
+dsa-setting-select::before {
+  content: "test";
+}
+
+dsa-setting-select-options {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+dsa-setting-select:hover > dsa-setting-select-options {
+  display: block;
+}
+
+dsa-setting-select-option {
+  display: block;
+  border: 1px solid rgb(190 190 190);
+}

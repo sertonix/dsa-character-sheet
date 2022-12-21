@@ -1,0 +1,18 @@
+body {
+  color: white;
+  background-color: black;
+  font-family: monospace;
+  margin: 0;
+  padding: 1em;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.heading {
+  display: block;
+  font-size: 150%;
+  padding: 1em;
+}

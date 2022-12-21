@@ -1,0 +1,27 @@
+dsa-attributes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 6px;
+  gap: 10px;
+}
+
+dsa-attribute {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1.25px solid var(--dsa-attribute-color);
+  outline: currentcolor solid 0.2px;
+
+  padding: 3px;
+  width: 2em;
+  height: 2em;
+}
+
+dsa-attribute-e.dsa-name {
+  display: none;
+}
+
+dsa-attribute-e.dsa-value[edit=true] {
+  outline: 0 solid transparent;
+}
