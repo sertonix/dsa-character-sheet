@@ -1,9 +1,8 @@
-dsa-character {
+body, dsa-character {
   background-color: #000000;
   color: #ffffff;
-  border: solid 1px;
 }
 
-dsa-character[view-state=maximized] {
-  border: none;
+dsa-character:not([view-state=maximized]) {
+  border: solid 1px;
 }
