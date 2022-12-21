@@ -6,3 +6,4 @@ export default {
   },
   styleURI: "./index.css",
 };
+// TODO page title from character titles
