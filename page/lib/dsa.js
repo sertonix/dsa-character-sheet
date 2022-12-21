@@ -29,6 +29,7 @@ export class DSA {
     );
 
     this.buttons.addNew("New", () => this.addCharacter());
+    this.buttons.addNew("About", () => window.open(URI.join(window.location.href,"."), "_blank").focus());
   }
 
   initialize() {
