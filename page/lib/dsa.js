@@ -21,7 +21,6 @@ export class DSA {
   constructor() {
     this.uriResolver.setProxy("dsa",URI.join(import.meta.url,"."),".js");
     this.uriResolver.setProxy("dsa-plugin",URI.join(import.meta.url,"../plugins/"),".js","index");
-    this.uriResolver.setProxy("dsa-theme",URI.join(import.meta.url,"../themes/"),".css","index");
 
     this.append(
       this.style.getOuterElement(),
@@ -33,7 +32,6 @@ export class DSA {
   }
 
   initialize() {
-    this.style.set("base","dsa-theme:base");
     this.plugins.initialize();
   }
 
