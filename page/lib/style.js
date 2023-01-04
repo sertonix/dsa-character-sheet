@@ -9,12 +9,17 @@ export class StyleManager {
       return;
     }
     if (this.styles[id] == null) {
-      const element = document.createElement("link");
-      element.setAttribute("rel","styleSheet");
+      const element = this.createStyleLinkElement();
       this.append(element);
       this.styles[id] = element;
     }
     this.styles[id].setAttribute("href",uri);
+  }
+
+  createStyleLinkElement(uri) {
+    const element = document.createElement("link");
+    element.setAttribute("rel","styleSheet");
+    return element;
   }
 
   getOuterElement() { return this.element; }
