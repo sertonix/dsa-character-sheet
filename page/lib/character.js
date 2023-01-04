@@ -7,24 +7,22 @@ import {safeJSONParse} from "./safe-json-parse.js";
 const FORMAT_VERSION = 1;
 
 export class Character {
+  data = Object.create(null);
   element = document.createElement("dsa-character");
   sections = new Sections();
   style = new StyleManager();
   plugins = new PluginManager();
+  config = new ConfigManager();
 
-  constructor({
-    config,
-    data = {},
-    formatVersion = FORMAT_VERSION,
-  } = {}) {
-    if (formatVersion !== FORMAT_VERSION) throw new Error(`Invalid format version! got ${formatVersion} expected ${FORMAT_VERSION}`);
-    this.data = data;
-    this.config = new ConfigManager(config);
-
+  constructor() {
     this.append(
       this.style.element,
       this.sections.getOuterElement(),
     );
+  }
+
+  setData(data) {
+    this.data = data;
   }
 
   initialize() {
