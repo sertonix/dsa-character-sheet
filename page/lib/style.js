@@ -3,7 +3,9 @@ export class StyleManager {
   element = document.createElement("dsa-style-manager");
 
   add(uri) {
-    const element = this.createStyleLinkElement(uri);
+    const element = document.createElement("link");
+    element.setAttribute("rel","styleSheet");
+    element.setAttribute("href",uri);
     this.element.append(element);
     this.styles.add(element);
     return element;
@@ -12,12 +14,5 @@ export class StyleManager {
   remove(style) {
     this.styles.delete(style);
     style.remove();
-  }
-
-  createStyleLinkElement(uri) {
-    const element = document.createElement("link");
-    element.setAttribute("rel","styleSheet");
-    element.setAttribute("href",uri);
-    return element;
   }
 }
