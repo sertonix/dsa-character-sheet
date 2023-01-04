@@ -15,7 +15,6 @@ export class PluginManager {
   ];
 
   constructor() {
-    this.uriResolver.setProxy("dsa",URI.join(import.meta.url,"."),".js");
     this.uriResolver.setProxy("dsa-plugin",URI.join(import.meta.url,"../plugins/"),".js","index");
   }
 
