@@ -13,11 +13,7 @@ export class PluginManager {
   ];
 
   initialize() {
-    this.addAll(...this.getInitialPlugins());
-  }
-
-  getInitialPlugins() {
-    return this.defaultPlugins;
+    this.addAll(...this.defaultPlugins);
   }
 
   add(uri) {
