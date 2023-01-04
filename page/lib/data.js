@@ -12,21 +12,21 @@ export class DataManager {
   events = new EventEmitter();
   schemas = new Set();
 
-  constructor(config = Object.create(null)) {
-    this.config = config; // TODO remove object prototypes
+  constructor(data = Object.create(null)) {
+    this.data = data; // TODO remove object prototypes
   }
 
   get(name) {
-    return this.config[name] ?? this.getSchemaFor(name)?.default;
+    return this.data[name] ?? this.getSchemaFor(name)?.default;
   }
 
   set(name,value) {
-    if (this.config[name] === name || (name == null && this.config[name] == null)) return;
-    const oldValue = this.config[name];
+    if (this.data[name] === name || (name == null && this.data[name] == null)) return;
+    const oldValue = this.data[name];
     if (name != null) {
-      this.config[name] = value;
+      this.data[name] = value;
     } else {
-      delete this.config[name];
+      delete this.data[name];
     }
     this.events.emit( "did-change", name, value, oldValue );
     this.events.emit( `did-change-${name}`, value, oldValue );
@@ -38,7 +38,7 @@ export class DataManager {
   }
 
   export() {
-    return this.config;
+    return this.data;
   }
 
   onDidAnyChange(callback) { return this.events.on( "did-change", callback ); }
