@@ -6,10 +6,12 @@ export class StyleManager {
     const element = this.createStyleLinkElement(uri);
     this.element.append(element);
     this.styles.add(element);
+    return element;
   }
 
   remove(style) {
-    this.styles.remove(style);
+    this.styles.delete(style);
+    style.remove();
   }
 
   createStyleLinkElement(uri) {
