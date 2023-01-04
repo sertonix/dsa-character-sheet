@@ -18,7 +18,7 @@ export class PluginManager {
 
   add(uri) {
     if (this.plugins.has(uri)) return this.plugins.get(uri);
-    const plugin = new Plugin(this,uri);
+    const plugin = new Plugin(uri);
     this.plugins.set(uri,plugin);
     plugin.load();
     this.events.emit("did-added-plugin", plugin);
@@ -47,8 +47,7 @@ export class PluginManager {
 export class Plugin {
   loaded = false;
 
-  constructor(plugins,uri) {
-    this.plugins = plugins;
+  constructor(uri) {
     this.uri = uri;
   }
 
