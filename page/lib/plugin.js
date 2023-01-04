@@ -42,7 +42,7 @@ export class PluginManager {
   remove(...uris) {
     for (const uri of uris) {
       if (!this.plugins.has(uri)) continue;
-      const plugin = this.plugins.get(uri);
+      this.plugins.get(uri).unload();
       this.plugins.delete(uri);
       this.events.emit("did-removed-plugin", uri);
     }
@@ -65,16 +65,23 @@ export class Plugin {
   constructor(plugins,uri) {
     this.plugins = plugins;
     this.uri = uri;
-    this.load = import(this.plugins.resolveURI(this.uri)).then( this.handleImports.bind(this) );
   }
 
-  handleImports(exports) {
-    this.exports = exports;
+  load() {
+    return this.loadPromise ||= this.makeLoadPromise();
+  }
+
+  async makeLoadPromise() {
+    this.exports = await import(this.plugins.resolveURI(this.uri));
+    await this.getExport("load")?.();
     this.loaded = true;
-    this.getExport("add")?.();
     const styleURI = this.getExport("styleURI");
     if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
-    return this;
+  }
+
+  async unload() {
+    // await this.loadPromise;
+    await this.getExport("unload")?.();
   }
 
   getExport(name) {
