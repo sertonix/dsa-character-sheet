@@ -14,10 +14,6 @@ export class PluginManager {
     // "dsa-plugin:attributes",
   ];
 
-  constructor() {
-    this.uriResolver.setProxy("dsa-plugin",URI.join(import.meta.url,"../plugins/"),".js","index");
-  }
-
   resolveURI(uri) {
     return this.uriResolver.resolve(uri);
   }
@@ -89,6 +85,6 @@ export class Plugin {
   }
 
   resolveStyleURI(uri) {
-    return this.plugins.resolveURI(URI.join(this.plugins.resolveURI(this.uri),uri));
+    return URI.join(this.uri,uri);
   }
 }
