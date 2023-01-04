@@ -3,8 +3,6 @@ import {Sections} from "./section.js";
 import {StyleManager} from "./style.js";
 import {PluginManager} from "./plugin.js";
 
-const FORMAT_VERSION = 1;
-
 export class Character {
   element = document.createElement("dsa-character");
   sections = new Sections();
