@@ -1,7 +1,9 @@
 import {EventEmitter} from "./event.js";
+import {URIResolver} from "./uri-resolver.js";
 import {URI} from "./uri.js";
 
 export class PluginManager {
+  uriResolver = new URIResolver();
   plugins = new Map();
   events = new EventEmitter();
   defaultPlugins = [
@@ -11,6 +13,19 @@ export class PluginManager {
     "dsa-plugin:import-export",
     "dsa-plugin:attributes",
   ];
+
+  constructor() {
+    this.uriResolver.setProxy("dsa",URI.join(import.meta.url,"."),".js");
+    this.uriResolver.setProxy("dsa-plugin",URI.join(import.meta.url,"../plugins/"),".js","index");
+  }
+
+  resolveURI(uri) {
+    return this.uriResolver.resolve(uri);
+  }
+
+  import(uri) {
+    return import(this.resolveURI(uri));
+  }
 
   initialize() {
     this.addAll(...this.defaultPlugins);
@@ -50,7 +65,7 @@ export class Plugin {
   constructor(plugins,uri) {
     this.plugins = plugins;
     this.uri = uri;
-    this.load = import(dsa.resolveURI(this.uri)).then( this.handleImports.bind(this) );
+    this.load = import(this.plugins.resolveURI(this.uri)).then( this.handleImports.bind(this) );
   }
 
   handleImports(exports) {
@@ -73,6 +88,6 @@ export class Plugin {
   }
 
   resolveStyleURI(uri) {
-    return dsa.resolveURI(URI.join(dsa.resolveURI(this.uri),uri));
+    return this.plugins.resolveURI(URI.join(this.plugins.resolveURI(this.uri),uri));
   }
 }

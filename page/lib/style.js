@@ -14,7 +14,7 @@ export class StyleManager {
       this.append(element);
       this.styles[id] = element;
     }
-    this.styles[id].setAttribute("href",dsa.resolveURI(uri));
+    this.styles[id].setAttribute("href",uri);
   }
 
   getOuterElement() { return this.element; }
