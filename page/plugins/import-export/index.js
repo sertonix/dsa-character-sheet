@@ -3,9 +3,9 @@ const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 
 function saveCharacter() {
   const fileContent = JSON.stringify(
-    dsa.character.export(),
+    dsa.export(),
     null,
-    dsa.character.config.get("import-export.stringify-space")
+    dsa.config.get("import-export.stringify-space")
   );
   const blob = new Blob([fileContent]);
   const objectURI = URL.createObjectURL(blob);
@@ -37,13 +37,13 @@ export default {
     const importB = document.createElement("dsa-button");
     importB.classList.add("dsa-character-export");
     importB.innerText = "Import";
-    dsa.character.topBar.appendToLeft(importB);
+    dsa.topBar.appendToLeft(importB);
     importB.addEventListener("click", importCharacter, {passive:true});
 
     const exportB = document.createElement("dsa-button");
     exportB.classList.add("dsa-character-export");
     exportB.innerText = "Export";
-    dsa.character.topBar.appendToLeft(exportB);
+    dsa.topBar.appendToLeft(exportB);
     exportB.addEventListener("click", saveCharacter, {passive:true});
   },
   configSchema: {
