@@ -1,5 +1,3 @@
-import {EventEmitter} from "./event.js";
-
 function safeObject(k,v) {
   return v && typeof v === "object" && !Array.isArray(v) ? Object.setPrototypeOf(v, null) : v;
 }
@@ -10,7 +8,7 @@ export function safeJSONParse(str) { // TODO allow reviver
 
 export class DataManager {
   data = Object.create(null);
-  events = new EventEmitter();
+  observer = Object.create(null);
 
   get(name) {
     return this.data[name];
@@ -24,19 +22,19 @@ export class DataManager {
     } else {
       delete this.data[name];
     }
-    this.events.emit( "did-change", name, value, oldValue );
-    this.events.emit( `did-change-${name}`, value, oldValue );
+    this.observer[name]?.forEach( cb => cb(value,oldValue) );
   }
 
-  observe(name,callback) {
-    this.onDidChange( name, callback );
+  addObserver(name,callback) {
+    (this.observer[name] ||= new Set()).add(callback);
     callback(this.get(name));
+  }
+
+  removeObserver(name,callback) {
+    this.observer[name]?.delete(callback);
   }
 
   export() {
     return this.data;
   }
-
-  onDidAnyChange(callback) { return this.events.on( "did-change", callback ); }
-  onDidChange(name,callback) { return this.events.on( `did-change-${name}`, callback ); }
 }
