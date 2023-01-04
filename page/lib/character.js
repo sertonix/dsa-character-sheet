@@ -1,6 +1,7 @@
 import {ConfigManager} from "./config.js";
 import {HorizontalBar} from "./bar.js";
 import {Sections} from "./section.js";
+import {StyleManager} from "./style.js";
 import {safeJSONParse} from "./safe-json-parse.js";
 
 const FORMAT_VERSION = 1;
@@ -10,6 +11,7 @@ export class Character {
   topBar = new HorizontalBar();
   sections = new Sections();
   bottomBar = new HorizontalBar();
+  style = new StyleManager();
 
   constructor({
     config,
@@ -24,6 +26,7 @@ export class Character {
     this.bottomBar.getOuterElement().classList.add("dsa-character-bottom");
 
     this.append(
+      this.style.element,
       this.topBar.getOuterElement(),
       this.sections.getOuterElement(),
       this.bottomBar.getOuterElement(),

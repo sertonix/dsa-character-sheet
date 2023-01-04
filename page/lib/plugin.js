@@ -64,7 +64,7 @@ export class Plugin {
     if (configSchema) dsa.character.config.addSchema(configSchema);
     this.getExport("add")?.();
     const styleURI = this.getExport("styleURI");
-    if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
+    if (styleURI) dsa.character.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
     return this;
   }
 
