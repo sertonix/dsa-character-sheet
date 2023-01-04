@@ -46,7 +46,6 @@ export class PluginManager {
 
 export class Plugin {
   loaded = false;
-  events = new EventEmitter();
 
   constructor(plugins,uri) {
     this.plugins = plugins;
