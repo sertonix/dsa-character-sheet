@@ -32,8 +32,4 @@ export class DataManager {
   removeObserver(name,callback) {
     this.observer[name]?.delete(callback);
   }
-
-  export() {
-    return this.data;
-  }
 }
