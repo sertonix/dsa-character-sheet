@@ -71,8 +71,6 @@ export class Plugin {
   handleImports(exports) {
     this.exports = exports;
     this.loaded = true;
-    const configSchema = this.getExport("configSchema");
-    if (configSchema) dsa.config.addSchema(configSchema);
     this.getExport("add")?.();
     const styleURI = this.getExport("styleURI");
     if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
