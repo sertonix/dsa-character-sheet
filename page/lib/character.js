@@ -2,7 +2,6 @@ import {DataManager} from "./data.js";
 import {Sections} from "./section.js";
 import {StyleManager} from "./style.js";
 import {PluginManager} from "./plugin.js";
-import {safeJSONParse} from "./safe-json-parse.js";
 
 const FORMAT_VERSION = 1;
 
