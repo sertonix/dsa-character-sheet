@@ -2,6 +2,7 @@ import {ConfigManager} from "./config.js";
 import {HorizontalBar} from "./bar.js";
 import {Sections} from "./section.js";
 import {StyleManager} from "./style.js";
+import {PluginManager} from "./plugin.js";
 import {safeJSONParse} from "./safe-json-parse.js";
 
 const FORMAT_VERSION = 1;
@@ -12,6 +13,7 @@ export class Character {
   sections = new Sections();
   bottomBar = new HorizontalBar();
   style = new StyleManager();
+  plugins = new PluginManager();
 
   constructor({
     config,
@@ -31,6 +33,10 @@ export class Character {
       this.sections.getOuterElement(),
       this.bottomBar.getOuterElement(),
     );
+  }
+
+  initialize() {
+    this.plugins.initialize();
   }
 
   getOuterElement() { return this.element; }
