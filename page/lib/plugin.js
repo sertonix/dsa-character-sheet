@@ -65,7 +65,6 @@ export class Plugin {
   }
 
   async unload() {
-    // await this.loadPromise;
     if (this.style) dsa.style.remove(this.style);
     await this.getExport("unload")?.();
   }
