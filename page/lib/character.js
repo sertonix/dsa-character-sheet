@@ -1,5 +1,4 @@
 import {ConfigManager} from "./config.js";
-import {HorizontalBar} from "./bar.js";
 import {Sections} from "./section.js";
 import {StyleManager} from "./style.js";
 import {PluginManager} from "./plugin.js";
@@ -9,9 +8,7 @@ const FORMAT_VERSION = 1;
 
 export class Character {
   element = document.createElement("dsa-character");
-  topBar = new HorizontalBar();
   sections = new Sections();
-  bottomBar = new HorizontalBar();
   style = new StyleManager();
   plugins = new PluginManager();
 
@@ -24,14 +21,9 @@ export class Character {
     this.data = data;
     this.config = new ConfigManager(config);
 
-    this.topBar.getOuterElement().classList.add("dsa-character-top");
-    this.bottomBar.getOuterElement().classList.add("dsa-character-bottom");
-
     this.append(
       this.style.element,
-      this.topBar.getOuterElement(),
       this.sections.getOuterElement(),
-      this.bottomBar.getOuterElement(),
     );
   }
 
