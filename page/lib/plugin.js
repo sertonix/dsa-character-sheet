@@ -71,10 +71,6 @@ export class Plugin {
   handleImports(exports) {
     this.exports = exports;
     this.loaded = true;
-    return this.handleFinishedImport();
-  }
-
-  handleFinishedImport() {
     const configSchema = this.getExport("configSchema");
     if (configSchema) dsa.config.addSchema(configSchema);
     this.getExport("add")?.();
