@@ -1,9 +1,7 @@
 import {EventEmitter} from "./event.js";
-import {URIResolver} from "./uri-resolver.js";
 import {URI} from "./uri.js";
 
 export class PluginManager {
-  uriResolver = new URIResolver();
   plugins = new Map();
   events = new EventEmitter();
   defaultPlugins = [
@@ -13,14 +11,6 @@ export class PluginManager {
     // "dsa-plugin:import-export",
     // "dsa-plugin:attributes",
   ];
-
-  resolveURI(uri) {
-    return this.uriResolver.resolve(uri);
-  }
-
-  import(uri) {
-    return import(this.resolveURI(uri));
-  }
 
   initialize() {
     this.addAll(...this.defaultPlugins);
@@ -68,11 +58,11 @@ export class Plugin {
   }
 
   async makeLoadPromise() {
-    this.exports = await import(this.plugins.resolveURI(this.uri));
+    this.exports = await import(this.uri);
     await this.getExport("load")?.();
     this.loaded = true;
     const styleURI = this.getExport("styleURI");
-    if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
+    if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,URI.join(this.uri,styleURI));
   }
 
   async unload() {
@@ -82,9 +72,5 @@ export class Plugin {
 
   getExport(name) {
     return this.exports[name] ?? this.exports.default?.[name];
-  }
-
-  resolveStyleURI(uri) {
-    return URI.join(this.uri,uri);
   }
 }
