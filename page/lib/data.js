@@ -15,7 +15,7 @@ export class DataManager {
   }
 
   set(name,value) {  // TODO remove object prototypes
-    if (this.data[name] === name || (name == null && this.data[name] == null)) return;
+    if (this.data[name] === value || (name == null && this.data[name] == null)) return;
     const oldValue = this.data[name];
     if (name != null) {
       this.data[name] = value;
