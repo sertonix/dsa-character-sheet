@@ -17,7 +17,7 @@ export class DataManager {
   }
 
   get(name) {
-    return this.data[name] ?? this.getSchemaFor(name)?.default;
+    return this.data[name];
   }
 
   set(name,value) {
