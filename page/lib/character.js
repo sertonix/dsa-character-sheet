@@ -25,8 +25,4 @@ export class Character {
 
   getOuterElement() { return this.element; }
   append(...elements) { this.element.append(...elements); }
-
-  export() {
-    return this.data.export();
-  }
 }
