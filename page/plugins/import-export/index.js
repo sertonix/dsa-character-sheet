@@ -1,11 +1,11 @@
 const CHARACTER_FILE_TYPES = "application/json,.dsa-char";
 const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 
-function saveCharacter(character) {
+function saveCharacter() {
   const fileContent = JSON.stringify(
-    character.export(),
+    dsa.character.export(),
     null,
-    character.config.get("import-export.stringify-space")
+    dsa.character.config.get("import-export.stringify-space")
   );
   const blob = new Blob([fileContent]);
   const objectURI = URL.createObjectURL(blob);
@@ -32,20 +32,19 @@ function importCharacter() {
   tempInput.click();
 }
 
-function getSaveCharacter(character) {
-  return () => saveCharacter(character);
-}
-
 export default {
-  addCharacter(character) {
-    const element = document.createElement("dsa-button");
-    element.classList.add("dsa-character-export");
-    element.innerText = "Export";
-    character.topBar.appendToLeft(element);
-    element.addEventListener("click", getSaveCharacter(character), {passive:true});
-  },
   add() {
-    dsa.buttons.addNew("Import", importCharacter);
+    const importB = document.createElement("dsa-button");
+    importB.classList.add("dsa-character-export");
+    importB.innerText = "Import";
+    dsa.character.topBar.appendToLeft(importB);
+    importB.addEventListener("click", importCharacter, {passive:true});
+
+    const exportB = document.createElement("dsa-button");
+    exportB.classList.add("dsa-character-export");
+    exportB.innerText = "Export";
+    dsa.character.topBar.appendToLeft(exportB);
+    exportB.addEventListener("click", saveCharacter, {passive:true});
   },
   configSchema: {
     "import-export.stringify-space": {

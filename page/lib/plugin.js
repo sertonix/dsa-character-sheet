@@ -2,14 +2,12 @@ import {EventEmitter} from "./event.js";
 import {URI} from "./uri.js";
 
 export class PluginManager {
-  pluginClass = Plugin;
   plugins = new Map();
   events = new EventEmitter();
   defaultPlugins = [
     "dsa-plugin:theme-base",
     "dsa-plugin:theme-black-and-white", // TODO easily disable when different theme is used
     "dsa-plugin:title",
-    "dsa-plugin:character-view-controls",
     "dsa-plugin:import-export",
     "dsa-plugin:attributes",
   ];
@@ -24,7 +22,7 @@ export class PluginManager {
 
   add(uri) {
     if (this.plugins.has(uri)) return this.plugins.get(uri);
-    const plugin = new this.pluginClass(this,uri);
+    const plugin = new Plugin(this,uri);
     this.plugins.set(uri,plugin);
     this.events.emit("did-added-plugin", plugin);
     return plugin;
@@ -49,43 +47,6 @@ export class PluginManager {
   onDidRemovedPlugin(callback) { return this.events.on( "did-removed-plugin", callback ); }
 }
 
-export class HeroPluginManager extends PluginManager {
-  pluginClass = HeroPlugin;
-
-  constructor(character) {
-    super();
-    this.character = character;
-  }
-
-  initialize() {
-    super.initialize();
-    this.character.config.onDidChange("dsa.plugins", (newURIs,oldURIs) => {
-      for (const oldURI of oldURIs) {
-        if (newURIs.includes(oldURI)) continue;
-        this.remove(oldURI);
-      }
-      for (const newURI of newURIs) {
-        if (!oldURIs.includes(newURI)) continue;
-        this.add(newURI);
-      }
-    });
-    this.character.config.onDidChange("dsa.plugins.default-enabled", enabled => {
-      if (enabled) {
-        this.addAll(...this.defaultPlugins);
-      } else {
-        this.remove(...this.defaultPlugins);
-      }
-    });
-  }
-
-  getInitialPlugins() {
-    return [
-      ...this.character.config.get("dsa.plugins.default-enabled") ? this.defaultPlugins : [],
-      ...this.character.config.get("dsa.plugins"),
-    ];
-  }
-}
-
 export class Plugin {
   loaded = false;
   events = new EventEmitter();
@@ -103,6 +64,8 @@ export class Plugin {
   }
 
   handleFinishedImport() {
+    const configSchema = this.getExport("configSchema");
+    if (configSchema) dsa.character.config.addSchema(configSchema);
     this.getExport("add")?.();
     const styleURI = this.getExport("styleURI");
     if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
@@ -115,16 +78,5 @@ export class Plugin {
 
   resolveStyleURI(uri) {
     return dsa.resolveURI(URI.join(dsa.resolveURI(this.uri),uri));
-  }
-}
-
-export class HeroPlugin extends Plugin {
-  handleFinishedImport() {
-    const configSchema = this.getExport("configSchema");
-    if (configSchema) this.plugins.character.config.addSchema(configSchema);
-    this.getExport("addCharacter")?.(this.plugins.character);
-    const styleURI = this.getExport("styleURI");
-    if (styleURI) this.plugins.character.style.set(`dsa-plugin:${this.uri}`,this.resolveStyleURI(styleURI));
-    return this;
   }
 }

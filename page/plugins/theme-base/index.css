@@ -9,27 +9,14 @@ TODO color variables to allow themes and plugins styles to fit together
 }
 */
 
-body, dsa-character {
+body {
   margin: 0;
   padding: 0;
   line-height: 1; /* allows the use of em as 1 line high */
   font-family: monospace;
   background-color: black;
   color: white;
-}
-
-body {
   min-height: 100vh;
-}
-
-dsa-characters {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-dsa-character-casing {
-  display: contents;
 }
 
 dsa-buttons {
