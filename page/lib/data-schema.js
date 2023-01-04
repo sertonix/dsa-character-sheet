@@ -1,4 +1,4 @@
-export const configSchema = {
+export const dataSchema = {
   "dsa.plugins": {
     type: "array",
     items: {

@@ -1,11 +1,11 @@
 import {EventEmitter} from "./event.js";
-import {configSchema} from "./config-schema.js";
+import {dataSchema} from "./data-schema.js";
 
-export class ConfigManager {
+export class DataManager {
   events = new EventEmitter();
   schemas = new Set();
 
-  constructor(config = Object.create(null), baseSchema = configSchema) {
+  constructor(config = Object.create(null), baseSchema = dataSchema) {
     this.config = config; // TODO remove object prototypes
 
     this.addSchema(baseSchema);
