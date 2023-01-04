@@ -11,7 +11,6 @@ export function safeJSONParse(str) { // TODO allow reviver
 export class DataManager {
   data = Object.create(null);
   events = new EventEmitter();
-  schemas = new Set();
 
   get(name) {
     return this.data[name];
