@@ -9,18 +9,15 @@ export function safeJSONParse(str) { // TODO allow reviver
 }
 
 export class DataManager {
+  data = Object.create(null);
   events = new EventEmitter();
   schemas = new Set();
-
-  constructor(data = Object.create(null)) {
-    this.data = data; // TODO remove object prototypes
-  }
 
   get(name) {
     return this.data[name];
   }
 
-  set(name,value) {
+  set(name,value) {  // TODO remove object prototypes
     if (this.data[name] === name || (name == null && this.data[name] == null)) return;
     const oldValue = this.data[name];
     if (name != null) {
