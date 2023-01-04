@@ -7,11 +7,11 @@ export class PluginManager {
   plugins = new Map();
   events = new EventEmitter();
   defaultPlugins = [
-    "dsa-plugin:theme-base",
-    "dsa-plugin:theme-black-and-white", // TODO easily disable when different theme is used
-    "dsa-plugin:title",
-    "dsa-plugin:import-export",
-    "dsa-plugin:attributes",
+    // "dsa-plugin:theme-base",
+    // "dsa-plugin:theme-black-and-white", // TODO easily disable when different theme is used
+    // "dsa-plugin:title",
+    // "dsa-plugin:import-export",
+    // "dsa-plugin:attributes",
   ];
 
   constructor() {
