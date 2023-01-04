@@ -4,7 +4,7 @@ export class StyleManager {
 
   add(uri) {
     const element = this.createStyleLinkElement(uri);
-    this.append(element);
+    this.element.append(element);
     this.styles.add(element);
   }
 
@@ -18,7 +18,4 @@ export class StyleManager {
     element.setAttribute("href",uri);
     return element;
   }
-
-  getOuterElement() { return this.element; }
-  append(...elements) { return this.element.append(...elements); }
 }

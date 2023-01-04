@@ -11,16 +11,13 @@ export class Character {
   data = new DataManager();
 
   constructor() {
-    this.append(
+    this.element.append(
       this.style.element,
-      this.sections.getOuterElement(),
+      this.sections.element,
     );
   }
 
   initialize() {
     this.plugins.initialize();
   }
-
-  getOuterElement() { return this.element; }
-  append(...elements) { this.element.append(...elements); }
 }
