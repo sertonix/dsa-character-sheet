@@ -46,6 +46,7 @@ export class PluginManager {
 
 export class Plugin {
   loaded = false;
+  style = undefined;
 
   constructor(uri) {
     this.uri = uri;
@@ -60,11 +61,12 @@ export class Plugin {
     await this.getExport("load")?.();
     this.loaded = true;
     const styleURI = this.getExport("styleURI");
-    if (styleURI) dsa.style.set(`dsa-plugin:${this.uri}`,URI.join(this.uri,styleURI));
+    if (styleURI) this.style = dsa.style.add(URI.join(this.uri,styleURI));
   }
 
   async unload() {
     // await this.loadPromise;
+    if (this.style) dsa.style.remove(this.style);
     await this.getExport("unload")?.();
   }
 
