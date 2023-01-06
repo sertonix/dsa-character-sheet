@@ -19,7 +19,7 @@ export class DataManager {
     }
     const oldValue = this.data[name];
     if (value === oldValue) return;
-    if (name != null) {
+    if (value != null) {
       this.data[name] = value;
     } else {
       delete this.data[name];
