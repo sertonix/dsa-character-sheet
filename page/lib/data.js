@@ -13,8 +13,7 @@ export class DataManager {
     const data = Object.create(null);
     Object.assign(data,this.data);
     for (const name in this.redirects) {
-      if (!this.redirects[name].get) continue;
-      const value = this.redirects[name].get();
+      const value = this.redirects[name]?.get();
       if (value == null) continue;
       data[name] = value;
     }
