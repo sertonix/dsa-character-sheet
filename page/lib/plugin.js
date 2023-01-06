@@ -10,6 +10,7 @@ export class PluginManager {
     "title/index.js",
     "tool-bar/index.js",
     "import-export/index.js",
+    "command-palette/index.js",
     // "attributes/index.js",
   ];
 
