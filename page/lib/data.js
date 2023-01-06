@@ -26,15 +26,23 @@ export class DataManager {
     }
     this.triggerObserver(name,value,oldValue);
   }
+  
+  reset() {
+    for (const name in this.data) {
+      delete this.data[name];
+      this.triggerObserver(name,undefined,oldValue);
+    }
+    Object.values(this.redirector).forEach( r => r.reset?.() );
+  }
 
-  setRedirect(name,get,set) {
+  setRedirect(name,{get,set,reset}) {
     if (this.redirects[name]) throw new Error(`data redirect for ${JSON.stringify(name)} already exists`);
     if (this.data[name] != null) {
       if (!set) throw new Error(`value for data ${JSON.stringify(name)} already set but redirector doesn't allow setting`);
       set(this.data[name]);
       delete this.data[name];
     }
-    return this.redirects[name] = { get, set };
+    return this.redirects[name] = { get, set, reset };
   }
 
   getRedirect(name) { return this.redirects[name]; }
