@@ -2,6 +2,24 @@ export class DataManager {
   data = Object.create(null);
   redirects = Object.create(null);
   observer = Object.create(null);
+  
+  setAll(data) {
+    for (const name in data) {
+      this.set(name,data[name]);
+    }
+  }
+  
+  getAll() {
+    const data = Object.create(null);
+    Object.assign(data,this.data);
+    for (const name in this.redirects) {
+      if (!this.redirects[name].get) continue;
+      const value = this.redirects[name].get();
+      if (value == null) continue;
+      data[name] = value;
+    }
+    return data;
+  }
 
   get(name) {
     if (this.redirects[name]) {
