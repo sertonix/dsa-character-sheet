@@ -39,11 +39,6 @@ dsa-container[axis=vertical] {
   flex-direction: column;
 }
 
-dsa-character-sections {
-  height: 120vh;
-  border: 10px solid;
-}
-
 dsa-buttons {
   display: flex;
   flex-wrap: wrap;
