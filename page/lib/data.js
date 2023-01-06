@@ -29,7 +29,7 @@ export class DataManager {
 
   setRedirect(name,get,set) {
     if (this.data[name]) throw new Error(`redirected data ${JSON.stringify(name)} that was already set`);
-    if (this.redirects[name]) throw new Error(`overwriting data redirect for ${JSON.stringify(name)}`);
+    if (this.redirects[name]) throw new Error(`data redirect for ${JSON.stringify(name)} already exists`);
     return this.redirects[name] = { get, set };
   }
 
