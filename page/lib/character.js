@@ -3,6 +3,7 @@ import {Sections} from "./section.js";
 import {StyleManager} from "./style.js";
 import {PluginManager} from "./plugin.js";
 import {CommandManager} from "./command.js";
+import {URI} from "./uri.js";
 
 export class Character {
   element = {
@@ -32,6 +33,8 @@ export class Character {
     
     this.element.center.append(this.sections.element);
     this.element.main.append(this.style.element);
+    
+    this.commands.add("dsa.about", () => window.open(URI.join(window.location.href,"."), "_blank")?.focus() );
   }
 
   initialize() {
