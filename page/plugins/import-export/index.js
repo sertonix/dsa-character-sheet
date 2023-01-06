@@ -1,12 +1,8 @@
 const CHARACTER_FILE_TYPES = "application/json,.dsa-char";
 const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 
-function saveCharacter() {
-  const fileContent = JSON.stringify(
-    dsa.data.getAll(),
-    null,
-    dsa.config.get("import-export.stringify-space")
-  );
+dsa.commands.add("import-export.export", () => {
+  const fileContent = JSON.stringify(dsa.data.getAll(),null,2);
   const blob = new Blob([fileContent]);
   const objectURI = URL.createObjectURL(blob);
 
@@ -17,9 +13,9 @@ function saveCharacter() {
 
   URL.revokeObjectURL(objectURI);
   tempLink.remove();
-}
+});
 
-function importCharacter() {
+dsa.commands.add("import-export.import", () => {
   const tempInput = document.createElement("input");
   tempInput.setAttribute("type", "file");
   tempInput.setAttribute("multiple", "");
@@ -32,6 +28,6 @@ function importCharacter() {
     dsa.data.setAll(data);
   }, {once:true,passive:true});
   tempInput.click();
-}
+});
 
 export default {styleURI: "./index.css"};
