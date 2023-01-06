@@ -23,6 +23,8 @@ export class DataManager {
   }
 
   removeObserver(name,callback) {
-    this.observer[name]?.delete(callback);
+    const foundObserver = this.observer[name]?.delete(callback);
+    if (!foundObserver) throw new Error(`could not find observer for ${JSON.stringify(name)}`);
+    if (!this.observer[name].size) delete this.observer[name];
   }
 }
