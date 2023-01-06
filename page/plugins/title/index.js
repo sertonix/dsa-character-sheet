@@ -1,2 +1,4 @@
+const TITLE_DATA_NAME = "title.title";
+
 const defaultTitle = document.title;
-dsa.data.addObserver("title.title", title => document.title = title ?? defaultTitle );
+dsa.data.addObserver(TITLE_DATA_NAME, title => document.title = title ?? defaultTitle );
