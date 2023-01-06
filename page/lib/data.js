@@ -8,6 +8,7 @@ export class DataManager {
 
   set(name,value) {
     const oldValue = this.data[name];
+    if (value === oldValue) return;
     if (name != null) {
       this.data[name] = value;
     } else {
