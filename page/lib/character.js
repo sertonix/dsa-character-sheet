@@ -2,6 +2,7 @@ import {DataManager} from "./data.js";
 import {Sections} from "./section.js";
 import {StyleManager} from "./style.js";
 import {PluginManager} from "./plugin.js";
+import {CommandManager} from "./command.js";
 
 export class Character {
   element = {
@@ -11,6 +12,7 @@ export class Character {
   style = new StyleManager();
   plugins = new PluginManager();
   data = new DataManager();
+  commands = new CommandManager();
 
   constructor() {
     for (const pos of ["top","center","bottom"]) {
