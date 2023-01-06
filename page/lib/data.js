@@ -76,7 +76,7 @@ export class DataManager {
   triggerObserver(name,newValue,oldValue) {
     const observer = this.observer[name];
     if (!observer) return;
-    for (const cd of observer) {
+    for (const cb of observer) {
       cb(newValue,oldValue);
     }
   }
