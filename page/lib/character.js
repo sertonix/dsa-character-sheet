@@ -35,6 +35,7 @@ export class Character {
     this.element.main.append(this.style.element);
     
     this.commands.add("dsa.about", () => window.open(URI.join(window.location.href,"."), "_blank")?.focus() );
+    this.commands.add("dsa.new", () => window.open(window.location.href, "_blank")?.focus() );
   }
 
   initialize() {
