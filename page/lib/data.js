@@ -33,7 +33,7 @@ export class DataManager {
       this.triggerObserver(name,undefined,oldValue);
     }
     for (const redirector of Object.values(this.redirects)) {
-      r.reset?.();
+      redirector.reset?.();
     }
   }
 
