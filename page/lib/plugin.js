@@ -13,7 +13,7 @@ export class PluginManager {
   ];
 
   initialize() {
-    this.addAll(...this.defaultPlugins);
+    this.addAll(...this.defaultPlugins); // TODO move to data instead
   }
 
   add(uri,load = true) {
