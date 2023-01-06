@@ -32,7 +32,7 @@ export class DataManager {
       delete this.data[name];
       this.triggerObserver(name,undefined,oldValue);
     }
-    Object.values(this.redirector).forEach( r => r.reset?.() );
+    Object.values(this.redirects).forEach( r => r.reset?.() );
   }
 
   setRedirect(name,{get,set,reset}) {
