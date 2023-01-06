@@ -18,7 +18,7 @@ export class DataManager {
       return;
     }
     const oldValue = this.data[name];
-    if (value === oldValue) return;
+    if (value === oldValue) return; // TODO matching of arrays and objects
     if (value != null) {
       this.data[name] = value;
     } else {
