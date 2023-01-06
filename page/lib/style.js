@@ -6,6 +6,7 @@ export class StyleManager {
     const element = document.createElement("link");
     element.setAttribute("rel","styleSheet");
     element.setAttribute("href",uri);
+    element.style.setProperty("display","none");
     this.element.append(element);
     this.styles.add(element);
     return element;

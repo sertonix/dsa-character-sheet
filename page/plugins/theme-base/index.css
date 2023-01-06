@@ -33,10 +33,6 @@ dsa-character {
   flex-direction: column;
 }
 
-dsa-style-manager {
-  display: none;
-}
-
 dsa-horizontal-bar {
   display: flex;
   align-items: stretch;
