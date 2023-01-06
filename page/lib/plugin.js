@@ -16,11 +16,11 @@ export class PluginManager {
     this.addAll(...this.defaultPlugins);
   }
 
-  add(uri) {
+  add(uri,load = true) {
     if (this.plugins.has(uri)) return this.plugins.get(uri);
     const plugin = new Plugin(uri);
     this.plugins.set(uri,plugin);
-    plugin.load();
+    if (load) plugin.load();
     this.events.emit("did-added-plugin", plugin);
     return plugin;
   }
