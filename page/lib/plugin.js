@@ -28,9 +28,10 @@ export class PluginManager {
   remove(...uris) {
     for (const uri of uris) {
       if (!this.plugins.has(uri)) continue;
-      this.plugins.get(uri).unload();
       this.plugins.delete(uri);
-      this.events.emit("did-removed-plugin", uri);
+      this.plugins.get(uri).unload().then( () =>
+        this.events.emit("did-removed-plugin", uri),
+      );
     }
   }
 
