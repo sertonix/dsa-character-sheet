@@ -3,7 +3,7 @@ const DEFAULT_CHARACTER_FILE_ENDING = ".json";
 
 function saveCharacter() {
   const fileContent = JSON.stringify(
-    dsa.export(),
+    dsa.data.getAll(),
     null,
     dsa.config.get("import-export.stringify-space")
   );
@@ -24,34 +24,14 @@ function importCharacter() {
   tempInput.setAttribute("type", "file");
   tempInput.setAttribute("multiple", "");
   tempInput.setAttribute("accept", CHARACTER_FILE_TYPES);
-  tempInput.addEventListener("change", () => {
-    for (const file of tempInput.files) {
-      file.text().then( dsa.addCharacter.bind(dsa) )
-    }
+  tempInput.addEventListener("change", async () => {
+    const file = tempInput.files[0];
+    if (!file) return;
+    const data = JSON.parse(await file.text());
+    dsa.data.reset();
+    dsa.data.setAll(data);
   }, {once:true,passive:true});
   tempInput.click();
 }
 
-export default {
-  add() {
-    const importB = document.createElement("dsa-button");
-    importB.classList.add("dsa-character-export");
-    importB.innerText = "Import";
-    dsa.topBar.appendToLeft(importB);
-    importB.addEventListener("click", importCharacter, {passive:true});
-
-    const exportB = document.createElement("dsa-button");
-    exportB.classList.add("dsa-character-export");
-    exportB.innerText = "Export";
-    dsa.topBar.appendToLeft(exportB);
-    exportB.addEventListener("click", saveCharacter, {passive:true});
-  },
-  configSchema: {
-    "import-export.stringify-space": {
-      type: "integer",
-      min: 0,
-      default: 2,
-    },
-  },
-  styleURI: "./index.css",
-};
+export default {styleURI: "./index.css"};
