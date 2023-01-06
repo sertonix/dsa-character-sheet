@@ -8,7 +8,8 @@ export class PluginManager {
     "theme-base/index.js",
     "theme-black-and-white/index.js", // TODO easily disable when different theme is used
     "title/index.js",
-    // "import-export/index.js",
+    "tool-bar/index.js",
+    "import-export/index.js",
     // "attributes/index.js",
   ];
 
