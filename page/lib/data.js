@@ -32,7 +32,9 @@ export class DataManager {
       delete this.data[name];
       this.triggerObserver(name,undefined,oldValue);
     }
-    Object.values(this.redirects).forEach( r => r.reset?.() );
+    for (const redirector of Object.values(this.redirects)) {
+      r.reset?.();
+    }
   }
 
   setRedirect(name,{get,set,reset}) {
@@ -54,7 +56,11 @@ export class DataManager {
   }
 
   triggerObserver(name,newValue,oldValue) {
-    this.observer[name]?.forEach( cb => cb(newValue,oldValue) );
+    const observer = this.observer[name];
+    if (!observer) return;
+    for (const cd of observer) {
+      cb(newValue,oldValue);
+    }
   }
 
   addObserver(name,callback) {
