@@ -48,6 +48,7 @@ export class PluginManager {
 
 export class Plugin {
   loaded = false;
+  exports = undefined;
   style = undefined;
   loadPromise = undefined;
 
