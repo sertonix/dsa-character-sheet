@@ -66,7 +66,7 @@ for (const [name,content] of ${
 import(objectURLs["index.js"]);
 `;
 
-if (bundledContent.includes("<script") || ["<!--","<script","</script"].some( s => bundledContent.includes(s) )) {
+if (["<!--","<script","</script"].some( s => bundledContent.includes(s) )) {
   throw new Error("can't bundle. please remove any occurences of \"<!--\", \"<script\" or \"</script\"");
 }
 
