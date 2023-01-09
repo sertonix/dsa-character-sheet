@@ -55,14 +55,17 @@ export class DataManager {
     }
   }
 
-  setRedirect(name,{get,set,reset}) {
+  setRedirect(name,{get,set,reset,initialize}) {
     if (this.redirects[name]) throw new Error(`data redirect for ${JSON.stringify(name)} already exists`);
-    if (this.data[name] != null) {
+    if (initialize) {
+      initialize(this.data[name]);
+      delete this.data[name];
+    } else if (this.data[name] != null) {
       if (!set) throw new Error(`value for data ${JSON.stringify(name)} already set but redirector doesn't allow setting`);
       set(this.data[name]);
       delete this.data[name];
     }
-    return this.redirects[name] = { get, set, reset };
+    return this.redirects[name] = { get, set, reset, initialize };
   }
 
   getRedirect(name) { return this.redirects[name]; }
