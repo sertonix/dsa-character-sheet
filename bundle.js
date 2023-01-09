@@ -34,11 +34,21 @@ while (unsortedLibFiles.length) {
 // bundle javascript
 const bundledContent = `\
 const objectURLs = Object.create(null);
-const i = ([n]) => (ss,...is) => objectURLs[n] = URL.createObjectURL(new Blob([ss.map( (s,i) => is.length === i ? s : s + objectURLs[is[i]] ).join()],{type:"text/javascript"})) + "#./" + n;
 
-${orderedLibFiles.map( ([name,content]) => `i\`${name}\`\`${
+function addFile(name, src) {
+  const blob = new Blob(src, {type:"text/javascript"});
+  objectURLs[name] = URL.createObjectURL(blob) + "#./" + name;
+}
+
+function genImports(strings,...imports) {
+  return strings.map( (str,i) =>
+    imports.length === i ? str : str + objectURLs[imports[i]]
+  );
+}
+
+${orderedLibFiles.map( ([name,content]) => `addFile("${name}", genImports\`${
   content.replace( /[\\`]|\$(?={)/g, "\\$&" ).replace( importRegexp, "import $1 from \"${\"$2\"}\";" )
-}\`;`).join("\n")}
+}\`);`).join("\n")}
 
 import(objectURLs["index.js"]);`;
 
