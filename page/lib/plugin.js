@@ -48,9 +48,9 @@ export class PluginManager {
 
 export class Plugin {
   loaded = false;
+  loadPromise = undefined;
   exports = undefined;
   style = undefined;
-  loadPromise = undefined;
 
   constructor(uri) {
     this.uri = uri;
