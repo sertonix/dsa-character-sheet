@@ -54,9 +54,7 @@ while (unsortedLibFiles.length) {
 const bundledContent = `\
 let objectURLs = Object.create(null);
 
-for (const [name,content] of ${
-  JSON.stringify(orderedLibFiles)
-}) {
+for (const [name,content] of ${JSON.stringify(orderedLibFiles)}) {
   const blob = new Blob([
     content.replace(/${PREFIX}([a-zA-Z\\-_]*?.js)/g, (m,n) => objectURLs[n])
   ],{type:"text/javascript"});
