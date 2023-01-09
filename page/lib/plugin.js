@@ -105,6 +105,7 @@ export class Plugin {
   }
 
   getExport(name) {
+    if (!this.exports) throw new Error("no exports defined yet");
     return this.exports[name] ?? this.exports.default?.[name];
   }
 }
