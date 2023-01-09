@@ -3,7 +3,6 @@ import {Sections} from "./section.js";
 import {StyleManager} from "./style.js";
 import {PluginManager} from "./plugin.js";
 import {CommandManager} from "./command.js";
-import {URI} from "./uri.js";
 
 export class Character {
   element = {
