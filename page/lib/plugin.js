@@ -60,7 +60,7 @@ export class Plugin {
   }
 
   async makeLoadPromise() {
-    this.exports = await import(URI.join(this.uri));
+    this.exports = await import(this.uri);
     this.loaded = true;
     const styleURI = this.getExport("styleURI");
     if (styleURI) this.style = dsa.style.add(URI.join(this.uri,styleURI));
