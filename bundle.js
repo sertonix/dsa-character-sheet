@@ -64,10 +64,10 @@ function bundleJs(dir) {
   return bundledJs;
 }
 
-function bundle(jsDir,htmlPath,outPath) {
+function bundle(jsDir,htmlPath,faviconPath,outPath) {
   let htmlContent = fs.readFileSync(htmlPath,{encoding:"utf8"});
   
-  const favicon = fs.readFileSync(path.join(__dirname,"page","favicon.svg"),{encoding:"utf8"});
+  const favicon = fs.readFileSync(faviconPath,{encoding:"utf8"});
   htmlContent = htmlContent.replace("./favicon.svg", "data:image/svg+xml," + encodeURIComponent(favicon) );
   
   htmlContent = htmlContent.replace(
@@ -81,5 +81,6 @@ function bundle(jsDir,htmlPath,outPath) {
 bundle(
   path.join(__dirname,"page","lib"),
   path.join(__dirname,"page","sheet.html"),
+  path.join(__dirname,"page","favicon.svg"),
   path.join(__dirname,"sheet-bundled.html"),
 );
