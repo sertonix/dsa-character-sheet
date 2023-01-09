@@ -31,8 +31,16 @@ while (unsortedLibFiles.length) {
   if (lengthBefore === unsortedLibFiles.length) throw new Error(`circular reference ${unsortedLibFiles.map( ([n]) => n )}`);
 }
 
+function genLibFileAdder([name,content]) {
+  return `addFile("${name}", genImports\`${
+    content
+      .replace( /[\\`]|\$(?={)/g, "\\$&" )
+      .replace( importRegexp, "import $1 from \"${\"$2\"}\";" )
+  }\`);`
+}
+
 // bundle javascript
-const bundledContent = `\
+const bundledContent = `
 const objectURLs = Object.create(null);
 
 function addFile(name, src) {
@@ -46,11 +54,10 @@ function genImports(strings,...imports) {
   );
 }
 
-${orderedLibFiles.map( ([name,content]) => `addFile("${name}", genImports\`${
-  content.replace( /[\\`]|\$(?={)/g, "\\$&" ).replace( importRegexp, "import $1 from \"${\"$2\"}\";" )
-}\`);`).join("\n")}
+${orderedLibFiles.map(genLibFileAdder).join("\n")}
 
-import(objectURLs["index.js"]);`;
+import(objectURLs["index.js"]);
+`;
 
 if (["<!--","<script","</script"].some( s => bundledContent.includes(s) )) {
   throw new Error("can't bundle. please remove any occurences of \"<!--\", \"<script\" or \"</script\"");
