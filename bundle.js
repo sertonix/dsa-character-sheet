@@ -59,7 +59,7 @@ for (const [name,content] of ${
 }) {
   const blob = new Blob([
     content.replace(/${PREFIX}([a-zA-Z\\-_]*?.js)/g, (m,n) => objectURLs[n])
-  ],{type:"application/javascript"});
+  ],{type:"text/javascript"});
   objectURLs[name] = URL.createObjectURL(blob) + "#./" + name;
 }
 
