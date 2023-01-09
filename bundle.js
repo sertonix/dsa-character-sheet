@@ -13,12 +13,7 @@ let htmlContent = fs.readFileSync(path.join(__dirname,"page","sheet.html"),{enco
 
 // bundle favicon
 const favicon = fs.readFileSync(path.join(__dirname,"page","favicon.svg"),{encoding:"utf8"});
-htmlContent = htmlContent.replace(
-  "./favicon.svg",
-  `data:image/svg+xml,${
-    encodeURIComponent(favicon.replace(/[\n\r]/g,""))
-  }`,
-);
+htmlContent = htmlContent.replace("./favicon.svg", "data:image/svg+xml," + encodeURIComponent(favicon) );
 
 // order files so that imports always resolve
 const importRegexp = /^import (.+?) from ".\/([a-zA-Z\-_]*?.js)";$/gm;
