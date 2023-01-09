@@ -34,7 +34,7 @@ htmlContent = htmlContent.replace(
   }`,
 );
 
-// order files so that imports are always before
+// order files so that imports always resolve
 const importRegexp = new RegExp(`${PREFIX}([a-zA-Z\\-_]*?.js)`,"g");
 const orderedLibFiles = [];
 let unsortedLibFiles = Object.entries(libFiles);
