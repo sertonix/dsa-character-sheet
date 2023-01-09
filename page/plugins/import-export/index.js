@@ -23,7 +23,7 @@ dsa.commands.add("import-export:import", () => {
   tempInput.addEventListener("change", async () => {
     const file = tempInput.files[0];
     if (!file) return;
-    const data = JSON.parse(await file.text());
+    const data = JSON.parse(await file.text(), (k,v) => v && typeof v === "object" && !Array.isArray(v) ? Object.assign(Object.create(null),v) : v);
     dsa.data.reset();
     dsa.data.setAll(data);
   }, {once:true,passive:true});
