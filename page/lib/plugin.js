@@ -1,5 +1,4 @@
 import {EventEmitter} from "./event.js";
-import {URI} from "./uri.js";
 
 export class PluginManager {
   plugins = new Map();
