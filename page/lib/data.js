@@ -46,8 +46,8 @@ export class DataManager {
   
   reset() {
     for (const name in this.data) {
+      this.triggerObserver(name,undefined,this.data[name]);
       delete this.data[name];
-      this.triggerObserver(name,undefined,oldValue);
     }
     for (const redirector of Object.values(this.redirects)) {
       redirector.set?.();
