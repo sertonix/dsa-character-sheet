@@ -38,7 +38,8 @@ function genFileAdder([name,content]) {
 
 function bundleJs(dir) {
   const files = orderJsFiles(readFilesInDir(dir));
-  const bundledJs = `
+  const bundledJs = `\
+  (()=>{
   const objectURLs = Object.create(null);
   
   function addFile(name, src) {
@@ -55,7 +56,7 @@ function bundleJs(dir) {
   ${files.map(genFileAdder).join("\n")}
   
   import(objectURLs["index.js"]);
-  `;
+  }();`;
   
   if (["<!--","<script","</script"].some( s => bundledJs.includes(s) )) {
     throw new Error("can't bundle. please remove any occurences of \"<!--\", \"<script\" or \"</script\"");
