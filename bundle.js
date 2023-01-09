@@ -33,7 +33,7 @@ while (unsortedLibFiles.length) {
 
 // bundle javascript
 const bundledContent = `\
-let objectURLs = Object.create(null);
+const objectURLs = Object.create(null);
 
 ${orderedLibFiles.map( ([name,content]) =>
   `objectURLs[${JSON.stringify(name)}] = URL.createObjectURL(new Blob([\`${
