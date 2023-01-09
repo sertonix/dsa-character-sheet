@@ -34,13 +34,12 @@ while (unsortedLibFiles.length) {
 // bundle javascript
 const bundledContent = `\
 const objectURLs = Object.create(null);
+const i = ([n]) => (ss,...is) => objectURLs[n] = URL.createObjectURL(new Blob([ss.map( (s,i) => is.length === i ? s : s + objectURLs[is[i]] ).join()],{type:"text/javascript"})) + "#./" + n;
 
-${orderedLibFiles.map( ([name,content]) =>
-  `objectURLs[${JSON.stringify(name)}] = URL.createObjectURL(new Blob([\`${
-    content.replace( /[\\`]|\$(?={)/g, "\\$&" ).replace( importRegexp, "import $1 from \"${objectURLs[\"$2\"]}\";" )
-  }\`],{type:"text/javascript"})) + "#./" + ${JSON.stringify(name)};`
-).join("\n")}
-
+${orderedLibFiles.map( ([name,content]) => `i\`${name}\`\`${
+  content.replace( /[\\`]|\$(?={)/g, "\\$&" ).replace( importRegexp, "import $1 from \"${\"$2\"}\";" )
+}\`;`).join("\n")}
+console.log(objectURLs);
 import(objectURLs["index.js"]);`;
 
 if (["<!--","<script","</script"].some( s => bundledContent.includes(s) )) {
