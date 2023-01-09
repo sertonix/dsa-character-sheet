@@ -52,17 +52,13 @@ while (unsortedLibFiles.length) {
 
 // bundle javascript
 const bundledContent = `\
-let objectURLs = Object.create(null);
-
-for (const [name,content] of ${JSON.stringify(orderedLibFiles)}) {
-  const blob = new Blob([
-    content.replace(/${PREFIX}([a-zA-Z\\-_]*?.js)/g, (m,n) => objectURLs[n])
-  ],{type:"text/javascript"});
-  objectURLs[name] = URL.createObjectURL(blob) + "#./" + name;
-}
-
-import(objectURLs["index.js"]);
-`;
+let objectURLs = Object.create(null);${
+  orderedLibFiles.map( ([name,content]) =>
+    `objectURLs[${JSON.stringify(name)}] = URL.createObjectURL(new Blob([\`${
+      content.replace( /[\\`]|\$(?={)/g, m => `\\${m}` ).replace( importRegexp, (m,n) => `\${objectURLs[${JSON.stringify(n)}]}` )
+    }\`],{type:"text/javascript"})) + "#./" + ${JSON.stringify(name)};`
+  ).join("\n")
+}import(objectURLs["index.js"]);`;
 
 if (["<!--","<script","</script"].some( s => bundledContent.includes(s) )) {
   throw new Error("can't bundle. please remove any occurences of \"<!--\", \"<script\" or \"</script\"");
