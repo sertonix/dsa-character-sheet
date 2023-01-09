@@ -21,14 +21,15 @@ htmlContent = htmlContent.replace(
 );
 
 // order files so that imports always resolve
+const importRegexp = /^import (.+?) from ".\/([a-zA-Z\-_]*?.js)";$/gm;
 const orderedLibFiles = [];
 let unsortedLibFiles = Object.entries(libFiles);
 
 while (unsortedLibFiles.length) {
   const lengthBefore = unsortedLibFiles.length;
   unsortedLibFiles = unsortedLibFiles.filter( ([name,content]) => {
-    if ([...content.matchAll(/^import .+? from ".\/([a-zA-Z\-_]*?.js)";$/gm)].some( importMatch =>
-      orderedLibFiles.findIndex( ([n]) => n === importMatch[1] ) === -1
+    if ([...content.matchAll(importRegexp)].some( importMatch =>
+      orderedLibFiles.findIndex( ([n]) => n === importMatch[2] ) === -1
     )) return true;
     orderedLibFiles.push([name,content]);
   });
@@ -40,7 +41,7 @@ const bundledContent = `\
 let objectURLs = Object.create(null);${
   orderedLibFiles.map( ([name,content]) =>
     `objectURLs[${JSON.stringify(name)}] = URL.createObjectURL(new Blob([\`${
-      content.replace( /[\\`]|\$(?={)/g, m => `\\${m}` ).replace( /^import (.+?) from ".\/([a-zA-Z\-_]*?.js)";$/gm, (m,_1,n) => `import ${_1} from "\${objectURLs[${JSON.stringify(n)}]}"` )
+      content.replace( /[\\`]|\$(?={)/g, "\\$&" ).replace( importRegexp, "import $1 from \"${objectURLs[\"$2\"]}\";" )
     }\`],{type:"text/javascript"})) + "#./" + ${JSON.stringify(name)};`
   ).join("\n")
 }import(objectURLs["index.js"]);`;
