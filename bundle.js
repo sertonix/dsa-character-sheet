@@ -32,7 +32,7 @@ function genFileAdder([name,content]) {
   return `addFile("${name}", genImports\`${
     content
       .replace( /[\\`]|\$(?={)/g, "\\$&" )
-      .replace( importRegexp, "import $1 from \"${\"$2\"}\";" )
+      .replace( importRegexp, "import $1 from \"${\"$2\"}\";" ) // TODO restrict matching to prevent false positives.
   }\`);`
 }
 
