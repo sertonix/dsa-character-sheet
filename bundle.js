@@ -39,7 +39,7 @@ const i = ([n]) => (ss,...is) => objectURLs[n] = URL.createObjectURL(new Blob([s
 ${orderedLibFiles.map( ([name,content]) => `i\`${name}\`\`${
   content.replace( /[\\`]|\$(?={)/g, "\\$&" ).replace( importRegexp, "import $1 from \"${\"$2\"}\";" )
 }\`;`).join("\n")}
-console.log(objectURLs);
+
 import(objectURLs["index.js"]);`;
 
 if (["<!--","<script","</script"].some( s => bundledContent.includes(s) )) {
