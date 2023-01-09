@@ -5,12 +5,12 @@ export class PluginManager {
   plugins = new Map();
   events = new EventEmitter();
   defaultPlugins = [
-    "theme-base/index.js",
-    "theme-black-and-white/index.js", // TODO easily disable when different theme is used
-    "title/index.js",
-    "tool-bar/index.js",
-    "import-export/index.js",
-    "command-palette/index.js",
+    "http://localhost/plugins/theme-base/index.js",
+    "http://localhost/plugins/theme-black-and-white/index.js", // TODO easily disable when different theme is used
+    "http://localhost/plugins/title/index.js",
+    "http://localhost/plugins/tool-bar/index.js",
+    "http://localhost/plugins/import-export/index.js",
+    "http://localhost/plugins/command-palette/index.js",
     // "attributes/index.js",
   ];
 
@@ -60,10 +60,10 @@ export class Plugin {
   }
 
   async makeLoadPromise() {
-    this.exports = await import(URI.join(import.meta.url,"../plugins/",this.uri));
+    this.exports = await import(URI.join(this.uri));
     this.loaded = true;
     const styleURI = this.getExport("styleURI");
-    if (styleURI) this.style = dsa.style.add(URI.join(import.meta.url,"../plugins/",this.uri,styleURI));
+    if (styleURI) this.style = dsa.style.add(URI.join(this.uri,styleURI));
   }
 
   async unload() {
