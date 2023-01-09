@@ -47,6 +47,9 @@ export class PluginManager {
 }
 
 export class Plugin {
+  enabled = false;
+  enablePromise = undefined;
+  disablePromise = undefined;
   loaded = false;
   loadPromise = undefined;
   exports = undefined;
@@ -56,20 +59,50 @@ export class Plugin {
     this.uri = uri;
   }
 
+  enable() {
+    return this.enablePromise ||= this.makeEnablePromise();
+  }
+  
+  async makeEnablePromise() {
+    if (this.enabled) return;
+    if (this.disablePromise) {
+      this.disablePromise.stop = true;
+      await this.disablePromise;
+    }
+    if (this.enablePromise.stop) return this.enablePromise = undefined;
+    await this.load();
+    if (this.enablePromise.stop) return this.enablePromise = undefined;
+    await this.getExport("enable")?.(this);
+    this.enabled = true;
+    this.enablePromise = undefined;
+  }
+  
   load() {
     return this.loadPromise ||= this.makeLoadPromise();
   }
 
   async makeLoadPromise() {
+    if (this.loaded) return;
     this.exports = await import(this.uri);
     const styleURI = this.getExport("styleURI");
     if (styleURI) this.style = dsa.style.add(new URL(styleURI,this.uri));
     this.loaded = true;
   }
-
-  async unload() {
-    if (this.style) dsa.style.remove(this.style);
-    await this.getExport("unload")?.();
+  
+  disable() {
+    return this.disablePromise ||= this.makeDisablePromise();
+  }
+  
+  async makeDisablePromise() {
+    if (!this.enabled) return;
+    if (this.enablePromise) {
+      this.enablePromise.stop = true;
+      await this.enablePromise;
+    }
+    if (this.disablePromise.stop) return this.disablePromise = undefined;
+    await this.getExport("disable")?.();
+    this.enabled = false;
+    this.disablePromise = undefined;
   }
 
   getExport(name) {
