@@ -58,12 +58,12 @@ for (const [name,content] of ${
   JSON.stringify(orderedLibFiles)
 }) {
   const blob = new Blob([
-    content.replace(/${PREFIX}([a-zA-Z\\-_]*?.js)/g, (m,n) => objectURLs[n] + "#" + n)
+    content.replace(/${PREFIX}([a-zA-Z\\-_]*?.js)/g, (m,n) => objectURLs[n] + "#./" + n)
   ],{type:"application/javascript"});
   objectURLs[name] = URL.createObjectURL(blob);
 }
 
-import(objectURLs["index.js"] + "#" + "index.js");
+import(objectURLs["index.js"] + "#./" + "index.js");
 `;
 
 if (bundledContent.includes("<script") || ["<!--","<script","</script"].some( s => bundledContent.includes(s) )) {
