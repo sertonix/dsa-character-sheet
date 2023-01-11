@@ -1,8 +1,8 @@
-import {DataManager} from "./data.js";
-import {Sections} from "./section.js";
-import {StyleManager} from "./style.js";
-import {PluginManager} from "./plugin.js";
-import {CommandManager} from "./command.js";
+const {DataManager} = await fileSystem.i("./data.js",import.meta.url);
+const {Sections} = await fileSystem.i("./section.js",import.meta.url);
+const {StyleManager} = await fileSystem.i("./style.js",import.meta.url);
+const {PluginManager} = await fileSystem.i("./plugin.js",import.meta.url);
+const {CommandManager} = await fileSystem.i("./command.js",import.meta.url);
 
 export class Character {
   element = {
