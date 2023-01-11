@@ -3,18 +3,8 @@ import {EventEmitter} from "./event.js";
 export class PluginManager {
   plugins = new Map();
   events = new EventEmitter();
-  defaultPlugins = [
-    "http://localhost/plugins/theme-base/index.js",
-    "http://localhost/plugins/theme-black-and-white/index.js", // TODO easily disable when different theme is used
-    "http://localhost/plugins/title/index.js",
-    "http://localhost/plugins/tool-bar/index.js",
-    "http://localhost/plugins/import-export/index.js",
-    "http://localhost/plugins/command-palette/index.js",
-    // "attributes/index.js",
-  ];
 
   initialize() {
-    this.addAll(...this.defaultPlugins); // TODO move to data instead
   }
 
   add(uri,load = true) {
