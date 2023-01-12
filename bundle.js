@@ -17,7 +17,7 @@ function templateStringify(str) {
   return "`" + str.replace( /[\\`]|\$(?={)/g, "\\$&" ) + "`";
 }
 
-const bundledIndexJs = indexJsContent.replace(/(?<=\/\*! BUNDLER REPLACE \*\/)[\s\S]*?(?=\/\*! END BUNDLER REPLACE \*\/)/, () =>
+const bundledIndexJs = indexJsContent.replace(/\/\*! BUNDLER REPLACE \*\/[\s\S]*?\/\*! END BUNDLER REPLACE \*\//, () =>
   libFiles.map( ([name,content]) => `fs.addFileFromContent("/dsa/lib/${name}",${templateStringify(content)});` ).join("\n")
 );
 
