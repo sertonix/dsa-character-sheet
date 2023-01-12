@@ -6,6 +6,7 @@ const fsJsContent = fs.readFileSync(path.join(__dirname,"page","lib","fs.js"),{e
 const libDirPath = path.join(__dirname,"page","lib");
 const libFiles = [];
 for (const name of fs.readdirSync(libDirPath)) {
+  if (name === "fs.js") continue;
   libFiles.push([
     name,
     fs.readFileSync(path.join(libDirPath,name),{encoding:"utf8"}),
