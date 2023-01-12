@@ -71,18 +71,18 @@ class FileSystem {
   }
 }
 
-window.fileSystem = new FileSystem();
-fileSystem.addFileFromLocalURL("/index.js",import.meta.url);
+window.fs = new FileSystem();
+fs.addFileFromLocalURL("/index.js",import.meta.url);
 
 /*! BUNDLER REPLACE */
 
 ["character","command","data","event","plugin","section","style"].forEach( name =>
-  fileSystem.addFileFromLocalURL(`/dsa/lib/${name}.js`,new URL(`./${name}.js`,import.meta.url).toString())
+  fs.addFileFromLocalURL(`/dsa/lib/${name}.js`,new URL(`./${name}.js`,import.meta.url).toString())
 );
 
 /*! END BUNDLER REPLACE */
 
-const {Character} = await fileSystem.i("/dsa/lib/character.js",import.meta.url);
+const {Character} = await fs.i("/dsa/lib/character.js",import.meta.url);
 
 const dsa = window.dsa = new Character();
 document.body.append(dsa.element.main);

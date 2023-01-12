@@ -1,4 +1,4 @@
-const {EventEmitter} = await fileSystem.i("./event.js",import.meta.url);
+const {EventEmitter} = await fs.i("./event.js",import.meta.url);
 
 export class PluginManager {
   plugins = new Map();

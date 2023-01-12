@@ -1,8 +1,8 @@
-const {DataManager} = await fileSystem.i("./data.js",import.meta.url);
-const {Sections} = await fileSystem.i("./section.js",import.meta.url);
-const {StyleManager} = await fileSystem.i("./style.js",import.meta.url);
-const {PluginManager} = await fileSystem.i("./plugin.js",import.meta.url);
-const {CommandManager} = await fileSystem.i("./command.js",import.meta.url);
+const {DataManager} = await fs.i("./data.js",import.meta.url);
+const {Sections} = await fs.i("./section.js",import.meta.url);
+const {StyleManager} = await fs.i("./style.js",import.meta.url);
+const {PluginManager} = await fs.i("./plugin.js",import.meta.url);
+const {CommandManager} = await fs.i("./command.js",import.meta.url);
 
 export class Character {
   element = {

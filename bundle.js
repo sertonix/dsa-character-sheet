@@ -18,7 +18,7 @@ function templateStringify(str) {
 }
 
 const bundledIndexJs = indexJsContent.replace(/(?<=\/\*! BUNDLER REPLACE \*\/)[\s\S]*?(?=\/\*! END BUNDLER REPLACE \*\/)/, () =>
-  libFiles.map( ([name,content]) => `fileSystem.addFileFromContent("/dsa/lib/${name}",${templateStringify(content)});` ).join("\n")
+  libFiles.map( ([name,content]) => `fs.addFileFromContent("/dsa/lib/${name}",${templateStringify(content)});` ).join("\n")
 );
 
 const bundledHtmlContent = htmlContent.replace(
