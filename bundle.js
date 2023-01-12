@@ -2,11 +2,10 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const htmlContent = fs.readFileSync(path.join(__dirname,"page","sheet.html"),{encoding:"utf8"});
-const indexJsContent = fs.readFileSync(path.join(__dirname,"page","lib","index.js"),{encoding:"utf8"});
+const fsJsContent = fs.readFileSync(path.join(__dirname,"page","lib","fs.js"),{encoding:"utf8"});
 const libDirPath = path.join(__dirname,"page","lib");
 const libFiles = [];
 for (const name of fs.readdirSync(libDirPath)) {
-  if (name === "index.js") continue;
   libFiles.push([
     name,
     fs.readFileSync(path.join(libDirPath,name),{encoding:"utf8"}),
@@ -17,13 +16,13 @@ function templateStringify(str) {
   return "`" + str.replace( /[\\`]|\$(?={)/g, "\\$&" ) + "`";
 }
 
-const bundledIndexJs = indexJsContent.replace(/\/\*! BUNDLER REPLACE \*\/[\s\S]*?\/\*! END BUNDLER REPLACE \*\//, () =>
+const bundledFsJs = fsJsContent.replace(/\/\*! BUNDLER EXCLUDE \*\/[\s\S]*?\/\*! END BUNDLER EXCLUDE \*\//, () =>
   libFiles.map( ([name,content]) => `fs.addFileFromContent("/dsa/lib/${name}",${templateStringify(content)});` ).join("\n")
 );
 
 const bundledHtmlContent = htmlContent.replace(
-  "<script src=\"./lib/index.js\" type=\"module\"></script>",
-  () => `<script>import(URL.createObjectURL(new Blob([${templateStringify(bundledIndexJs)}],{type:"text/javascript"})));</script>`,
+  '"./lib/fs.js"',
+  () => `URL.createObjectURL(new Blob([${templateStringify(bundledFsJs)}],{type:"text/javascript"}))`,
 );
 
 fs.writeFileSync(path.join(__dirname,"sheet-bundled.html"),bundledHtmlContent);
