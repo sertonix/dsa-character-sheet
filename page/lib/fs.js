@@ -1,4 +1,4 @@
-export class FileSystem {
+export class VirtualFileSystem {
   files = Object.create(null);
   reverse = Object.create(null);
   
@@ -71,23 +71,23 @@ export class FileSystem {
   }
 }
 
-window.fs = new FileSystem();
-fs.addFileFromLocalURL("/fs.js",import.meta.url);
+window.vfs = new VirtualFileSystem();
+vfs.addFileFromLocalURL("/vfs.js",import.meta.url);
 
 /*! BUNDLER EXCLUDE */
 
-// FileSystem.hasPath = ( hasPath => url => hasPath(url) )(FileSystem.hasPath);
-// FileSystem.getPath = ( getPath => url => getPath(url) )(FileSystem.getPath);
+// VirtualFileSystem.hasPath = ( hasPath => url => hasPath(url) )(VirtualFileSystem.hasPath);
+// VirtualFileSystem.getPath = ( getPath => url => getPath(url) )(VirtualFileSystem.getPath);
 // const BASE_DIR = "/dsa/lib/";
-// FileSystem.prototype.hasFile = ( hasFile => function(path) {
+// VirtualFileSystem.prototype.hasFile = ( hasFile => function(path) {
 //   return path.startsWith(BASE_DIR) ? true : hasFile.apply(this,[path]);
-// })(FileSystem.prototype.hasFile);
-// FileSystem.prototype.getFile = ( getFile => function(path) {
+// })(VirtualFileSystem.prototype.hasFile);
+// VirtualFileSystem.prototype.getFile = ( getFile => function(path) {
 //   return path.startsWith(BASE_DIR) ? new URL("./" + path.substring(BASE_DIR.length),import.meta.url) : getFile.apply(this,[path]);
-// })(FileSystem.prototype.getFile);
+// })(VirtualFileSystem.prototype.getFile);
 
 ["character","command","data","event","index","plugin","section","style"].forEach( name =>
-  fs.addFileFromLocalURL(`/dsa/lib/${name}.js`,new URL(`./${name}.js`,import.meta.url).toString())
+  vfs.addFileFromLocalURL(`/dsa/lib/${name}.js`,new URL(`./${name}.js`,import.meta.url).toString())
 );
 
 /*! END BUNDLER EXCLUDE */
