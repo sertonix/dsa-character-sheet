@@ -18,7 +18,7 @@ function templateStringify(str) {
 }
 
 const bundledFsJs = fsJsContent.replace(/\/\*! BUNDLER EXCLUDE \*\/[\s\S]*?\/\*! END BUNDLER EXCLUDE \*\//g, () =>
-  libFiles.map( ([name,content]) => `fs.addFileFromContent("/dsa/lib/${name}",${templateStringify(content)});` ).join("\n")
+  libFiles.map( ([name,content]) => `vfs.addFileFromContent("/dsa/lib/${name}",${templateStringify(content)});` ).join("\n")
 );
 
 const bundledHtmlContent = htmlContent.replace(
