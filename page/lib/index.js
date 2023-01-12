@@ -72,7 +72,7 @@ class FileSystem {
 }
 
 window.fileSystem = new FileSystem();
-fileSystem.addFileFromLocalURL("/dsa/lib/index.js",import.meta.url);
+fileSystem.addFileFromLocalURL("/index.js",import.meta.url);
 
 /*! BUNDLER REPLACE */
 
