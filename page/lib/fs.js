@@ -1,4 +1,4 @@
-class FileSystem {
+export class FileSystem {
   files = Object.create(null);
   reverse = Object.create(null);
   
@@ -75,6 +75,16 @@ window.fs = new FileSystem();
 fs.addFileFromLocalURL("/fs.js",import.meta.url);
 
 /*! BUNDLER EXCLUDE */
+
+// FileSystem.hasPath = ( hasPath => url => hasPath(url) )(FileSystem.hasPath);
+// FileSystem.getPath = ( getPath => url => getPath(url) )(FileSystem.getPath);
+// const BASE_DIR = "/dsa/lib/";
+// FileSystem.prototype.hasFile = ( hasFile => function(path) {
+//   return path.startsWith(BASE_DIR) ? true : hasFile.apply(this,[path]);
+// })(FileSystem.prototype.hasFile);
+// FileSystem.prototype.getFile = ( getFile => function(path) {
+//   return path.startsWith(BASE_DIR) ? new URL("./" + path.substring(BASE_DIR.length),import.meta.url) : getFile.apply(this,[path]);
+// })(FileSystem.prototype.getFile);
 
 ["character","command","data","event","index","plugin","section","style"].forEach( name =>
   fs.addFileFromLocalURL(`/dsa/lib/${name}.js`,new URL(`./${name}.js`,import.meta.url).toString())
