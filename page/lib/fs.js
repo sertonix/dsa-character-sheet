@@ -71,13 +71,12 @@ export class VirtualFileSystem {
   }
 }
 
-window.vfs = new VirtualFileSystem();
-vfs.addFileFromLocalURL("/vfs.js",import.meta.url);
-
+export function init() {
+  window.vfs = new VirtualFileSystem();
+  vfs.addFileFromLocalURL("/vfs.js",import.meta.url);
 /*! BUNDLER EXCLUDE */
-
-["character","command","data","event","index","plugin","section","style"].forEach( name =>
-  vfs.addFileFromLocalURL(`/dsa/lib/${name}.js`,new URL(`./${name}.js`,import.meta.url).toString())
-);
-
+  ["character","command","data","event","index","plugin","section","style"].forEach( name =>
+    vfs.addFileFromLocalURL(`/dsa/lib/${name}.js`,new URL(`./${name}.js`,import.meta.url).toString())
+  );
 /*! END BUNDLER EXCLUDE */
+}
