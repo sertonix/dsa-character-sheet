@@ -82,7 +82,7 @@ fileSystem.addFileFromLocalURL("/index.js",import.meta.url);
 
 /*! END BUNDLER REPLACE */
 
-const {Character} = await fileSystem.i("./character.js",import.meta.url);
+const {Character} = await fileSystem.i("/dsa/lib/character.js",import.meta.url);
 
 const dsa = window.dsa = new Character();
 document.body.append(dsa.element.main);
