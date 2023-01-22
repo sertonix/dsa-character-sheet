@@ -20,5 +20,6 @@ You find more information like how to use it [here](https://sertonix.github.io/d
 
 ## Ideas
 
+* take inspiration from [DnD character sheet](https://github.com/derikb/character-sheet-app)
 * key bindings
 * right click menu
