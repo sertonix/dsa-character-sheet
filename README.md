@@ -13,6 +13,7 @@ You find more information like how to use it [here](https://sertonix.github.io/d
 * plugin provided and consumed api
 * order priorities and id for consistent order
 * edit mode
+* localization
 * plugins:
   * config view
   * character infos section
