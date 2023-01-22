@@ -9,7 +9,7 @@ You find more information like how to use it [here](https://sertonix.github.io/d
 
 ## To-dos
 
-* move fs and bundle to own module
+* move vfs and bundle to own module
 * plugin provided and consumed api
 * order priorities and id for consistent order
 * edit mode
