@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>DSA Character Sheet</title>
     <link rel="icon" href="./favicon.svg" />
-    <script>import("./lib/fs.js").then( ({init}) => init() ).then( () => vfs.i("/dsa/lib/index.js") )</script>
+    <script type="module">import("./lib/fs.js").then( ({init}) => init() ).then( () => vfs.i("/dsa/lib/index.js") )</script>
+    <script nomodule>alert("You need a modern browser for this to work.");</script>
   </head>
   <body style="display: contents;"></body>
 </html>
