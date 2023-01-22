@@ -2,7 +2,6 @@ const {EventEmitter} = await vfs.i("./event.js",import.meta.url);
 
 export class PluginManager {
   plugins = new Map();
-  events = new EventEmitter();
 
   initialize() {
   }
@@ -12,7 +11,6 @@ export class PluginManager {
     const plugin = new Plugin(uri);
     this.plugins.set(uri,plugin);
     if (load) plugin.load();
-    this.events.emit("did-added-plugin", plugin);
     return plugin;
   }
 
@@ -20,9 +18,7 @@ export class PluginManager {
     for (const uri of uris) {
       if (!this.plugins.has(uri)) continue;
       this.plugins.delete(uri);
-      this.plugins.get(uri).unload().then( () =>
-        this.events.emit("did-removed-plugin", uri),
-      );
+      this.plugins.get(uri).unload();
     }
   }
 
@@ -31,9 +27,6 @@ export class PluginManager {
   getAll() { return [...this.plugins.values()]; }
   getAllURIs() { return [...this.plugins.keys()]; }
   has(uri) { return this.plugins.has(uri); }
-
-  onDidAddedPlugin(callback) { return this.events.on( "did-added-plugin", callback ); }
-  onDidRemovedPlugin(callback) { return this.events.on( "did-removed-plugin", callback ); }
 }
 
 export class Plugin {
