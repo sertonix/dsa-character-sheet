@@ -1,4 +1,3 @@
-const {EventEmitter} = await vfs.i("./event.js",import.meta.url);
 
 export class PluginManager {
   plugins = new Map();
