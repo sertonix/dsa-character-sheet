@@ -22,5 +22,3 @@ You find more information like how to use it [here](https://sertonix.github.io/d
 
 * key bindings
 * right click menu
-* plugins:
-  * single character (optimize for one character)
