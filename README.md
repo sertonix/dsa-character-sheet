@@ -9,16 +9,17 @@ You find more information like how to use it [here](https://sertonix.github.io/d
 
 ## To-dos
 
+* move vfs and bundle to own module
 * plugin provided and consumed api
 * order priorities and id for consistent order
 * edit mode
+* localization
 * plugins:
   * config view
   * character infos section
 
 ## Ideas
 
+* take inspiration from [DnD character sheet](https://github.com/derikb/character-sheet-app)
 * key bindings
 * right click menu
-* plugins:
-  * single character (optimize for one character)
