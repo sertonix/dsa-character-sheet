@@ -4,12 +4,12 @@
   "description": "A manager for DSA characters",
   "repository": "https://github.com/Sertonix/dsa-character-sheet",
   "scripts": {
-    "server": "http-server ./page -c-1 -p 80 -P http://localhost/index? -d false -i false --cors",
+    "server": "serve ./page -Cn",
     "bundle": "node ./bundle.js"
   },
   "author": "Sertonix",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "^13.1.0"
+    "serve": "^14.1.2"
   }
 }
